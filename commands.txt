@@ -1,0 +1,22 @@
+git clone https://github.com/ros-navigation/navigation2.git src
+git clone -b ros2 https://github.com/ros-geographic-info/geographic_info.git
+git clone -b ros2 https://github.com/ros/bond_core.git
+sudo apt install ros-jazzy-test-msgs
+
+sudo apt-get install graphicsmagick libgraphicsmagick++-dev
+
+sudo apt-get install xtensor-dev
+
+git clone https://github.com/geographiclib/geographiclib.git
+
+
+git clone -b ros2 https://github.com/ros/diagnostics.git
+
+sudo apt-get install libompl-dev ompl-demos
+ sudo apt-get install libboost-filesystem-dev
+
+git clone -b ros2 https://github.com/ros/xacro.git
+
+
+
+ros2 pkg create --build-type ament_cmake --license Apache-2.0 roshai_gazebo
