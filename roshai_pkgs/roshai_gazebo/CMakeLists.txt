@@ -13,7 +13,7 @@ find_package(ament_cmake REQUIRED)
 
 
 install(
-  DIRECTORY launch urdf worlds params meshes
+  DIRECTORY launch urdf worlds params meshes rviz
   DESTINATION share/${PROJECT_NAME}
 )
 if(BUILD_TESTING)

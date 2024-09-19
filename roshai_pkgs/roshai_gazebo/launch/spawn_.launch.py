@@ -1,16 +1,3 @@
-# Copyright 2019 Open Source Robotics Foundation, Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 
 import os
 
@@ -23,7 +10,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     # Get the urdf file
-    urdf_file_name = 'car.urdf'
+    urdf_file_name = 'my_sdfs.sdf'
     urdf_path = os.path.join(
         get_package_share_directory('roshai_gazebo'),
         'urdf',
@@ -58,7 +45,7 @@ def generate_launch_description():
     bridge_params = os.path.join(
         get_package_share_directory('roshai_gazebo'),
         'params',
-        'turtlebot3_waffle_bridge.yaml'
+        'innova.yaml'
     )
 
     start_gazebo_ros_bridge_cmd = Node(
@@ -78,6 +65,13 @@ def generate_launch_description():
         arguments=['/camera/image_raw'],
         output='screen',
     )
+    rviz_node=Node(
+            package='rviz2',
+            namespace='',
+            executable='rviz2',
+            name='rviz2',
+            arguments=['-d' + os.path.join(get_package_share_directory('roshai_gazebo'), 'rviz', 'emptymode.rviz')]
+        )
 
     ld = LaunchDescription()
 
@@ -89,5 +83,7 @@ def generate_launch_description():
     ld.add_action(start_gazebo_ros_spawner_cmd)
     ld.add_action(start_gazebo_ros_bridge_cmd)
     ld.add_action(start_gazebo_ros_image_bridge_cmd)
+
+    #ld.add_action(rviz_node)
 
     return ld

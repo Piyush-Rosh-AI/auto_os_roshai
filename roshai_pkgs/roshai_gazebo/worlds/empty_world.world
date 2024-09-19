@@ -34,6 +34,11 @@
         https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun
       </uri>
     </include>
+    <include>
+      <uri>
+        /home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/worlds/Model3/model.sdf
+      </uri>
+    </include>
 
     <scene>
       <shadows>false</shadows>
