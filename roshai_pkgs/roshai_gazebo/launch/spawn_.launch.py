@@ -13,7 +13,7 @@ def generate_launch_description():
     urdf_file_name = 'my_sdfs.sdf'
     urdf_path = os.path.join(
         get_package_share_directory('roshai_gazebo'),
-        'urdf',
+        'sdf',
         urdf_file_name)
 
     # Launch configuration variables specific to simulation

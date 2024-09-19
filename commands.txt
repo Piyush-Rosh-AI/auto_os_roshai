@@ -20,3 +20,8 @@ git clone -b ros2 https://github.com/ros/xacro.git
 
 
 ros2 pkg create --build-type ament_cmake --license Apache-2.0 roshai_gazebo
+
+
+<mesh filename="package://my_package/meshes/rp_lidar.dae"/>
+<mesh filename="$(find my_package)/meshes/rp_lidar.dae
+<mesh filename="file://$(find my_package)/meshes/rp_lidar.dae"/>

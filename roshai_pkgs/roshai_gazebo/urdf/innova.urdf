@@ -44,7 +44,8 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="/home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/meshes/hybrid_body.obj" scale="0.01 0.01 0.01" />
+       <mesh filename="package://roshai_gazebo/meshes/hybrid_body.obj" scale="0.01 0.01 0.01" />
+       <!--roshai_gazebo -->
       </geometry>
     </visual>
 
@@ -146,7 +147,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="/home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/meshes/wheel.obj" scale="0.01 0.01 0.01" />
+       <mesh filename="package://roshai_gazebo/meshes/wheel.obj" scale="0.01 0.01 0.01" />
       </geometry>
     </visual>
   </link>
@@ -164,7 +165,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="/home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/meshes/wheel.obj" scale="0.01 0.01 0.01" />
+         <mesh filename="package://roshai_gazebo/meshes/wheel.obj" scale="0.01 0.01 0.01" />
       </geometry>
     </visual>
   </link>
@@ -182,7 +183,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="/home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/meshes/wheel.obj" scale="0.01 0.01 0.01" />
+          <mesh filename="package://roshai_gazebo/meshes/wheel.obj" scale="0.01 0.01 0.01" />
       </geometry>
     </visual>
   </link>
@@ -200,7 +201,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="/home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/meshes/wheel.obj" scale="0.01 0.01 0.01" />
+          <mesh filename="package://roshai_gazebo/meshes/wheel.obj" scale="0.01 0.01 0.01" />
       </geometry>
     </visual>
   </link>
@@ -212,8 +213,9 @@
     <visual>
       <origin xyz="0 0 0" rpy="1.302101 0 0" />
       <geometry>
-        <mesh filename="/home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/meshes/steering_wheel.obj"
-          scale="0.01 0.01 0.01" />
+         <mesh filename="package://roshai_gazebo/meshes/steering_wheel.obj"  scale="0.01 0.01 0.01" /> 
+        <!-- <mesh filename="file://$(find roshai_gazebo)/meshes/steering_wheel.obj"
+          scale="0.01 0.01 0.01" /> -->
       </geometry>
     </visual>
   </link>
