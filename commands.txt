@@ -7,7 +7,7 @@ sudo apt install ros-jazzy-test-msgs
 sudo apt-get install graphicsmagick libgraphicsmagick++-dev
 
 sudo apt-get install xtensor-dev
-
+sudo apt install libceres-dev
 git clone https://github.com/geographiclib/geographiclib.git
 
 
@@ -28,5 +28,17 @@ ros2 pkg create --build-type ament_cmake --license Apache-2.0 roshai_gazebo
 <mesh filename="$(find my_package)/meshes/rp_lidar.dae
 <mesh filename="file://$(find my_package)/meshes/rp_lidar.dae"/>
 
+sudo nano /etc/gdm3/custom.conf 
+
+sudo apt-get update
+sudo apt-get install curl lsb-release gnupg
+
+sudo curl https://packages.osrfoundation.org/gazebo.gpg --output /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+sudo apt-get update
+sudo apt-get install gz-harmonic
+
+sudo apt-get install ros-${ROS_DISTRO}-ros-gz
 
 gz sdf -p /my_urdf.urdf > /my_sdf.sdf 
+unset XDG_SESSION_TYPE
