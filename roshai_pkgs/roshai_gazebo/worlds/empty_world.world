@@ -34,10 +34,13 @@
         https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun
       </uri>
     </include>
-    <include>
+    <!-- <include>
       <uri>
-        /home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/worlds/Model3/model.sdf
+        /home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/worlds/Model3/sonoma.sdf
       </uri>
+    </include> -->
+      <include>
+      <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/Sonoma Raceway</uri>
     </include>
 
     <scene>
