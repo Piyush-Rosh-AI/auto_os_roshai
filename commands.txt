@@ -42,3 +42,15 @@ sudo apt-get install ros-${ROS_DISTRO}-ros-gz
 
 gz sdf -p /my_urdf.urdf > /my_sdf.sdf 
 unset XDG_SESSION_TYPE
+
+
+
+
+
+
+
+----------------
+colcon build --packages-select roshai_gazebo 
+ros2 launch roshai_gazebo emptyworld.launch.py 
+
+ros2 run nav2_map_server map_saver_cli 

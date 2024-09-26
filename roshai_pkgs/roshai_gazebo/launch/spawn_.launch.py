@@ -22,7 +22,7 @@ def generate_launch_description():
 
     # Declare the launch arguments
     declare_x_position_cmd = DeclareLaunchArgument(
-        'x_pose', default_value='0.0',
+        'x_pose', default_value='1.6',
         description='Specify namespace of the robot')
 
     declare_y_position_cmd = DeclareLaunchArgument(
@@ -35,8 +35,8 @@ def generate_launch_description():
         arguments=[
             '-name', 'innova',
             '-file', urdf_path,
-            '-x', x_pose,
-            '-y', y_pose,
+            '-x', '-26.95',
+            '-y', '-13.06',
             '-z', '0.01'
         ],
         output='screen',
@@ -44,7 +44,7 @@ def generate_launch_description():
 
     bridge_params = os.path.join(
         get_package_share_directory('roshai_gazebo'),
-        'params',
+        'param',
         'innova.yaml'
     )
 

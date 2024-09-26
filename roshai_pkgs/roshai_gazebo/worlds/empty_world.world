@@ -34,15 +34,26 @@
         https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun
       </uri>
     </include>
-    <!-- <include>
+    <include>
+      <uri>
+        /home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/worlds/Model4
+      </uri>
+     </include> 
+<!-- <include>
       <uri>
         /home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/worlds/Model3/sonoma.sdf
       </uri>
-    </include> -->
-      <include>
+     </include> -->
+  <!-- <include>
       <uri>https://fuel.ignitionrobotics.org/1.0/openrobotics/models/Sonoma Raceway</uri>
-    </include>
-
+    </include> --> 
+ <!-- <include>
+      <name>dynamic_rocks_3b</name>
+      <pose>125.713000 -277.706000 -2.421220 0.319924 -0.508086 0.972944</pose>
+      <uri>
+        https://fuel.ignitionrobotics.org/1.0/OpenRobotics/models/Large Rock Fall
+      </uri>
+    </include> -->
     <scene>
       <shadows>false</shadows>
     </scene>
