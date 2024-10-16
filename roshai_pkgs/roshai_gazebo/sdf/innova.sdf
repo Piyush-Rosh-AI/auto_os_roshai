@@ -633,6 +633,7 @@
               <min_angle>0.000000</min_angle>
               <max_angle>6.280000</max_angle>
             </horizontal>
+        
           </scan>
           <range>
             <min>0.120000</min>

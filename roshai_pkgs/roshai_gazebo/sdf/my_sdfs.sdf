@@ -160,6 +160,12 @@
               <min_angle>0.000000</min_angle>
               <max_angle>6.280000</max_angle>
             </horizontal>
+            <vertical>
+              <samples>360</samples>
+              <resolution>1.000000</resolution>
+              <min_angle>-0.19625</min_angle>
+              <max_angle>0.19625</max_angle>
+            </vertical>
           </scan>
           <range>
             <min>0.120000</min>

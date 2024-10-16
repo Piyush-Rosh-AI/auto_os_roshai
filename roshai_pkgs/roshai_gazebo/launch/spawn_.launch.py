@@ -44,7 +44,7 @@ def generate_launch_description():
 
     bridge_params = os.path.join(
         get_package_share_directory('roshai_gazebo'),
-        'param',
+        'params',
         'innova.yaml'
     )
 

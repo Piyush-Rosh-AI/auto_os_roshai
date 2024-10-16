@@ -44,8 +44,21 @@ gz sdf -p /my_urdf.urdf > /my_sdf.sdf
 unset XDG_SESSION_TYPE
 
 
+------------
+
+sudo apt install gdbserver
+Option 2: With ros2 launch, attaching a gdb-server to the process
+
+$ ros2 run --prefix 'gdbserver localhost:3000' [package_name] [executable_name]
+
+In a second terminal:
+
+$ gdb
+(gdb) target remote localhost:3000
 
 
+----misc---
+std::vector < double > id(ida, std::end(ida));
 
 
 
@@ -54,3 +67,23 @@ colcon build --packages-select roshai_gazebo
 ros2 launch roshai_gazebo emptyworld.launch.py 
 
 ros2 run nav2_map_server map_saver_cli 
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
+
+
+ros2 topic pub -r 10 /tf geometry_msgs/TransformStamped  '{transform:{translation:{x: 10, y: 0.0, z: 0.0}}}'
+
+
+
+
+
+------tf2
+ros2 run tf2_tools view_frames.py
+ros2 run tf2_ros tf2_echo [source_frame] [target_frame]
+ros2 run rviz2 rviz2 -d $(ros2 pkg prefix --share turtle_tf2_py)/rviz/turtle_rviz.rviz
+ros2 run tf2_ros static_transform_publisher --x x --y y --z z --yaw yaw --pitch pitch --roll roll --frame-id frame_id --child-frame-id child_frame_id
+
+
+
+ros2 run tf2_ros static_transform_publisher 1 2 3 0.5 0.1 -1.0 map odom
+
+sudo apt-get install ros-<YOUR_ROSDISTO>-imu-tools
