@@ -8,12 +8,20 @@ T1-for build and check with
  sudo apt-get install libboost-all-dev
 ```
 
+For installation of gazebo simulator
+```bash
+sudo apt-get install gz-harmonic
+```
+For installation of gazebo based ros support
+```bash
+ sudo apt-get install ros-jazzy-ros-gz
+```
 
 
 
 
 
-T2:opened dependencies folder to clone repo if required
+T2:open dependencies folder to clone repo if required
 ```bash
   git clone -b ros2 https://github.com/ros/bond_core.git 
 ```
@@ -87,3 +95,14 @@ Check for the following commands in case you witness some other dependencies iss
     
 
 
+-----
+To launch the gazebo world:
+change the location of the world to the desired location with the new workspace:
+https://vscode.dev/github/Piyush-Rosh-AI/auto_os_roshai/blob/main/roshai_pkgs/roshai_gazebo/worlds/empty_world.world#L38
+
+
+Run the launch file to open for the gazebo as well as rviz world:
+```bash
+  ros2 launch roshai_gazebo emptyworld.launch.py
+```
+    

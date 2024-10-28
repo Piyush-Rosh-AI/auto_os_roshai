@@ -35,8 +35,9 @@
       </uri>
     </include>
     <include>
+      <!-- make the location setting to something like this : filename="package://roshai_gazebo ... -->
       <uri>
-        /home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/worlds/Model4
+        /home/roshai/dec_ws/install/roshai_gazebo/share/roshai_gazebo/worlds/Model4
       </uri>
      </include> 
 <!-- <include>
