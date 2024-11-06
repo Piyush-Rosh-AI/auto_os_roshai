@@ -1,0 +1,6 @@
+<map id="opennav_docking_bt::DockRobotAction" name="opennav_docking_bt::DockRobotAction">
+<area shape="rect" id="node1" title="nav2_behavior_tree::BtActionNode class that wraps opnav2_msgsennav_docking_msgs/DockRobot" alt="" coords="69,197,225,237"/>
+<area shape="rect" id="node2" href="$classnav2__behavior__tree_1_1BtActionNode.html" title=" " alt="" coords="44,93,251,148"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,5,159,31"/>
+<area shape="rect" id="node4" title=" " alt="" coords="183,5,242,31"/>
+</map>

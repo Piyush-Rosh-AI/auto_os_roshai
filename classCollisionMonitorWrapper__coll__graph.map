@@ -1,0 +1,9 @@
+<map id="CollisionMonitorWrapper" name="CollisionMonitorWrapper">
+<area shape="rect" id="node1" title=" " alt="" coords="136,300,319,325"/>
+<area shape="rect" id="node2" href="$classnav2__collision__monitor_1_1CollisionMonitor.html" title="Collision Monitor ROS2 node." alt="" coords="141,211,314,251"/>
+<area shape="rect" id="node3" href="$classnav2__util_1_1LifecycleNode.html" title="A lifecycle node wrapper to enable common Nav2 needs such as manipulating parameters." alt="" coords="36,115,219,141"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,13,228,38"/>
+<area shape="rect" id="node5" href="$structnav2__collision__monitor_1_1Action.html" title="Action for robot." alt="" coords="253,108,426,148"/>
+<area shape="rect" id="node6" href="$structnav2__collision__monitor_1_1Velocity.html" title="Velocity for 2D model of motion." alt="" coords="253,5,426,45"/>
+<area shape="rect" id="node7" title=" " alt="" coords="450,13,509,38"/>
+</map>

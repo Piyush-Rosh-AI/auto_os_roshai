@@ -1,0 +1,7 @@
+<map id="nav2_waypoint_follower::WaypointFollower" name="nav2_waypoint_follower::WaypointFollower">
+<area shape="rect" id="node1" title="An action server that uses behavior tree for navigating a robot to its goal position." alt="" coords="171,241,353,281"/>
+<area shape="rect" id="node2" href="$classnav2__util_1_1LifecycleNode.html" title="A lifecycle node wrapper to enable common Nav2 needs such as manipulating parameters." alt="" coords="25,87,208,113"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,5,228,31"/>
+<area shape="rect" id="node4" title=" " alt="" coords="233,87,291,113"/>
+<area shape="rect" id="node5" href="$structnav2__waypoint__follower_1_1GoalStatus.html" title=" " alt="" coords="361,80,542,120"/>
+</map>

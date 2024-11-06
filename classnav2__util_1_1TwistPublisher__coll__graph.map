@@ -1,0 +1,4 @@
+<map id="nav2_util::TwistPublisher" name="nav2_util::TwistPublisher">
+<area shape="rect" id="node1" title="A simple wrapper on a Twist publisher that provides either Twist or TwistStamped." alt="" coords="5,93,188,119"/>
+<area shape="rect" id="node2" title=" " alt="" coords="67,5,126,31"/>
+</map>

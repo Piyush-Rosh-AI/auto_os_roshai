@@ -1,0 +1,6 @@
+<map id="nav2_map_server::CostmapFilterInfoServer" name="nav2_map_server::CostmapFilterInfoServer">
+<area shape="rect" id="node1" title=" " alt="" coords="15,152,219,192"/>
+<area shape="rect" id="node4" href="$classInfoServerWrapper.html" title=" " alt="" coords="45,240,189,265"/>
+<area shape="rect" id="node2" href="$classnav2__util_1_1LifecycleNode.html" title="A lifecycle node wrapper to enable common Nav2 needs such as manipulating parameters." alt="" coords="25,79,208,104"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,5,228,31"/>
+</map>

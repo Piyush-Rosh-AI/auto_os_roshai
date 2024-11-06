@@ -1,0 +1,6 @@
+<map id="dwb_core::NoLegalTrajectoriesException" name="dwb_core::NoLegalTrajectoriesException">
+<area shape="rect" id="node1" title="Thrown when all the trajectories explored are illegal." alt="" coords="184,183,404,223"/>
+<area shape="rect" id="node2" href="$classnav2__core_1_1ControllerException.html" title=" " alt="" coords="5,87,231,113"/>
+<area shape="rect" id="node3" title=" " alt="" coords="49,5,187,31"/>
+<area shape="rect" id="node4" href="$classdwb__core_1_1IllegalTrajectoryTracker.html" title=" " alt="" coords="255,80,451,120"/>
+</map>

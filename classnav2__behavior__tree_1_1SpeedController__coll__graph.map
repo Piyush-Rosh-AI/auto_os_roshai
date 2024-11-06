@@ -1,0 +1,4 @@
+<map id="nav2_behavior_tree::SpeedController" name="nav2_behavior_tree::SpeedController">
+<area shape="rect" id="node1" title="A BT::DecoratorNode that ticks its child every at a rate proportional to the speed of the robot...." alt="" coords="5,79,156,119"/>
+<area shape="rect" id="node2" title=" " alt="" coords="9,5,153,31"/>
+</map>

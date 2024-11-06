@@ -1,0 +1,7 @@
+<map id="nav2_bt_navigator::BtNavigator" name="nav2_bt_navigator::BtNavigator">
+<area shape="rect" id="node1" title="An action server that uses behavior tree for navigating a robot to its goal position." alt="" coords="181,200,332,240"/>
+<area shape="rect" id="node2" href="$classnav2__util_1_1LifecycleNode.html" title="A lifecycle node wrapper to enable common Nav2 needs such as manipulating parameters." alt="" coords="25,103,208,128"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,5,228,31"/>
+<area shape="rect" id="node4" href="$classnav2__core_1_1NavigatorMuxer.html" title="A class to control the state of the BT navigator by allowing only a single plugin to be processed at ..." alt="" coords="379,103,580,128"/>
+<area shape="rect" id="node5" title=" " alt="" coords="306,5,365,31"/>
+</map>

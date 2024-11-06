@@ -1,0 +1,4 @@
+<map id="nav2_rviz_plugins::Nav2Panel" name="nav2_rviz_plugins::Nav2Panel">
+<area shape="rect" id="node1" title="Panel to interface to the nav2 stack." alt="" coords="9,79,155,119"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,159,31"/>
+</map>

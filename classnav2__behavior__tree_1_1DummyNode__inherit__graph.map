@@ -1,0 +1,5 @@
+<map id="nav2_behavior_tree::DummyNode" name="nav2_behavior_tree::DummyNode">
+<area shape="rect" id="node1" title="A Dummy TreeNode to be used as a child for testing nodes Returns the current status on tick without a..." alt="" coords="7,79,157,119"/>
+<area shape="rect" id="node3" href="$classRecoveryDummy.html" title=" " alt="" coords="15,167,149,192"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,159,31"/>
+</map>

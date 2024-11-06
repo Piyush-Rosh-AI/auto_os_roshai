@@ -1,0 +1,4 @@
+<map id="nav2_behavior_tree::TimeExpiredCondition" name="nav2_behavior_tree::TimeExpiredCondition">
+<area shape="rect" id="node1" title="A BT::ConditionNode that returns SUCCESS every time a specified time period passes and FAILURE otherw..." alt="" coords="5,79,180,119"/>
+<area shape="rect" id="node2" title=" " alt="" coords="21,5,164,31"/>
+</map>

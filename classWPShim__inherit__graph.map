@@ -1,0 +1,6 @@
+<map id="WPShim" name="WPShim">
+<area shape="rect" id="node1" title=" " alt="" coords="79,240,155,265"/>
+<area shape="rect" id="node2" href="$classnav2__waypoint__follower_1_1WaypointFollower.html" title="An action server that uses behavior tree for navigating a robot to its goal position." alt="" coords="26,152,207,192"/>
+<area shape="rect" id="node3" href="$classnav2__util_1_1LifecycleNode.html" title="A lifecycle node wrapper to enable common Nav2 needs such as manipulating parameters." alt="" coords="25,79,208,104"/>
+<area shape="rect" id="node4" title=" " alt="" coords="5,5,228,31"/>
+</map>

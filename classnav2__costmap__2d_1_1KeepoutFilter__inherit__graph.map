@@ -1,0 +1,5 @@
+<map id="nav2_costmap_2d::KeepoutFilter" name="nav2_costmap_2d::KeepoutFilter">
+<area shape="rect" id="node1" title="Reads in a keepout mask and marks keepout regions in the map to prevent planning or control in restri..." alt="" coords="8,167,209,207"/>
+<area shape="rect" id="node2" href="$classnav2__costmap__2d_1_1CostmapFilter.html" title=": CostmapFilter basic class. It is inherited from Layer in order to avoid hidden problems when the sh..." alt="" coords="5,79,212,119"/>
+<area shape="rect" id="node3" href="$classnav2__costmap__2d_1_1Layer.html" title="Abstract class for layered costmap plugin implementations." alt="" coords="17,5,201,31"/>
+</map>

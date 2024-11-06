@@ -1,0 +1,4 @@
+<map id="nav2_smac_planner::GridCollisionChecker" name="nav2_smac_planner::GridCollisionChecker">
+<area shape="rect" id="node1" title="A costmap grid collision checker." alt="" coords="35,108,195,148"/>
+<area shape="rect" id="node2" href="$classnav2__costmap__2d_1_1FootprintCollisionChecker.html" title=" " alt="" coords="5,5,224,60"/>
+</map>

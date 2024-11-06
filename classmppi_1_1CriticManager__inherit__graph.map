@@ -1,0 +1,5 @@
+<map id="mppi::CriticManager" name="mppi::CriticManager">
+<area shape="rect" id="node1" title="Manager of objective function plugins for scoring trajectories." alt="" coords="117,5,272,31"/>
+<area shape="rect" id="node2" href="$classCriticManagerWrapper.html" title=" " alt="" coords="5,79,173,104"/>
+<area shape="rect" id="node3" href="$classCriticManagerWrapperEnum.html" title=" " alt="" coords="197,79,403,104"/>
+</map>

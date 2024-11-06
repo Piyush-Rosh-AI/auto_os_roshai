@@ -1,0 +1,5 @@
+<map id="dwb_critics::MapGridCritic::MapGridQueue" name="dwb_critics::MapGridCritic::MapGridQueue">
+<area shape="rect" id="node1" title="Subclass of CostmapQueue that avoids Obstacles and Unknown Values." alt="" coords="31,167,223,207"/>
+<area shape="rect" id="node2" href="$classcostmap__queue_1_1CostmapQueue.html" title=" " alt="" coords="10,93,243,119"/>
+<area shape="rect" id="node3" href="$classcostmap__queue_1_1MapBasedQueue.html" title=" " alt="" coords="5,5,248,45"/>
+</map>

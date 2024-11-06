@@ -1,0 +1,8 @@
+<map id="nav2_core::NavigatorBase" name="nav2_core::NavigatorBase">
+<area shape="rect" id="node1" title="Navigator interface to allow navigators to be stored in a vector and accessed via pluginlib due to te..." alt="" coords="5,92,199,117"/>
+<area shape="rect" id="node2" href="$classnav2__core_1_1BehaviorTreeNavigator.html" title=" " alt="" coords="251,5,529,60"/>
+<area shape="rect" id="node4" href="$classnav2__core_1_1BehaviorTreeNavigator.html" title=" " alt="" coords="247,85,533,125"/>
+<area shape="rect" id="node6" href="$classnav2__core_1_1BehaviorTreeNavigator.html" title="Navigator interface that acts as a base class for all BT&#45;based Navigator action&#39;s plugins All methods..." alt="" coords="267,149,513,189"/>
+<area shape="rect" id="node3" href="$classnav2__bt__navigator_1_1NavigateThroughPosesNavigator.html" title="A navigator for navigating to a a bunch of intermediary poses." alt="" coords="581,13,817,53"/>
+<area shape="rect" id="node5" href="$classnav2__bt__navigator_1_1NavigateToPoseNavigator.html" title="A navigator for navigating to a specified pose." alt="" coords="604,85,795,125"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="mppi::CriticData" name="mppi::CriticData">
+<area shape="rect" id="node1" title="Data to pass to critics for scoring, including state, trajectories, path, costs, and important parame..." alt="" coords="540,104,668,129"/>
+<area shape="rect" id="node2" href="$structmppi_1_1models_1_1State.html" title="State information: velocities, controls, poses, speed." alt="" coords="229,29,382,55"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,5,116,31"/>
+<area shape="rect" id="node4" title=" " alt="" coords="33,55,88,80"/>
+<area shape="rect" id="node5" href="$structmppi_1_1models_1_1Trajectories.html" title="Candidate Trajectories." alt="" coords="208,79,403,104"/>
+<area shape="rect" id="node6" href="$structmppi_1_1models_1_1Path.html" title="Path represented as a tensor." alt="" coords="232,128,379,153"/>
+<area shape="rect" id="node7" href="$classnav2__core_1_1GoalChecker.html" title="Function&#45;object for checking whether a goal has been reached." alt="" coords="216,177,395,203"/>
+</map>

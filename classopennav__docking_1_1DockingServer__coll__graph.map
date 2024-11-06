@@ -1,0 +1,6 @@
+<map id="opennav_docking::DockingServer" name="opennav_docking::DockingServer">
+<area shape="rect" id="node1" title="An action server which implements charger docking node for AMRs." alt="" coords="90,197,287,237"/>
+<area shape="rect" id="node2" href="$classnav2__util_1_1LifecycleNode.html" title="A lifecycle node wrapper to enable common Nav2 needs such as manipulating parameters." alt="" coords="25,80,208,105"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,5,228,31"/>
+<area shape="rect" id="node4" title=" " alt="" coords="233,80,291,105"/>
+</map>

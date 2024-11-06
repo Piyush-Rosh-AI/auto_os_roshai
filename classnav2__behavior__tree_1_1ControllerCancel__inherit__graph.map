@@ -1,0 +1,5 @@
+<map id="nav2_behavior_tree::ControllerCancel" name="nav2_behavior_tree::ControllerCancel">
+<area shape="rect" id="node1" title="A nav2_behavior_tree::BtActionNode class that wraps nav2_msgs::action::FollowPath." alt="" coords="13,196,164,236"/>
+<area shape="rect" id="node2" href="$classnav2__behavior__tree_1_1BtCancelActionNode.html" title=" " alt="" coords="5,79,172,148"/>
+<area shape="rect" id="node3" title=" " alt="" coords="12,5,165,31"/>
+</map>

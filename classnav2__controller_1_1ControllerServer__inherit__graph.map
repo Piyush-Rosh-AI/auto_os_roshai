@@ -1,0 +1,6 @@
+<map id="nav2_controller::ControllerServer" name="nav2_controller::ControllerServer">
+<area shape="rect" id="node1" title="This class hosts variety of plugins of different algorithms to complete control tasks from the expose..." alt="" coords="19,152,214,192"/>
+<area shape="rect" id="node4" href="$classControllerShim.html" title=" " alt="" coords="57,240,176,265"/>
+<area shape="rect" id="node2" href="$classnav2__util_1_1LifecycleNode.html" title="A lifecycle node wrapper to enable common Nav2 needs such as manipulating parameters." alt="" coords="25,79,208,104"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,5,228,31"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="dwb_critics::GoalDistCritic" name="dwb_critics::GoalDistCritic">
+<area shape="rect" id="node1" title="Scores trajectories based on how far along the global path they end up." alt="" coords="9,152,202,177"/>
+<area shape="rect" id="node4" href="$classdwb__critics_1_1GoalAlignCritic.html" title="Scores trajectories based on whether the robot ends up pointing toward the eventual goal." alt="" coords="5,225,205,251"/>
+<area shape="rect" id="node2" href="$classdwb__critics_1_1MapGridCritic.html" title="breadth&#45;first scoring of all the cells in the costmap" alt="" coords="9,79,201,104"/>
+<area shape="rect" id="node3" href="$classdwb__core_1_1TrajectoryCritic.html" title="Evaluates a Trajectory2D to produce a score." alt="" coords="10,5,201,31"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="ShimNode" name="ShimNode">
+<area shape="rect" id="node1" title=" " alt="" coords="36,167,125,192"/>
+<area shape="rect" id="node2" href="$classnav2__behavior__tree_1_1SingleTrigger.html" title="A BT::DecoratorNode that triggers its child only once and returns FAILURE for every succeeding tick." alt="" coords="5,79,156,119"/>
+<area shape="rect" id="node3" title=" " alt="" coords="9,5,153,31"/>
+</map>

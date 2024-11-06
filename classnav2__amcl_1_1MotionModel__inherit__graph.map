@@ -1,0 +1,5 @@
+<map id="nav2_amcl::MotionModel" name="nav2_amcl::MotionModel">
+<area shape="rect" id="node1" title="An abstract motion model class." alt="" coords="143,5,329,31"/>
+<area shape="rect" id="node2" href="$classnav2__amcl_1_1DifferentialMotionModel.html" title=" " alt="" coords="5,79,224,119"/>
+<area shape="rect" id="node3" href="$classnav2__amcl_1_1OmniMotionModel.html" title=" " alt="" coords="248,86,469,111"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="nav2_behavior_tree::PlannerSelector" name="nav2_behavior_tree::PlannerSelector">
+<area shape="rect" id="node1" title="The PlannerSelector behavior is used to switch the planner that will be used by the planner server...." alt="" coords="6,79,157,119"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,157,31"/>
+</map>

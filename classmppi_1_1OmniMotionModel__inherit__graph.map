@@ -1,0 +1,4 @@
+<map id="mppi::OmniMotionModel" name="mppi::OmniMotionModel">
+<area shape="rect" id="node1" title="Omnidirectional motion model." alt="" coords="5,79,188,104"/>
+<area shape="rect" id="node2" href="$classmppi_1_1MotionModel.html" title="Abstract motion model for modeling a vehicle." alt="" coords="23,5,171,31"/>
+</map>

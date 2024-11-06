@@ -1,0 +1,7 @@
+<map id="mppi::critics::ConstraintCritic" name="mppi::critics::ConstraintCritic">
+<area shape="rect" id="node1" title="Critic objective function for enforcing feasible constraints." alt="" coords="137,260,314,300"/>
+<area shape="rect" id="node2" href="$classmppi_1_1critics_1_1CriticFunction.html" title="Abstract critic objective function to score trajectories." alt="" coords="126,185,325,211"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,5,64,31"/>
+<area shape="rect" id="node5" href="$classmppi_1_1ParametersHandler.html" title="Handles getting parameters and dynamic parmaeter changes." alt="" coords="131,95,319,121"/>
+<area shape="rect" id="node4" href="$classnav2__costmap__2d_1_1Costmap2D.html" title="A 2D costmap provides a mapping between points in the world and their associated &quot;costs&quot;." alt="" coords="344,95,568,121"/>
+</map>

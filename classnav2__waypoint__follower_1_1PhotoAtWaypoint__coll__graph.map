@@ -1,0 +1,6 @@
+<map id="nav2_waypoint_follower::PhotoAtWaypoint" name="nav2_waypoint_follower::PhotoAtWaypoint">
+<area shape="rect" id="node1" title=" " alt="" coords="207,108,388,148"/>
+<area shape="rect" id="node2" href="$classnav2__core_1_1WaypointTaskExecutor.html" title="Base class for creating a plugin in order to perform a specific task at waypoint arrivals." alt="" coords="5,5,248,31"/>
+<area shape="rect" id="node3" title=" " alt="" coords="272,5,323,31"/>
+<area shape="rect" id="node4" title=" " alt="" coords="365,5,424,31"/>
+</map>

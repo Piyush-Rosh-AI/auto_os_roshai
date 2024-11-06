@@ -1,0 +1,5 @@
+<map id="opennav_docking_core::NonChargingDock" name="opennav_docking_core::NonChargingDock">
+<area shape="rect" id="node1" title="Abstract interface for a non&#45;charging dock for the docking framework." alt="" coords="27,93,198,133"/>
+<area shape="rect" id="node3" href="$classopennav__docking_1_1SimpleNonChargingDock.html" title=" " alt="" coords="5,181,220,221"/>
+<area shape="rect" id="node2" href="$classopennav__docking__core_1_1ChargingDock.html" title="Abstract interface for a charging dock for the docking framework." alt="" coords="27,5,198,45"/>
+</map>

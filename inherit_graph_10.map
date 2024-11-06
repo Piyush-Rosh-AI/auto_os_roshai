@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,205,149,230"/>
+<area shape="rect" id="node2" href="$classnav2__behavior__tree_1_1DistanceController.html" title="A BT::DecoratorNode that ticks its child every time the robot travels a specified distance." alt="" coords="213,5,363,45"/>
+<area shape="rect" id="node3" href="$classnav2__behavior__tree_1_1GoalUpdatedController.html" title="A BT::DecoratorNode that ticks its child if the goal was updated." alt="" coords="199,69,377,109"/>
+<area shape="rect" id="node4" href="$classnav2__behavior__tree_1_1GoalUpdater.html" title="A BT::DecoratorNode that subscribes to a goal topic and updates the current goal on the blackboard." alt="" coords="213,133,363,173"/>
+<area shape="rect" id="node5" href="$classnav2__behavior__tree_1_1PathLongerOnApproach.html" title="A BT::DecoratorNode that ticks its child everytime when the length of the new path is smaller than th..." alt="" coords="197,197,379,237"/>
+<area shape="rect" id="node6" href="$classnav2__behavior__tree_1_1RateController.html" title="A BT::DecoratorNode that ticks its child at a specified rate." alt="" coords="213,261,363,301"/>
+<area shape="rect" id="node7" href="$classnav2__behavior__tree_1_1SingleTrigger.html" title="A BT::DecoratorNode that triggers its child only once and returns FAILURE for every succeeding tick." alt="" coords="213,325,363,365"/>
+<area shape="rect" id="node9" href="$classnav2__behavior__tree_1_1SpeedController.html" title="A BT::DecoratorNode that ticks its child every at a rate proportional to the speed of the robot...." alt="" coords="213,389,363,429"/>
+<area shape="rect" id="node8" href="$classShimNode.html" title=" " alt="" coords="427,333,516,358"/>
+</map>

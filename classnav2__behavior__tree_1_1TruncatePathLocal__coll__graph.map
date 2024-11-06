@@ -1,0 +1,4 @@
+<map id="nav2_behavior_tree::TruncatePathLocal" name="nav2_behavior_tree::TruncatePathLocal">
+<area shape="rect" id="node1" title="A BT::ActionNodeBase to shorten path to some distance around robot." alt="" coords="7,79,157,119"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,159,31"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="nav2_smac_planner::UpsamplerCostFunction" name="nav2_smac_planner::UpsamplerCostFunction">
+<area shape="rect" id="node1" title="Cost function for path upsampling with multiple terms using unconstrained optimization including curv..." alt="" coords="106,108,283,148"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,13,189,38"/>
+<area shape="rect" id="node3" href="$structnav2__smac__planner_1_1SmootherParams.html" title="Parameters for the smoother cost function." alt="" coords="213,5,373,45"/>
+</map>

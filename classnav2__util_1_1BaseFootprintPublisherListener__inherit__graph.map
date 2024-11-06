@@ -1,0 +1,4 @@
+<map id="nav2_util::BaseFootprintPublisherListener" name="nav2_util::BaseFootprintPublisherListener">
+<area shape="rect" id="node1" title="A TF2 listener that overrides the subscription callback to inject base footprint publisher removing Z..." alt="" coords="11,79,191,119"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,197,31"/>
+</map>

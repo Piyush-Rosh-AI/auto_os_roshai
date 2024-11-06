@@ -1,0 +1,4 @@
+<map id="nav2_smac_planner::OptimizerParams" name="nav2_smac_planner::OptimizerParams">
+<area shape="rect" id="node1" title="Parameters for the ceres optimizer." alt="" coords="53,108,213,148"/>
+<area shape="rect" id="node2" href="$structnav2__smac__planner_1_1OptimizerParams_1_1AdvancedParams.html" title="Advanced parameters for the ceres optimizer." alt="" coords="5,5,260,45"/>
+</map>

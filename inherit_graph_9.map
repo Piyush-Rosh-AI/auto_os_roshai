@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,77,132,102"/>
+<area shape="rect" id="node2" href="$classnav2__behavior__tree_1_1PipelineSequence.html" title="Type of sequence node that re&#45;ticks previous children when a child returns running." alt="" coords="180,5,331,45"/>
+<area shape="rect" id="node3" href="$classnav2__behavior__tree_1_1RecoveryNode.html" title="The RecoveryNode has only two children and returns SUCCESS if and only if the first child returns SUC..." alt="" coords="180,69,331,109"/>
+<area shape="rect" id="node4" href="$classnav2__behavior__tree_1_1RoundRobinNode.html" title="Type of sequence node that ticks children in a round&#45;robin fashion." alt="" coords="180,133,331,173"/>
+</map>

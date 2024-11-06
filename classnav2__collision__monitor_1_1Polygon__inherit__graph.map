@@ -1,0 +1,8 @@
+<map id="nav2_collision_monitor::Polygon" name="nav2_collision_monitor::Polygon">
+<area shape="rect" id="node1" title="Basic polygon shape class. For STOP/SLOWDOWN/LIMIT model it represents zone around the robot while fo..." alt="" coords="5,55,179,95"/>
+<area shape="rect" id="node2" href="$classPolygonWrapper.html" title=" " alt="" coords="249,5,378,31"/>
+<area shape="rect" id="node3" href="$classnav2__collision__monitor_1_1Circle.html" title="Circle shape implementaiton. For STOP/SLOWDOWN/LIMIT model it represents zone around the robot while ..." alt="" coords="227,55,400,95"/>
+<area shape="rect" id="node5" href="$classnav2__collision__monitor_1_1VelocityPolygon.html" title="Velocity polygon class. This class contains all the points of the polygon and the expected condition ..." alt="" coords="227,119,400,159"/>
+<area shape="rect" id="node4" href="$classCircleWrapper.html" title=" " alt="" coords="481,63,596,88"/>
+<area shape="rect" id="node6" href="$classVelocityPolygonWrapper.html" title=" " alt="" coords="448,127,629,152"/>
+</map>

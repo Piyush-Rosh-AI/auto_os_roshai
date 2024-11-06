@@ -1,0 +1,8 @@
+<map id="nav2_bt_navigator::NavigateThroughPosesNavigator" name="nav2_bt_navigator::NavigateThroughPosesNavigator">
+<area shape="rect" id="node1" title="A navigator for navigating to a a bunch of intermediary poses." alt="" coords="953,59,1189,99"/>
+<area shape="rect" id="node2" href="$classnav2__core_1_1BehaviorTreeNavigator.html" title=" " alt="" coords="625,95,904,150"/>
+<area shape="rect" id="node3" href="$classnav2__core_1_1NavigatorBase.html" title="Navigator interface to allow navigators to be stored in a vector and accessed via pluginlib due to te..." alt="" coords="243,83,436,109"/>
+<area shape="rect" id="node4" href="$structnav2__core_1_1FeedbackUtils.html" title="Navigator feedback utilities required to get transforms and reference frames." alt="" coords="245,182,434,207"/>
+<area shape="rect" id="node5" title=" " alt="" coords="5,122,64,147"/>
+<area shape="rect" id="node6" href="$classnav2__core_1_1NavigatorMuxer.html" title="A class to control the state of the BT navigator by allowing only a single plugin to be processed at ..." alt="" coords="239,133,440,158"/>
+</map>

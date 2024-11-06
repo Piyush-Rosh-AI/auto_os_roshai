@@ -1,0 +1,8 @@
+<map id="PolygonWrapper" name="PolygonWrapper">
+<area shape="rect" id="node1" title=" " alt="" coords="174,301,303,327"/>
+<area shape="rect" id="node2" href="$classnav2__collision__monitor_1_1Polygon.html" title="Basic polygon shape class. For STOP/SLOWDOWN/LIMIT model it represents zone around the robot while fo..." alt="" coords="203,123,376,163"/>
+<area shape="rect" id="node3" title=" " alt="" coords="135,5,193,31"/>
+<area shape="rect" id="node6" href="$classnav2__collision__monitor_1_1Source.html" title="Basic data source class." alt="" coords="5,123,179,163"/>
+<area shape="rect" id="node4" title=" " alt="" coords="309,5,441,31"/>
+<area shape="rect" id="node5" href="$classnav2__collision__monitor_1_1PolygonSource.html" title="Implementation for polygon source." alt="" coords="60,212,233,252"/>
+</map>

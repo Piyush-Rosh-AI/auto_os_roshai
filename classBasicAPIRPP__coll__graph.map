@@ -1,0 +1,8 @@
+<map id="BasicAPIRPP" name="BasicAPIRPP">
+<area shape="rect" id="node1" title=" " alt="" coords="657,80,760,105"/>
+<area shape="rect" id="node2" href="$classnav2__regulated__pure__pursuit__controller_1_1RegulatedPurePursuitController.html" title="Regulated pure pursuit controller plugin." alt="" coords="373,65,608,120"/>
+<area shape="rect" id="node3" href="$classnav2__core_1_1Controller.html" title="controller interface that acts as a virtual base class for all controller plugins" alt="" coords="37,5,198,31"/>
+<area shape="rect" id="node4" title=" " alt="" coords="88,55,147,80"/>
+<area shape="rect" id="node5" href="$classnav2__costmap__2d_1_1Costmap2D.html" title="A 2D costmap provides a mapping between points in the world and their associated &quot;costs&quot;." alt="" coords="5,104,229,129"/>
+<area shape="rect" id="node6" href="$structnav2__regulated__pure__pursuit__controller_1_1Parameters.html" title=" " alt="" coords="38,153,197,208"/>
+</map>

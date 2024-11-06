@@ -1,0 +1,5 @@
+<map id="nav2_controller::SimpleGoalChecker" name="nav2_controller::SimpleGoalChecker">
+<area shape="rect" id="node1" title="Goal Checker plugin that only checks the position difference." alt="" coords="62,93,269,133"/>
+<area shape="rect" id="node2" href="$classnav2__core_1_1GoalChecker.html" title="Function&#45;object for checking whether a goal has been reached." alt="" coords="5,5,184,31"/>
+<area shape="rect" id="node3" title=" " alt="" coords="208,5,267,31"/>
+</map>

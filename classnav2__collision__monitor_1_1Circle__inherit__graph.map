@@ -1,0 +1,5 @@
+<map id="nav2_collision_monitor::Circle" name="nav2_collision_monitor::Circle">
+<area shape="rect" id="node1" title="Circle shape implementaiton. For STOP/SLOWDOWN/LIMIT model it represents zone around the robot while ..." alt="" coords="5,93,179,133"/>
+<area shape="rect" id="node3" href="$classCircleWrapper.html" title=" " alt="" coords="35,181,149,207"/>
+<area shape="rect" id="node2" href="$classnav2__collision__monitor_1_1Polygon.html" title="Basic polygon shape class. For STOP/SLOWDOWN/LIMIT model it represents zone around the robot while fo..." alt="" coords="5,5,179,45"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="nav2_smoother::SmootherServer" name="nav2_smoother::SmootherServer">
+<area shape="rect" id="node1" title="This class hosts variety of plugins of different algorithms to smooth or refine a path from the expos..." alt="" coords="5,152,241,177"/>
+<area shape="rect" id="node4" href="$classDummySmootherServer.html" title=" " alt="" coords="34,225,213,251"/>
+<area shape="rect" id="node2" href="$classnav2__util_1_1LifecycleNode.html" title="A lifecycle node wrapper to enable common Nav2 needs such as manipulating parameters." alt="" coords="32,79,215,104"/>
+<area shape="rect" id="node3" title=" " alt="" coords="12,5,235,31"/>
+</map>

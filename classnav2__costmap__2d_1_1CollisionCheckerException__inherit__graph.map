@@ -1,0 +1,5 @@
+<map id="nav2_costmap_2d::CollisionCheckerException" name="nav2_costmap_2d::CollisionCheckerException">
+<area shape="rect" id="node1" title="Exceptions thrown if collision checker determines a pose is in collision with the environment costmap..." alt="" coords="5,79,209,119"/>
+<area shape="rect" id="node3" href="$classnav2__costmap__2d_1_1IllegalPoseException.html" title="Thrown when CollisionChecker encounters a fatal error." alt="" coords="13,167,201,207"/>
+<area shape="rect" id="node2" title=" " alt="" coords="38,5,177,31"/>
+</map>

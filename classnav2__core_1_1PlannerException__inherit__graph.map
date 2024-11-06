@@ -1,0 +1,14 @@
+<map id="nav2_core::PlannerException" name="nav2_core::PlannerException">
+<area shape="rect" id="node1" title=" " alt="" coords="192,260,403,285"/>
+<area shape="rect" id="node3" href="$classnav2__core_1_1GoalOccupied.html" title=" " alt="" coords="465,5,651,31"/>
+<area shape="rect" id="node4" href="$classnav2__core_1_1GoalOutsideMapBounds.html" title=" " alt="" coords="455,55,661,95"/>
+<area shape="rect" id="node5" href="$classnav2__core_1_1InvalidPlanner.html" title=" " alt="" coords="463,120,653,145"/>
+<area shape="rect" id="node6" href="$classnav2__core_1_1NoValidPathCouldBeFound.html" title=" " alt="" coords="452,170,664,210"/>
+<area shape="rect" id="node7" href="$classnav2__core_1_1NoViapointsGiven.html" title=" " alt="" coords="451,235,665,260"/>
+<area shape="rect" id="node8" href="$classnav2__core_1_1PlannerCancelled.html" title=" " alt="" coords="453,284,663,309"/>
+<area shape="rect" id="node9" href="$classnav2__core_1_1PlannerTFError.html" title=" " alt="" coords="461,333,655,359"/>
+<area shape="rect" id="node10" href="$classnav2__core_1_1PlannerTimedOut.html" title=" " alt="" coords="453,383,663,408"/>
+<area shape="rect" id="node11" href="$classnav2__core_1_1StartOccupied.html" title=" " alt="" coords="464,432,652,457"/>
+<area shape="rect" id="node12" href="$classnav2__core_1_1StartOutsideMapBounds.html" title=" " alt="" coords="455,482,661,522"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,260,144,285"/>
+</map>

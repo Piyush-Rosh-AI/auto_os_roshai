@@ -1,0 +1,4 @@
+<map id="nav2_behavior_tree::IsBatteryLowCondition" name="nav2_behavior_tree::IsBatteryLowCondition">
+<area shape="rect" id="node1" title="A BT::ConditionNode that listens to a battery topic and returns SUCCESS when battery is low and FAILU..." alt="" coords="5,79,183,119"/>
+<area shape="rect" id="node2" title=" " alt="" coords="23,5,165,31"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="nav2_controller::PoseProgressChecker" name="nav2_controller::PoseProgressChecker">
+<area shape="rect" id="node1" title="This plugin is used to check the position and the angle of the robot to make sure that it is actually..." alt="" coords="93,183,312,223"/>
+<area shape="rect" id="node2" href="$classnav2__controller_1_1SimpleProgressChecker.html" title="This plugin is used to check the position of the robot to make sure that it is actually progressing t..." alt="" coords="5,93,237,133"/>
+<area shape="rect" id="node3" href="$classnav2__core_1_1ProgressChecker.html" title="This class defines the plugin interface used to check the position of the robot to make sure that it ..." alt="" coords="19,5,224,31"/>
+<area shape="rect" id="node4" title=" " alt="" coords="252,5,311,31"/>
+</map>

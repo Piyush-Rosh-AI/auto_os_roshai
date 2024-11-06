@@ -1,0 +1,8 @@
+<map id="dwb_critics::PathAlignCritic" name="dwb_critics::PathAlignCritic">
+<area shape="rect" id="node1" title="Scores trajectories based on how far from the global path the front of the robot ends up." alt="" coords="117,345,316,371"/>
+<area shape="rect" id="node2" href="$classdwb__critics_1_1PathDistCritic.html" title="Scores trajectories based on how far from the global path they end up." alt="" coords="121,271,312,296"/>
+<area shape="rect" id="node3" href="$classdwb__critics_1_1MapGridCritic.html" title="breadth&#45;first scoring of all the cells in the costmap" alt="" coords="121,196,313,221"/>
+<area shape="rect" id="node4" href="$classdwb__core_1_1TrajectoryCritic.html" title="Evaluates a Trajectory2D to produce a score." alt="" coords="5,108,196,133"/>
+<area shape="rect" id="node5" title=" " alt="" coords="71,5,130,31"/>
+<area shape="rect" id="node6" href="$classnav2__costmap__2d_1_1Costmap2D.html" title="A 2D costmap provides a mapping between points in the world and their associated &quot;costs&quot;." alt="" coords="221,108,445,133"/>
+</map>

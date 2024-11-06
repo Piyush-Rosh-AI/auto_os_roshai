@@ -1,0 +1,5 @@
+<map id="path_utils::RightTurnAround" name="path_utils::RightTurnAround">
+<area shape="rect" id="node1" title=" " alt="" coords="5,152,207,177"/>
+<area shape="rect" id="node2" href="$classpath__utils_1_1Arc.html" title=" " alt="" coords="49,79,163,104"/>
+<area shape="rect" id="node3" href="$classpath__utils_1_1PathSegment.html" title=" " alt="" coords="16,5,196,31"/>
+</map>

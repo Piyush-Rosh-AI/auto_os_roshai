@@ -1,0 +1,5 @@
+<map id="mppi::AckermannMotionModel" name="mppi::AckermannMotionModel">
+<area shape="rect" id="node1" title="Ackermann motion model." alt="" coords="15,168,236,193"/>
+<area shape="rect" id="node2" href="$classmppi_1_1MotionModel.html" title="Abstract motion model for modeling a vehicle." alt="" coords="51,93,199,119"/>
+<area shape="rect" id="node3" href="$structmppi_1_1models_1_1ControlConstraints.html" title="Constraints on control." alt="" coords="5,5,245,31"/>
+</map>

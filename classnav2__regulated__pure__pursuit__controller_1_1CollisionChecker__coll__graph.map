@@ -1,0 +1,5 @@
+<map id="nav2_regulated_pure_pursuit_controller::CollisionChecker" name="nav2_regulated_pure_pursuit_controller::CollisionChecker">
+<area shape="rect" id="node1" title="Checks for collision based on a RPP control command." alt="" coords="146,123,305,177"/>
+<area shape="rect" id="node2" href="$classnav2__costmap__2d_1_1Costmap2D.html" title="A 2D costmap provides a mapping between points in the world and their associated &quot;costs&quot;." alt="" coords="5,20,229,45"/>
+<area shape="rect" id="node3" href="$structnav2__regulated__pure__pursuit__controller_1_1Parameters.html" title=" " alt="" coords="254,5,413,60"/>
+</map>

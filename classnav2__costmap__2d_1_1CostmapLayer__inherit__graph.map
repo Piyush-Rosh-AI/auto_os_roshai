@@ -1,0 +1,9 @@
+<map id="nav2_costmap_2d::CostmapLayer" name="nav2_costmap_2d::CostmapLayer">
+<area shape="rect" id="node1" title="A costmap layer base class for costmap plugin layers. Rather than just a layer, this object also cont..." alt="" coords="277,69,484,109"/>
+<area shape="rect" id="node4" href="$classnav2__costmap__2d_1_1ObstacleLayer.html" title="Takes in laser and pointcloud data to populate into 2D costmap." alt="" coords="546,5,751,45"/>
+<area shape="rect" id="node6" href="$classnav2__costmap__2d_1_1RangeSensorLayer.html" title="Takes in IR/Sonar/similar point measurement sensors and populates in costmap." alt="" coords="532,69,765,109"/>
+<area shape="rect" id="node7" href="$classnav2__costmap__2d_1_1StaticLayer.html" title="Takes in a map generated from SLAM to add costs to costmap." alt="" coords="538,134,759,159"/>
+<area shape="rect" id="node2" href="$classnav2__costmap__2d_1_1Layer.html" title="Abstract class for layered costmap plugin implementations." alt="" coords="25,51,209,77"/>
+<area shape="rect" id="node3" href="$classnav2__costmap__2d_1_1Costmap2D.html" title="A 2D costmap provides a mapping between points in the world and their associated &quot;costs&quot;." alt="" coords="5,101,229,126"/>
+<area shape="rect" id="node5" href="$classnav2__costmap__2d_1_1VoxelLayer.html" title="Takes laser and pointcloud data to populate a 3D voxel representation of the environment." alt="" coords="813,13,1032,38"/>
+</map>

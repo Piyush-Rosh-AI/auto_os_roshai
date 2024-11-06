@@ -1,0 +1,5 @@
+<map id="nav2_behavior_tree::ClearEntireCostmapService" name="nav2_behavior_tree::ClearEntireCostmapService">
+<area shape="rect" id="node1" title="A nav2_behavior_tree::BtServiceNode class that wraps nav2_msgs::srv::ClearEntireCostmap." alt="" coords="23,181,231,221"/>
+<area shape="rect" id="node2" href="$classnav2__behavior__tree_1_1BtServiceNode.html" title=" " alt="" coords="5,79,249,133"/>
+<area shape="rect" id="node3" title=" " alt="" coords="51,5,204,31"/>
+</map>

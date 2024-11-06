@@ -1,0 +1,5 @@
+<map id="nav2_behavior_tree::ComputePathThroughPosesAction" name="nav2_behavior_tree::ComputePathThroughPosesAction">
+<area shape="rect" id="node1" title="A nav2_behavior_tree::BtActionNode class that wraps nav2_msgs::action::ComputePathThroughPoses." alt="" coords="11,196,260,236"/>
+<area shape="rect" id="node2" href="$classnav2__behavior__tree_1_1BtActionNode.html" title=" " alt="" coords="5,79,265,148"/>
+<area shape="rect" id="node3" title=" " alt="" coords="59,5,212,31"/>
+</map>

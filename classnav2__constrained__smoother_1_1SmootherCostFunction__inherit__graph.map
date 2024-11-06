@@ -1,0 +1,4 @@
+<map id="nav2_constrained_smoother::SmootherCostFunction" name="nav2_constrained_smoother::SmootherCostFunction">
+<area shape="rect" id="node1" title="Cost function for path smoothing with multiple terms including curvature, smoothness,..." alt="" coords="13,5,220,45"/>
+<area shape="rect" id="node2" href="$classTestableSmootherCostFunction.html" title=" " alt="" coords="5,93,228,119"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="DummyCostmapSubscriber" name="DummyCostmapSubscriber">
+<area shape="rect" id="node1" title=" " alt="" coords="9,93,209,119"/>
+<area shape="rect" id="node2" href="$classnav2__costmap__2d_1_1CostmapSubscriber.html" title="Subscribes to the costmap via a ros topic." alt="" coords="5,5,212,45"/>
+</map>

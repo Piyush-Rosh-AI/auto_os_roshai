@@ -1,0 +1,4 @@
+<map id="nav2_costmap_2d::DenoiseLayer" name="nav2_costmap_2d::DenoiseLayer">
+<area shape="rect" id="node1" title="Layer filters noise&#45;induced standalone obstacles (white costmap pixels) or small obstacles groups." alt="" coords="5,79,207,119"/>
+<area shape="rect" id="node2" href="$classnav2__costmap__2d_1_1Layer.html" title="Abstract class for layered costmap plugin implementations." alt="" coords="14,5,198,31"/>
+</map>

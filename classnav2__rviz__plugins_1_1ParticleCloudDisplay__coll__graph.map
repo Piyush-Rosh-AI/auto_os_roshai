@@ -1,0 +1,4 @@
+<map id="nav2_rviz_plugins::ParticleCloudDisplay" name="nav2_rviz_plugins::ParticleCloudDisplay">
+<area shape="rect" id="node1" title="Displays a nav2_msgs/ParticleCloud message as a bunch of line&#45;drawn weighted arrows." alt="" coords="32,108,188,148"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,215,60"/>
+</map>

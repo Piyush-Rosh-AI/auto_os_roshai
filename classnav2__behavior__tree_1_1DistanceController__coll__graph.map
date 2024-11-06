@@ -1,0 +1,4 @@
+<map id="nav2_behavior_tree::DistanceController" name="nav2_behavior_tree::DistanceController">
+<area shape="rect" id="node1" title="A BT::DecoratorNode that ticks its child every time the robot travels a specified distance." alt="" coords="5,79,156,119"/>
+<area shape="rect" id="node2" title=" " alt="" coords="9,5,153,31"/>
+</map>

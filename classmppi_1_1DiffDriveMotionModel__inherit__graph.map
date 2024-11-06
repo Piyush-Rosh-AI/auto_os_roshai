@@ -1,0 +1,4 @@
+<map id="mppi::DiffDriveMotionModel" name="mppi::DiffDriveMotionModel">
+<area shape="rect" id="node1" title="Differential drive motion model." alt="" coords="5,79,212,104"/>
+<area shape="rect" id="node2" href="$classmppi_1_1MotionModel.html" title="Abstract motion model for modeling a vehicle." alt="" coords="35,5,183,31"/>
+</map>

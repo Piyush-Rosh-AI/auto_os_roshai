@@ -1,0 +1,16 @@
+<map id="mppi::critics::CriticFunction" name="mppi::critics::CriticFunction">
+<area shape="rect" id="node1" title="Abstract critic objective function to score trajectories." alt="" coords="5,324,204,349"/>
+<area shape="rect" id="node2" href="$classDummyCritic.html" title=" " alt="" coords="312,5,420,31"/>
+<area shape="rect" id="node3" href="$classmppi_1_1critics_1_1ConstraintCritic.html" title="Critic objective function for enforcing feasible constraints." alt="" coords="277,55,455,95"/>
+<area shape="rect" id="node4" href="$classmppi_1_1critics_1_1CostCritic.html" title="Critic objective function for avoiding obstacles using costmap&#39;s inflated cost." alt="" coords="279,120,453,145"/>
+<area shape="rect" id="node5" href="$classmppi_1_1critics_1_1GoalAngleCritic.html" title=" " alt="" coords="277,170,455,210"/>
+<area shape="rect" id="node6" href="$classmppi_1_1critics_1_1GoalCritic.html" title=" " alt="" coords="279,235,453,260"/>
+<area shape="rect" id="node7" href="$classmppi_1_1critics_1_1ObstaclesCritic.html" title=" " alt="" coords="279,285,453,325"/>
+<area shape="rect" id="node8" href="$classmppi_1_1critics_1_1PathAlignCritic.html" title=" " alt="" coords="281,349,451,389"/>
+<area shape="rect" id="node9" href="$classmppi_1_1critics_1_1PathAngleCritic.html" title=" " alt="" coords="279,413,453,453"/>
+<area shape="rect" id="node11" href="$classmppi_1_1critics_1_1PathFollowCritic.html" title=" " alt="" coords="276,477,456,517"/>
+<area shape="rect" id="node12" href="$classmppi_1_1critics_1_1PreferForwardCritic.html" title=" " alt="" coords="265,541,467,581"/>
+<area shape="rect" id="node13" href="$classmppi_1_1critics_1_1TwirlingCritic.html" title=" " alt="" coords="269,605,463,631"/>
+<area shape="rect" id="node14" href="$classmppi_1_1critics_1_1VelocityDeadbandCritic.html" title="Critic objective function for enforcing feasible constraints." alt="" coords="252,655,480,695"/>
+<area shape="rect" id="node10" href="$classPathAngleCriticWrapper.html" title=" " alt="" coords="528,420,704,445"/>
+</map>

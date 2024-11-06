@@ -1,0 +1,6 @@
+<map id="SmootherWrapper" name="SmootherWrapper">
+<area shape="rect" id="node1" title=" " alt="" coords="127,167,267,192"/>
+<area shape="rect" id="node2" href="$classnav2__smac__planner_1_1Smoother.html" title="A Conjugate Gradient 2D path smoother implementation." alt="" coords="5,79,165,119"/>
+<area shape="rect" id="node3" href="$classnav2__smoother_1_1SimpleSmoother.html" title="A path smoother implementation." alt="" coords="190,86,429,111"/>
+<area shape="rect" id="node4" href="$classnav2__core_1_1Smoother.html" title="smoother interface that acts as a virtual base class for all smoother plugins" alt="" coords="229,5,389,31"/>
+</map>

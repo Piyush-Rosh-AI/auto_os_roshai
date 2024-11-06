@@ -1,0 +1,4 @@
+<map id="nav2_smac_planner::UnconstrainedSmootherCostFunction" name="nav2_smac_planner::UnconstrainedSmootherCostFunction">
+<area shape="rect" id="node1" title="Cost function for path smoothing with multiple terms including curvature, smoothness,..." alt="" coords="5,79,268,119"/>
+<area shape="rect" id="node2" title=" " alt="" coords="45,5,229,31"/>
+</map>

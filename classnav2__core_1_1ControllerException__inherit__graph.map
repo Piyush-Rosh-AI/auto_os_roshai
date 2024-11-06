@@ -1,0 +1,13 @@
+<map id="nav2_core::ControllerException" name="nav2_core::ControllerException">
+<area shape="rect" id="node1" title=" " alt="" coords="192,233,417,258"/>
+<area shape="rect" id="node3" href="$classdwb__core_1_1IllegalTrajectoryException.html" title="Thrown when one of the critics encountered a fatal error." alt="" coords="487,5,683,45"/>
+<area shape="rect" id="node4" href="$classdwb__core_1_1NoLegalTrajectoriesException.html" title="Thrown when all the trajectories explored are illegal." alt="" coords="475,69,695,109"/>
+<area shape="rect" id="node5" href="$classnav2__core_1_1ControllerTFError.html" title=" " alt="" coords="481,134,689,159"/>
+<area shape="rect" id="node6" href="$classnav2__core_1_1ControllerTimedOut.html" title=" " alt="" coords="473,183,698,209"/>
+<area shape="rect" id="node7" href="$classnav2__core_1_1FailedToMakeProgress.html" title=" " alt="" coords="465,233,705,258"/>
+<area shape="rect" id="node8" href="$classnav2__core_1_1InvalidController.html" title=" " alt="" coords="483,282,688,307"/>
+<area shape="rect" id="node9" href="$classnav2__core_1_1InvalidPath.html" title=" " alt="" coords="501,331,670,357"/>
+<area shape="rect" id="node10" href="$classnav2__core_1_1NoValidControl.html" title=" " alt="" coords="488,381,683,406"/>
+<area shape="rect" id="node11" href="$classnav2__core_1_1PatienceExceeded.html" title=" " alt="" coords="478,430,693,455"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,233,144,258"/>
+</map>

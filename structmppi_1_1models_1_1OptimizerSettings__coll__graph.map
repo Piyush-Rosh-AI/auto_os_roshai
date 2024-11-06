@@ -1,0 +1,5 @@
+<map id="mppi::models::OptimizerSettings" name="mppi::models::OptimizerSettings">
+<area shape="rect" id="node1" title="Settings for the optimizer to use." alt="" coords="130,108,366,133"/>
+<area shape="rect" id="node2" href="$structmppi_1_1models_1_1ControlConstraints.html" title="Constraints on control." alt="" coords="5,5,245,31"/>
+<area shape="rect" id="node3" href="$structmppi_1_1models_1_1SamplingStd.html" title="Noise parameters for sampling trajectories." alt="" coords="270,5,471,31"/>
+</map>

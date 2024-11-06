@@ -1,0 +1,7 @@
+<map id="nav2_costmap_2d::CostmapTopicCollisionChecker" name="nav2_costmap_2d::CostmapTopicCollisionChecker">
+<area shape="rect" id="node1" title="Using a costmap via a ros topic, this object is used to find if robot poses are in collision with the..." alt="" coords="619,59,825,99"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,43,64,69"/>
+<area shape="rect" id="node3" href="$classnav2__costmap__2d_1_1CostmapSubscriber.html" title="Subscribes to the costmap via a ros topic." alt="" coords="241,36,448,76"/>
+<area shape="rect" id="node4" href="$classnav2__costmap__2d_1_1FootprintSubscriber.html" title="Subscriber to the footprint topic to get current robot footprint (if changing) for use in collision a..." alt="" coords="241,100,448,140"/>
+<area shape="rect" id="node5" href="$classnav2__costmap__2d_1_1FootprintCollisionChecker.html" title=" " alt="" coords="241,164,448,233"/>
+</map>
