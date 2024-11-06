@@ -106,3 +106,9 @@ Run the launch file to open for the gazebo as well as rviz world:
   ros2 launch roshai_gazebo emptyworld.launch.py
 ```
     
+  Gazebo world
+![Image gazebo](images/gazebo.png)
+    Car Model
+![Image rviz](images/rviz.png)
+    Generated map
+![Image generated map](images/map.png)
