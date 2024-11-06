@@ -1,8 +1,12 @@
 Add the ROS extension from the official microsoft store 
 
 colcon build with debug: colcon build --packages-select slam_toolbox --cmake-args -DCMAKE_BUILD_TYPE=debug
+add add_compile_options(-g) in CMakeLists.txt
 
 Go in run and debug and launch with the destined launch file you want to do.
+or 
+(recommended)
+use the gdb debugger with prefix set in launch file as server(while running server you can find the path for the executable )
 
 For more details check:https://gist.github.com/JADC362/a4425c2d05cdaadaaa71b697b674425f#file-ros2debugvscode-md
 More on extension details:https://github.com/ms-iot/vscode-ros?tab=readme-ov-file
