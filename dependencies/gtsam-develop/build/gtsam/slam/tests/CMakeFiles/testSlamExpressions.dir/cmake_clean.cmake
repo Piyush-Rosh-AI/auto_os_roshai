@@ -1,0 +1,11 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/testSlamExpressions.dir/testSlamExpressions.cpp.o"
+  "CMakeFiles/testSlamExpressions.dir/testSlamExpressions.cpp.o.d"
+  "testSlamExpressions"
+  "testSlamExpressions.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/testSlamExpressions.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

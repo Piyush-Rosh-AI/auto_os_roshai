@@ -1,0 +1,11 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/testBoundingConstraint.dir/testBoundingConstraint.cpp.o"
+  "CMakeFiles/testBoundingConstraint.dir/testBoundingConstraint.cpp.o.d"
+  "testBoundingConstraint"
+  "testBoundingConstraint.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/testBoundingConstraint.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
