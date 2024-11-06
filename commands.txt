@@ -67,3 +67,7 @@ ros2 run tf2_ros static_transform_publisher --x x --y y --z z --yaw yaw --pitch 
 ros2 run tf2_ros static_transform_publisher 1 2 3 0.5 0.1 -1.0 map odom
 
 sudo apt-get install ros-<YOUR_ROSDISTO>-imu-tools
+
+
+-----
+ colcon build --packages-select slam_toolbox --cmake-args -DCMAKE_BUILD_TYPE=debug
