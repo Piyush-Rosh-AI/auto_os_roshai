@@ -110,5 +110,25 @@ Run the launch file to open for the gazebo as well as rviz world:
 ![Image gazebo](images/gazebo.png)
     Car Model
 ![Image rviz](images/rviz.png)
-    Generated map
+
+Run the launch file to open for the gazebo as well as rviz world:
+```bash
+  ros2 launch slam_toolbox online_sync_launch.py 
+```
+As debugger is on so we need to go is vs code and run and debug
+else
+remove the lines from launch file and run
+    prefix=["gdbserver localhost:3000"],
+    emulate_tty=True
+
+Run the launch file to open for the gazebo as well as rviz world:
+```bash
+  ros2 run teleop_twist_keyboard teleop_twist_keyboard 
+
+```
+Run around the environment to create the map
+
+![Image generated map](images/processing_map.png)
+
+  Final generated map map
 ![Image generated map](images/map.png)
