@@ -2,11 +2,8 @@ name: Doxygen GitHub Pages Deploy Action
 
 on:
   push:
-    paths-ignore:
-      - 'dependencies/**'
     branches:
       - main
-   
   workflow_dispatch:
 
 jobs:
