@@ -1,6 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classmppi_1_1MotionModel.html" title="Abstract motion model for modeling a vehicle." alt="" coords="5,55,153,80"/>
-<area shape="rect" id="node2" href="$classmppi_1_1AckermannMotionModel.html" title="Ackermann motion model." alt="" coords="201,5,423,31"/>
-<area shape="rect" id="node3" href="$classmppi_1_1DiffDriveMotionModel.html" title="Differential drive motion model." alt="" coords="209,55,415,80"/>
-<area shape="rect" id="node4" href="$classmppi_1_1OmniMotionModel.html" title="Omnidirectional motion model." alt="" coords="221,104,403,129"/>
-</map>

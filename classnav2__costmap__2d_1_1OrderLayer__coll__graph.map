@@ -1,6 +1,0 @@
-<map id="nav2_costmap_2d::OrderLayer" name="nav2_costmap_2d::OrderLayer">
-<area shape="rect" id="node1" title=" " alt="" coords="73,183,293,208"/>
-<area shape="rect" id="node2" href="$classnav2__costmap__2d_1_1Layer.html" title="Abstract class for layered costmap plugin implementations." alt="" coords="91,108,275,133"/>
-<area shape="rect" id="node3" href="$classnav2__costmap__2d_1_1LayeredCostmap.html" title="Instantiates different layer plugins and aggregates them into one score." alt="" coords="5,5,205,45"/>
-<area shape="rect" id="node4" title=" " alt="" coords="231,13,289,38"/>
-</map>

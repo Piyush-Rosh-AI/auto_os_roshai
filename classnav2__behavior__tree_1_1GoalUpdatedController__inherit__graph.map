@@ -1,4 +1,0 @@
-<map id="nav2_behavior_tree::GoalUpdatedController" name="nav2_behavior_tree::GoalUpdatedController">
-<area shape="rect" id="node1" title="A BT::DecoratorNode that ticks its child if the goal was updated." alt="" coords="5,79,184,119"/>
-<area shape="rect" id="node2" title=" " alt="" coords="23,5,167,31"/>
-</map>

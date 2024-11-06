@@ -1,5 +1,0 @@
-<map id="nav2_smac_planner::LatticeMotionTable" name="nav2_smac_planner::LatticeMotionTable">
-<area shape="rect" id="node1" title="A table of motion primitives and related functions." alt="" coords="5,196,165,236"/>
-<area shape="rect" id="node2" title=" " alt="" coords="56,5,115,31"/>
-<area shape="rect" id="node3" href="$structnav2__smac__planner_1_1LatticeMetadata.html" title="A struct of all lattice metadata." alt="" coords="243,93,403,133"/>
-</map>

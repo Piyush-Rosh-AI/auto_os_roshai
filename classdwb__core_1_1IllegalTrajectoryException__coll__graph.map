@@ -1,6 +1,0 @@
-<map id="dwb_core::IllegalTrajectoryException" name="dwb_core::IllegalTrajectoryException">
-<area shape="rect" id="node1" title="Thrown when one of the critics encountered a fatal error." alt="" coords="144,168,340,208"/>
-<area shape="rect" id="node2" href="$classnav2__core_1_1ControllerException.html" title=" " alt="" coords="5,80,231,105"/>
-<area shape="rect" id="node3" title=" " alt="" coords="49,5,187,31"/>
-<area shape="rect" id="node4" title=" " alt="" coords="254,80,313,105"/>
-</map>

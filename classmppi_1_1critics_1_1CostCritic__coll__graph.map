@@ -1,8 +1,0 @@
-<map id="mppi::critics::CostCritic" name="mppi::critics::CostCritic">
-<area shape="rect" id="node1" title="Critic objective function for avoiding obstacles using costmap&#39;s inflated cost." alt="" coords="1011,77,1184,102"/>
-<area shape="rect" id="node2" href="$classmppi_1_1critics_1_1CriticFunction.html" title="Abstract critic objective function to score trajectories." alt="" coords="631,77,830,102"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,42,64,67"/>
-<area shape="rect" id="node5" href="$classmppi_1_1ParametersHandler.html" title="Handles getting parameters and dynamic parmaeter changes." alt="" coords="218,103,406,129"/>
-<area shape="rect" id="node4" href="$classnav2__costmap__2d_1_1Costmap2D.html" title="A 2D costmap provides a mapping between points in the world and their associated &quot;costs&quot;." alt="" coords="200,159,424,185"/>
-<area shape="rect" id="node6" href="$classnav2__costmap__2d_1_1FootprintCollisionChecker.html" title=" " alt="" coords="621,139,840,194"/>
-</map>

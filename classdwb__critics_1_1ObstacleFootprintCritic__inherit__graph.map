@@ -1,6 +1,0 @@
-<map id="dwb_critics::ObstacleFootprintCritic" name="dwb_critics::ObstacleFootprintCritic">
-<area shape="rect" id="node1" title="Uses costmap 2d to assign negative costs if robot footprint is in obstacle on any point of the trajec..." alt="" coords="5,167,224,207"/>
-<area shape="rect" id="node4" href="$classOpenObstacleFootprintCritic.html" title=" " alt="" coords="12,255,217,280"/>
-<area shape="rect" id="node2" href="$classdwb__critics_1_1BaseObstacleCritic.html" title="Uses costmap 2d to assign negative costs if a circular robot would collide at any point of the trajec..." alt="" coords="19,79,211,119"/>
-<area shape="rect" id="node3" href="$classdwb__core_1_1TrajectoryCritic.html" title="Evaluates a Trajectory2D to produce a score." alt="" coords="19,5,210,31"/>
-</map>

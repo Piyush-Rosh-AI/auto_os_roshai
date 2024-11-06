@@ -1,6 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classdwb__core_1_1TrajectoryGenerator.html" title="Interface for iterating through possible velocities and creating trajectories." alt="" coords="5,13,227,38"/>
-<area shape="rect" id="node2" href="$classdwb__plugins_1_1StandardTrajectoryGenerator.html" title="Standard DWA&#45;like trajectory generator." alt="" coords="275,5,508,45"/>
-<area shape="rect" id="node3" href="$classdwb__plugins_1_1LimitedAccelGenerator.html" title="Limits the acceleration in the generated trajectories to a fraction of the simulated time." alt="" coords="556,5,751,45"/>
-<area shape="rect" id="node4" href="$classLimitedAccelGeneratorTest.html" title=" " alt="" coords="799,13,996,38"/>
-</map>

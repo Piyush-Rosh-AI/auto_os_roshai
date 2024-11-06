@@ -1,4 +1,0 @@
-<map id="DummyFootprintSubscriber" name="DummyFootprintSubscriber">
-<area shape="rect" id="node1" title=" " alt="" coords="9,93,209,119"/>
-<area shape="rect" id="node2" href="$classnav2__costmap__2d_1_1FootprintSubscriber.html" title="Subscriber to the footprint topic to get current robot footprint (if changing) for use in collision a..." alt="" coords="5,5,212,45"/>
-</map>

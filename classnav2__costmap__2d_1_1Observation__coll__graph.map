@@ -1,4 +1,0 @@
-<map id="nav2_costmap_2d::Observation" name="nav2_costmap_2d::Observation">
-<area shape="rect" id="node1" title="Stores an observation in terms of a point cloud and the origin of the source." alt="" coords="5,93,232,119"/>
-<area shape="rect" id="node2" title=" " alt="" coords="91,5,146,31"/>
-</map>

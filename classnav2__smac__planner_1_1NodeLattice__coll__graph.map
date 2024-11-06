@@ -1,7 +1,0 @@
-<map id="nav2_smac_planner::NodeLattice" name="nav2_smac_planner::NodeLattice">
-<area shape="rect" id="node1" title="NodeLattice implementation for graph, Hybrid&#45;A*." alt="" coords="51,299,211,339"/>
-<area shape="rect" id="node2" href="$structnav2__smac__planner_1_1NodeHybrid_1_1Coordinates.html" title="NodeHybrid implementation of coordinate structure." alt="" coords="5,196,191,236"/>
-<area shape="rect" id="node3" href="$structnav2__smac__planner_1_1LatticeMotionTable.html" title="A table of motion primitives and related functions." alt="" coords="215,196,375,236"/>
-<area shape="rect" id="node4" title=" " alt="" coords="211,5,270,31"/>
-<area shape="rect" id="node5" href="$structnav2__smac__planner_1_1LatticeMetadata.html" title="A struct of all lattice metadata." alt="" coords="398,93,558,133"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="nav2_collision_monitor::Range" name="nav2_collision_monitor::Range">
-<area shape="rect" id="node1" title="Implementation for IR/ultrasound range sensor source." alt="" coords="5,93,179,133"/>
-<area shape="rect" id="node3" href="$classRangeWrapper.html" title=" " alt="" coords="33,181,151,207"/>
-<area shape="rect" id="node2" href="$classnav2__collision__monitor_1_1Source.html" title="Basic data source class." alt="" coords="5,5,179,45"/>
-</map>

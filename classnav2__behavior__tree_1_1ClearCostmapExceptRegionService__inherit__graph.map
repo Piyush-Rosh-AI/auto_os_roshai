@@ -1,5 +1,0 @@
-<map id="nav2_behavior_tree::ClearCostmapExceptRegionService" name="nav2_behavior_tree::ClearCostmapExceptRegionService">
-<area shape="rect" id="node1" title="A nav2_behavior_tree::BtServiceNode class that wraps nav2_msgs::srv::ClearCostmapExceptRegion." alt="" coords="17,196,228,251"/>
-<area shape="rect" id="node2" href="$classnav2__behavior__tree_1_1BtServiceNode.html" title=" " alt="" coords="5,79,240,148"/>
-<area shape="rect" id="node3" title=" " alt="" coords="46,5,199,31"/>
-</map>

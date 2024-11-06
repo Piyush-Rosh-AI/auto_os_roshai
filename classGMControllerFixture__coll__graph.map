@@ -1,7 +1,0 @@
-<map id="GMControllerFixture" name="GMControllerFixture">
-<area shape="rect" id="node1" title=" " alt="" coords="144,197,297,223"/>
-<area shape="rect" id="node2" href="$classnav2__graceful__controller_1_1GracefulController.html" title="Graceful controller plugin." alt="" coords="129,108,312,148"/>
-<area shape="rect" id="node3" href="$classnav2__core_1_1Controller.html" title="controller interface that acts as a virtual base class for all controller plugins" alt="" coords="5,13,167,38"/>
-<area shape="rect" id="node4" title=" " alt="" coords="191,13,250,38"/>
-<area shape="rect" id="node5" href="$structnav2__graceful__controller_1_1Parameters.html" title=" " alt="" coords="275,5,457,45"/>
-</map>

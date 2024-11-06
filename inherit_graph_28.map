@@ -1,6 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classcostmap__queue_1_1MapBasedQueue.html" title=" " alt="" coords="5,37,248,77"/>
-<area shape="rect" id="node2" href="$classcostmap__queue_1_1CostmapQueue.html" title=" " alt="" coords="296,45,529,70"/>
-<area shape="rect" id="node3" href="$classcostmap__queue_1_1LimitedCostmapQueue.html" title="Extension of Costmap Queue where distances are limited to a given distance from source cells." alt="" coords="577,5,817,45"/>
-<area shape="rect" id="node4" href="$classdwb__critics_1_1MapGridCritic_1_1MapGridQueue.html" title="Subclass of CostmapQueue that avoids Obstacles and Unknown Values." alt="" coords="601,69,793,109"/>
-</map>

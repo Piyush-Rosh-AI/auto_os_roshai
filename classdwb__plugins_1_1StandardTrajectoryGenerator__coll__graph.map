@@ -1,5 +1,0 @@
-<map id="dwb_plugins::StandardTrajectoryGenerator" name="dwb_plugins::StandardTrajectoryGenerator">
-<area shape="rect" id="node1" title="Standard DWA&#45;like trajectory generator." alt="" coords="81,93,314,133"/>
-<area shape="rect" id="node2" href="$classdwb__core_1_1TrajectoryGenerator.html" title="Interface for iterating through possible velocities and creating trajectories." alt="" coords="5,5,227,31"/>
-<area shape="rect" id="node3" title=" " alt="" coords="251,5,309,31"/>
-</map>

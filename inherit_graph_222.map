@@ -1,7 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classopennav__docking__core_1_1ChargingDock.html" title="Abstract interface for a charging dock for the docking framework." alt="" coords="5,47,176,87"/>
-<area shape="rect" id="node2" href="$classopennav__docking_1_1SimpleChargingDock.html" title=" " alt="" coords="224,5,504,31"/>
-<area shape="rect" id="node3" href="$classopennav__docking_1_1TestFailureDock.html" title=" " alt="" coords="241,55,487,80"/>
-<area shape="rect" id="node4" href="$classopennav__docking__core_1_1NonChargingDock.html" title="Abstract interface for a non&#45;charging dock for the docking framework." alt="" coords="279,105,449,145"/>
-<area shape="rect" id="node5" href="$classopennav__docking_1_1SimpleNonChargingDock.html" title=" " alt="" coords="552,105,767,145"/>
-</map>

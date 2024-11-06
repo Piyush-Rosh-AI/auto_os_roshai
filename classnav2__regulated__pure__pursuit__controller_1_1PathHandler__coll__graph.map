@@ -1,4 +1,0 @@
-<map id="nav2_regulated_pure_pursuit_controller::PathHandler" name="nav2_regulated_pure_pursuit_controller::PathHandler">
-<area shape="rect" id="node1" title="Handles input paths to transform them to local frames required." alt="" coords="5,93,164,148"/>
-<area shape="rect" id="node2" title=" " alt="" coords="59,5,110,31"/>
-</map>

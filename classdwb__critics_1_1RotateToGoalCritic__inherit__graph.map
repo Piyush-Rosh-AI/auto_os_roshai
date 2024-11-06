@@ -1,4 +1,0 @@
-<map id="dwb_critics::RotateToGoalCritic" name="dwb_critics::RotateToGoalCritic">
-<area shape="rect" id="node1" title="Forces the commanded trajectories to only be rotations if within a certain distance window." alt="" coords="5,79,196,119"/>
-<area shape="rect" id="node2" href="$classdwb__core_1_1TrajectoryCritic.html" title="Evaluates a Trajectory2D to produce a score." alt="" coords="5,5,196,31"/>
-</map>

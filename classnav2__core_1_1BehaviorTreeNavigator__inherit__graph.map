@@ -1,4 +1,0 @@
-<map id="nav2_core::BehaviorTreeNavigator&lt; ActionT &gt;" name="nav2_core::BehaviorTreeNavigator&lt; ActionT &gt;">
-<area shape="rect" id="node1" title="Navigator interface that acts as a base class for all BT&#45;based Navigator action&#39;s plugins All methods..." alt="" coords="5,79,252,119"/>
-<area shape="rect" id="node2" href="$classnav2__core_1_1NavigatorBase.html" title="Navigator interface to allow navigators to be stored in a vector and accessed via pluginlib due to te..." alt="" coords="32,5,225,31"/>
-</map>

@@ -1,8 +1,0 @@
-<map id="nav2_behaviors::BackUp" name="nav2_behaviors::BackUp">
-<area shape="rect" id="node1" title=" " alt="" coords="154,329,337,355"/>
-<area shape="rect" id="node2" href="$classnav2__behaviors_1_1DriveOnHeading.html" title=" " alt="" coords="125,240,365,280"/>
-<area shape="rect" id="node3" href="$classnav2__behaviors_1_1TimedBehavior.html" title=" " alt="" coords="32,137,264,177"/>
-<area shape="rect" id="node4" href="$classnav2__core_1_1Behavior.html" title="Abstract interface for behaviors to adhere to with pluginlib." alt="" coords="5,5,160,31"/>
-<area shape="rect" id="node5" title=" " alt="" coords="184,5,243,31"/>
-<area shape="rect" id="node6" title=" " alt="" coords="289,145,399,170"/>
-</map>

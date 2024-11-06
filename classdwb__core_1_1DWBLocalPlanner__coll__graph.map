@@ -1,5 +1,0 @@
-<map id="dwb_core::DWBLocalPlanner" name="dwb_core::DWBLocalPlanner">
-<area shape="rect" id="node1" title="Plugin&#45;based flexible controller." alt="" coords="49,93,256,119"/>
-<area shape="rect" id="node2" href="$classnav2__core_1_1Controller.html" title="controller interface that acts as a virtual base class for all controller plugins" alt="" coords="5,5,167,31"/>
-<area shape="rect" id="node3" title=" " alt="" coords="191,5,250,31"/>
-</map>

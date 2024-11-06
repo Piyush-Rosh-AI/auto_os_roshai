@@ -1,4 +1,0 @@
-<map id="nav2_smac_planner::CostmapDownsampler" name="nav2_smac_planner::CostmapDownsampler">
-<area shape="rect" id="node1" title="A costmap downsampler for more efficient path planning." alt="" coords="32,93,203,133"/>
-<area shape="rect" id="node2" href="$classnav2__costmap__2d_1_1Costmap2D.html" title="A 2D costmap provides a mapping between points in the world and their associated &quot;costs&quot;." alt="" coords="5,5,229,31"/>
-</map>

@@ -1,8 +1,0 @@
-<map id="PlannerShim" name="PlannerShim">
-<area shape="rect" id="node1" title=" " alt="" coords="210,243,314,268"/>
-<area shape="rect" id="node2" href="$classnav2__planner_1_1PlannerServer.html" title="An action server implements the behavior tree&#39;s ComputePathToPose interface and hosts various plugins..." alt="" coords="157,168,367,193"/>
-<area shape="rect" id="node3" href="$classnav2__util_1_1LifecycleNode.html" title="A lifecycle node wrapper to enable common Nav2 needs such as manipulating parameters." alt="" coords="25,80,208,105"/>
-<area shape="rect" id="node4" title=" " alt="" coords="5,5,228,31"/>
-<area shape="rect" id="node5" title=" " alt="" coords="233,80,291,105"/>
-<area shape="rect" id="node6" href="$classnav2__costmap__2d_1_1Costmap2D.html" title="A 2D costmap provides a mapping between points in the world and their associated &quot;costs&quot;." alt="" coords="318,80,542,105"/>
-</map>

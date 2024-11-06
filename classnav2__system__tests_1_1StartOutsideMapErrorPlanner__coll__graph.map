@@ -1,5 +1,0 @@
-<map id="nav2_system_tests::StartOutsideMapErrorPlanner" name="nav2_system_tests::StartOutsideMapErrorPlanner">
-<area shape="rect" id="node1" title=" " alt="" coords="5,167,216,207"/>
-<area shape="rect" id="node2" href="$classnav2__system__tests_1_1UnknownErrorPlanner.html" title=" " alt="" coords="29,79,192,119"/>
-<area shape="rect" id="node3" href="$classnav2__core_1_1GlobalPlanner.html" title="Abstract interface for global planners to adhere to with pluginlib." alt="" coords="17,5,205,31"/>
-</map>

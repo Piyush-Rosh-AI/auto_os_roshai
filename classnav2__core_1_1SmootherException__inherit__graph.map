@@ -1,9 +1,0 @@
-<map id="nav2_core::SmootherException" name="nav2_core::SmootherException">
-<area shape="rect" id="node1" title=" " alt="" coords="192,104,416,129"/>
-<area shape="rect" id="node3" href="$classnav2__core_1_1FailedToSmoothPath.html" title=" " alt="" coords="464,5,691,31"/>
-<area shape="rect" id="node4" href="$classnav2__core_1_1InvalidPath.html" title=" " alt="" coords="493,55,662,80"/>
-<area shape="rect" id="node5" href="$classnav2__core_1_1InvalidSmoother.html" title=" " alt="" coords="475,104,679,129"/>
-<area shape="rect" id="node6" href="$classnav2__core_1_1SmoothedPathInCollision.html" title=" " alt="" coords="476,154,679,194"/>
-<area shape="rect" id="node7" href="$classnav2__core_1_1SmootherTimedOut.html" title=" " alt="" coords="465,219,689,244"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,104,144,129"/>
-</map>

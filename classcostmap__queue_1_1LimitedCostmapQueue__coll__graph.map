@@ -1,6 +1,0 @@
-<map id="costmap_queue::LimitedCostmapQueue" name="costmap_queue::LimitedCostmapQueue">
-<area shape="rect" id="node1" title="Extension of Costmap Queue where distances are limited to a given distance from source cells." alt="" coords="135,183,375,223"/>
-<area shape="rect" id="node2" href="$classcostmap__queue_1_1CostmapQueue.html" title=" " alt="" coords="138,108,371,133"/>
-<area shape="rect" id="node3" href="$classcostmap__queue_1_1MapBasedQueue.html" title=" " alt="" coords="5,5,248,45"/>
-<area shape="rect" id="node4" href="$classnav2__costmap__2d_1_1Costmap2D.html" title="A 2D costmap provides a mapping between points in the world and their associated &quot;costs&quot;." alt="" coords="272,13,496,38"/>
-</map>

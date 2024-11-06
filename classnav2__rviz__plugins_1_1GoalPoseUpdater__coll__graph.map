@@ -1,4 +1,0 @@
-<map id="nav2_rviz_plugins::GoalPoseUpdater" name="nav2_rviz_plugins::GoalPoseUpdater">
-<area shape="rect" id="node1" title="Class to set and update goal pose by emitting signal." alt="" coords="5,79,152,119"/>
-<area shape="rect" id="node2" title=" " alt="" coords="41,5,116,31"/>
-</map>

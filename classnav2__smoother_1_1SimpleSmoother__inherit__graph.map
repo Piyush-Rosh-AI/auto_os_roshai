@@ -1,5 +1,0 @@
-<map id="nav2_smoother::SimpleSmoother" name="nav2_smoother::SimpleSmoother">
-<area shape="rect" id="node1" title="A path smoother implementation." alt="" coords="5,79,244,104"/>
-<area shape="rect" id="node3" href="$classSmootherWrapper.html" title=" " alt="" coords="55,152,195,177"/>
-<area shape="rect" id="node2" href="$classnav2__core_1_1Smoother.html" title="smoother interface that acts as a virtual base class for all smoother plugins" alt="" coords="45,5,205,31"/>
-</map>

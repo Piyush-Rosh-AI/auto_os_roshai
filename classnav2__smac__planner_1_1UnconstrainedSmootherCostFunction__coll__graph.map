@@ -1,6 +1,0 @@
-<map id="nav2_smac_planner::UnconstrainedSmootherCostFunction" name="nav2_smac_planner::UnconstrainedSmootherCostFunction">
-<area shape="rect" id="node1" title="Cost function for path smoothing with multiple terms including curvature, smoothness,..." alt="" coords="345,47,608,87"/>
-<area shape="rect" id="node2" title=" " alt="" coords="25,5,209,31"/>
-<area shape="rect" id="node3" href="$classnav2__costmap__2d_1_1Costmap2D.html" title="A 2D costmap provides a mapping between points in the world and their associated &quot;costs&quot;." alt="" coords="5,55,229,80"/>
-<area shape="rect" id="node4" href="$structnav2__smac__planner_1_1SmootherParams.html" title="Parameters for the smoother cost function." alt="" coords="37,105,197,145"/>
-</map>

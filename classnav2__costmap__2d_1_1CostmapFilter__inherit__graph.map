@@ -1,8 +1,0 @@
-<map id="nav2_costmap_2d::CostmapFilter" name="nav2_costmap_2d::CostmapFilter">
-<area shape="rect" id="node1" title=": CostmapFilter basic class. It is inherited from Layer in order to avoid hidden problems when the sh..." alt="" coords="237,77,444,117"/>
-<area shape="rect" id="node3" href="$classCostmapFilterWrapper.html" title=" " alt="" coords="519,5,687,31"/>
-<area shape="rect" id="node4" href="$classnav2__costmap__2d_1_1BinaryFilter.html" title="Reads in a speed restriction mask and enables a robot to dynamically adjust speed based on pose in ma..." alt="" coords="492,55,715,80"/>
-<area shape="rect" id="node5" href="$classnav2__costmap__2d_1_1KeepoutFilter.html" title="Reads in a keepout mask and marks keepout regions in the map to prevent planning or control in restri..." alt="" coords="503,105,704,145"/>
-<area shape="rect" id="node6" href="$classnav2__costmap__2d_1_1SpeedFilter.html" title="Reads in a speed restriction mask and enables a robot to dynamically adjust speed based on pose in ma..." alt="" coords="493,169,714,195"/>
-<area shape="rect" id="node2" href="$classnav2__costmap__2d_1_1Layer.html" title="Abstract class for layered costmap plugin implementations." alt="" coords="5,84,189,109"/>
-</map>

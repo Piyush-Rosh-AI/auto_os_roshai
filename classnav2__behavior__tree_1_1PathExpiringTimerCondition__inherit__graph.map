@@ -1,4 +1,0 @@
-<map id="nav2_behavior_tree::PathExpiringTimerCondition" name="nav2_behavior_tree::PathExpiringTimerCondition">
-<area shape="rect" id="node1" title="A BT::ConditionNode that returns SUCCESS every time a specified time period passes and FAILURE otherw..." alt="" coords="5,79,216,119"/>
-<area shape="rect" id="node2" title=" " alt="" coords="39,5,182,31"/>
-</map>

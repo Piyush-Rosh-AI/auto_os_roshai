@@ -1,5 +1,0 @@
-<map id="costmap_queue::LimitedCostmapQueue" name="costmap_queue::LimitedCostmapQueue">
-<area shape="rect" id="node1" title="Extension of Costmap Queue where distances are limited to a given distance from source cells." alt="" coords="7,167,247,207"/>
-<area shape="rect" id="node2" href="$classcostmap__queue_1_1CostmapQueue.html" title=" " alt="" coords="10,93,243,119"/>
-<area shape="rect" id="node3" href="$classcostmap__queue_1_1MapBasedQueue.html" title=" " alt="" coords="5,5,248,45"/>
-</map>

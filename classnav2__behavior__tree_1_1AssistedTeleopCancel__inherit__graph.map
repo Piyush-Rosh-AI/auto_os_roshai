@@ -1,5 +1,0 @@
-<map id="nav2_behavior_tree::AssistedTeleopCancel" name="nav2_behavior_tree::AssistedTeleopCancel">
-<area shape="rect" id="node1" title="A nav2_behavior_tree::BtActionNode class that wraps nav2_msgs::action::BackUp." alt="" coords="5,196,176,236"/>
-<area shape="rect" id="node2" href="$classnav2__behavior__tree_1_1BtCancelActionNode.html" title=" " alt="" coords="7,79,174,148"/>
-<area shape="rect" id="node3" title=" " alt="" coords="14,5,167,31"/>
-</map>

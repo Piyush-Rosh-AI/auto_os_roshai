@@ -1,4 +1,0 @@
-<map id="nav2_waypoint_follower::WaitAtWaypoint" name="nav2_waypoint_follower::WaitAtWaypoint">
-<area shape="rect" id="node1" title="Simple plugin based on WaypointTaskExecutor, lets robot to sleep for a specified amount of time at wa..." alt="" coords="36,79,217,119"/>
-<area shape="rect" id="node2" href="$classnav2__core_1_1WaypointTaskExecutor.html" title="Base class for creating a plugin in order to perform a specific task at waypoint arrivals." alt="" coords="5,5,248,31"/>
-</map>

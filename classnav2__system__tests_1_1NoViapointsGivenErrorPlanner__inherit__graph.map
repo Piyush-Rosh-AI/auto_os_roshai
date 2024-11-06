@@ -1,5 +1,0 @@
-<map id="nav2_system_tests::NoViapointsGivenErrorPlanner" name="nav2_system_tests::NoViapointsGivenErrorPlanner">
-<area shape="rect" id="node1" title=" " alt="" coords="5,167,224,207"/>
-<area shape="rect" id="node2" href="$classnav2__system__tests_1_1UnknownErrorPlanner.html" title=" " alt="" coords="33,79,196,119"/>
-<area shape="rect" id="node3" href="$classnav2__core_1_1GlobalPlanner.html" title="Abstract interface for global planners to adhere to with pluginlib." alt="" coords="21,5,209,31"/>
-</map>

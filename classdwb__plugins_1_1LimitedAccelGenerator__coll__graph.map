@@ -1,6 +1,0 @@
-<map id="dwb_plugins::LimitedAccelGenerator" name="dwb_plugins::LimitedAccelGenerator">
-<area shape="rect" id="node1" title="Limits the acceleration in the generated trajectories to a fraction of the simulated time." alt="" coords="107,183,302,223"/>
-<area shape="rect" id="node2" href="$classdwb__plugins_1_1StandardTrajectoryGenerator.html" title="Standard DWA&#45;like trajectory generator." alt="" coords="5,93,239,133"/>
-<area shape="rect" id="node3" href="$classdwb__core_1_1TrajectoryGenerator.html" title="Interface for iterating through possible velocities and creating trajectories." alt="" coords="11,5,233,31"/>
-<area shape="rect" id="node4" title=" " alt="" coords="258,5,317,31"/>
-</map>

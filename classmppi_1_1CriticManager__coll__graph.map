@@ -1,5 +1,0 @@
-<map id="mppi::CriticManager" name="mppi::CriticManager">
-<area shape="rect" id="node1" title="Manager of objective function plugins for scoring trajectories." alt="" coords="5,181,160,207"/>
-<area shape="rect" id="node2" title=" " alt="" coords="53,5,112,31"/>
-<area shape="rect" id="node3" href="$classmppi_1_1ParametersHandler.html" title="Handles getting parameters and dynamic parmaeter changes." alt="" coords="135,93,323,119"/>
-</map>

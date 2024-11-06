@@ -1,9 +1,0 @@
-<map id="dwb_critics::MapGridCritic::MapGridQueue" name="dwb_critics::MapGridCritic::MapGridQueue">
-<area shape="rect" id="node1" title="Subclass of CostmapQueue that avoids Obstacles and Unknown Values." alt="" coords="935,64,1127,104"/>
-<area shape="rect" id="node2" href="$classcostmap__queue_1_1CostmapQueue.html" title=" " alt="" coords="600,46,833,71"/>
-<area shape="rect" id="node3" href="$classcostmap__queue_1_1MapBasedQueue.html" title=" " alt="" coords="241,5,484,45"/>
-<area shape="rect" id="node4" href="$classnav2__costmap__2d_1_1Costmap2D.html" title="A 2D costmap provides a mapping between points in the world and their associated &quot;costs&quot;." alt="" coords="251,78,475,103"/>
-<area shape="rect" id="node5" href="$classdwb__critics_1_1MapGridCritic.html" title="breadth&#45;first scoring of all the cells in the costmap" alt="" coords="621,95,813,121"/>
-<area shape="rect" id="node6" href="$classdwb__core_1_1TrajectoryCritic.html" title="Evaluates a Trajectory2D to produce a score." alt="" coords="267,137,458,162"/>
-<area shape="rect" id="node7" title=" " alt="" coords="5,137,64,162"/>
-</map>

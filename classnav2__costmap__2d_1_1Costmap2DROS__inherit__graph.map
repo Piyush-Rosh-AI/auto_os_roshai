@@ -1,5 +1,0 @@
-<map id="nav2_costmap_2d::Costmap2DROS" name="nav2_costmap_2d::Costmap2DROS">
-<area shape="rect" id="node1" title="A ROS wrapper for a 2D Costmap. Handles subscribing to topics that provide observations about obstacl..." alt="" coords="5,152,256,177"/>
-<area shape="rect" id="node2" href="$classnav2__util_1_1LifecycleNode.html" title="A lifecycle node wrapper to enable common Nav2 needs such as manipulating parameters." alt="" coords="39,79,222,104"/>
-<area shape="rect" id="node3" title=" " alt="" coords="19,5,242,31"/>
-</map>

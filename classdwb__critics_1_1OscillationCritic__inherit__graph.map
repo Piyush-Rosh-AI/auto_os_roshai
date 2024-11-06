@@ -1,4 +1,0 @@
-<map id="dwb_critics::OscillationCritic" name="dwb_critics::OscillationCritic">
-<area shape="rect" id="node1" title="Checks to see whether the sign of the commanded velocity flips frequently." alt="" coords="15,79,187,119"/>
-<area shape="rect" id="node2" href="$classdwb__core_1_1TrajectoryCritic.html" title="Evaluates a Trajectory2D to produce a score." alt="" coords="5,5,196,31"/>
-</map>

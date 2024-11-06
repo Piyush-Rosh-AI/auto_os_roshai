@@ -1,5 +1,0 @@
-<map id="nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController" name="nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController">
-<area shape="rect" id="node1" title="Regulated pure pursuit controller plugin." alt="" coords="5,79,240,133"/>
-<area shape="rect" id="node3" href="$classBasicAPIRPP.html" title=" " alt="" coords="71,181,174,207"/>
-<area shape="rect" id="node2" href="$classnav2__core_1_1Controller.html" title="controller interface that acts as a virtual base class for all controller plugins" alt="" coords="42,5,203,31"/>
-</map>

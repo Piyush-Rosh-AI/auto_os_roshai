@@ -1,4 +1,0 @@
-<map id="nav2_behavior_tree::RecoveryNode" name="nav2_behavior_tree::RecoveryNode">
-<area shape="rect" id="node1" title="The RecoveryNode has only two children and returns SUCCESS if and only if the first child returns SUC..." alt="" coords="5,79,156,119"/>
-<area shape="rect" id="node2" title=" " alt="" coords="17,5,144,31"/>
-</map>

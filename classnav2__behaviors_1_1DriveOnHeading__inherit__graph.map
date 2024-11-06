@@ -1,5 +1,0 @@
-<map id="nav2_behaviors::DriveOnHeading&lt; ActionT &gt;" name="nav2_behaviors::DriveOnHeading&lt; ActionT &gt;">
-<area shape="rect" id="node1" title="An action server Behavior for spinning in." alt="" coords="5,167,245,207"/>
-<area shape="rect" id="node2" href="$classnav2__behaviors_1_1TimedBehavior.html" title=" " alt="" coords="9,79,241,119"/>
-<area shape="rect" id="node3" href="$classnav2__core_1_1Behavior.html" title="Abstract interface for behaviors to adhere to with pluginlib." alt="" coords="48,5,203,31"/>
-</map>

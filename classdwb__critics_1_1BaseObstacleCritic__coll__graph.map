@@ -1,6 +1,0 @@
-<map id="dwb_critics::BaseObstacleCritic" name="dwb_critics::BaseObstacleCritic">
-<area shape="rect" id="node1" title="Uses costmap 2d to assign negative costs if a circular robot would collide at any point of the trajec..." alt="" coords="121,196,313,236"/>
-<area shape="rect" id="node2" href="$classdwb__core_1_1TrajectoryCritic.html" title="Evaluates a Trajectory2D to produce a score." alt="" coords="5,108,196,133"/>
-<area shape="rect" id="node3" title=" " alt="" coords="71,5,130,31"/>
-<area shape="rect" id="node4" href="$classnav2__costmap__2d_1_1Costmap2D.html" title="A 2D costmap provides a mapping between points in the world and their associated &quot;costs&quot;." alt="" coords="221,108,445,133"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="nav2_collision_monitor::Scan" name="nav2_collision_monitor::Scan">
-<area shape="rect" id="node1" title="Implementation for laser scanner source." alt="" coords="5,212,179,252"/>
-<area shape="rect" id="node2" href="$classnav2__collision__monitor_1_1Source.html" title="Basic data source class." alt="" coords="5,123,179,163"/>
-<area shape="rect" id="node3" title=" " alt="" coords="63,5,121,31"/>
-</map>

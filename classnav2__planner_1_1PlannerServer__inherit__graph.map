@@ -1,7 +1,0 @@
-<map id="nav2_planner::PlannerServer" name="nav2_planner::PlannerServer">
-<area shape="rect" id="node1" title="An action server implements the behavior tree&#39;s ComputePathToPose interface and hosts various plugins..." alt="" coords="30,152,239,177"/>
-<area shape="rect" id="node4" href="$classPlannerShim.html" title=" " alt="" coords="5,233,109,258"/>
-<area shape="rect" id="node5" href="$classnav2__system__tests_1_1NavFnPlannerTester.html" title=" " alt="" coords="134,225,290,265"/>
-<area shape="rect" id="node2" href="$classnav2__util_1_1LifecycleNode.html" title="A lifecycle node wrapper to enable common Nav2 needs such as manipulating parameters." alt="" coords="43,79,226,104"/>
-<area shape="rect" id="node3" title=" " alt="" coords="23,5,246,31"/>
-</map>

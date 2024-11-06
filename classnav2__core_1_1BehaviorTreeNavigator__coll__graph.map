@@ -1,7 +1,0 @@
-<map id="nav2_core::BehaviorTreeNavigator&lt; ActionT &gt;" name="nav2_core::BehaviorTreeNavigator&lt; ActionT &gt;">
-<area shape="rect" id="node1" title="Navigator interface that acts as a base class for all BT&#45;based Navigator action&#39;s plugins All methods..." alt="" coords="195,196,441,236"/>
-<area shape="rect" id="node2" href="$classnav2__core_1_1NavigatorBase.html" title="Navigator interface to allow navigators to be stored in a vector and accessed via pluginlib due to te..." alt="" coords="5,108,199,133"/>
-<area shape="rect" id="node3" href="$structnav2__core_1_1FeedbackUtils.html" title="Navigator feedback utilities required to get transforms and reference frames." alt="" coords="223,108,413,133"/>
-<area shape="rect" id="node4" title=" " alt="" coords="398,5,457,31"/>
-<area shape="rect" id="node5" href="$classnav2__core_1_1NavigatorMuxer.html" title="A class to control the state of the BT navigator by allowing only a single plugin to be processed at ..." alt="" coords="437,108,639,133"/>
-</map>

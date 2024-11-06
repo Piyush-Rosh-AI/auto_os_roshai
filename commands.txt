@@ -1,0 +1,73 @@
+
+----------------------------------------
+
+ros2 pkg create --build-type ament_cmake --license Apache-2.0 roshai_gazebo
+
+
+<mesh filename="package://my_package/meshes/rp_lidar.dae"/>
+<mesh filename="$(find my_package)/meshes/rp_lidar.dae
+<mesh filename="file://$(find my_package)/meshes/rp_lidar.dae"/>
+
+sudo nano /etc/gdm3/custom.conf 
+
+sudo apt-get update
+sudo apt-get install curl lsb-release gnupg
+
+sudo curl https://packages.osrfoundation.org/gazebo.gpg --output /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+sudo apt-get update
+sudo apt-get install gz-harmonic
+
+sudo apt-get install ros-${ROS_DISTRO}-ros-gz
+
+gz sdf -p /my_urdf.urdf > /my_sdf.sdf 
+unset XDG_SESSION_TYPE
+
+
+------------
+
+sudo apt install gdbserver
+Option 2: With ros2 launch, attaching a gdb-server to the process
+
+$ ros2 run --prefix 'gdbserver localhost:3000' [package_name] [executable_name]
+
+In a second terminal:
+
+$ gdb
+(gdb) target remote localhost:3000
+
+
+----misc---
+std::vector < double > id(ida, std::end(ida));
+
+
+
+----------------
+colcon build --packages-select roshai_gazebo 
+ros2 launch roshai_gazebo emptyworld.launch.py 
+
+ros2 run nav2_map_server map_saver_cli 
+rostopic pub -r 10 /cmd_vel geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
+
+
+ros2 topic pub -r 10 /tf geometry_msgs/TransformStamped  '{transform:{translation:{x: 10, y: 0.0, z: 0.0}}}'
+
+
+
+
+
+------tf2
+ros2 run tf2_tools view_frames.py
+ros2 run tf2_ros tf2_echo [source_frame] [target_frame]
+ros2 run rviz2 rviz2 -d $(ros2 pkg prefix --share turtle_tf2_py)/rviz/turtle_rviz.rviz
+ros2 run tf2_ros static_transform_publisher --x x --y y --z z --yaw yaw --pitch pitch --roll roll --frame-id frame_id --child-frame-id child_frame_id
+
+
+
+ros2 run tf2_ros static_transform_publisher 1 2 3 0.5 0.1 -1.0 map odom
+
+sudo apt-get install ros-<YOUR_ROSDISTO>-imu-tools
+
+
+-----
+ colcon build --packages-select slam_toolbox --cmake-args -DCMAKE_BUILD_TYPE=debug

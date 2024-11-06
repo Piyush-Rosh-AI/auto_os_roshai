@@ -1,7 +1,0 @@
-<map id="nav2_velocity_smoother::VelocitySmoother" name="nav2_velocity_smoother::VelocitySmoother">
-<area shape="rect" id="node1" title="This class that smooths cmd_vel velocities for robot bases." alt="" coords="197,168,380,208"/>
-<area shape="rect" id="node2" href="$classnav2__util_1_1LifecycleNode.html" title="A lifecycle node wrapper to enable common Nav2 needs such as manipulating parameters." alt="" coords="25,80,208,105"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,5,228,31"/>
-<area shape="rect" id="node4" title=" " alt="" coords="232,80,345,105"/>
-<area shape="rect" id="node5" title=" " alt="" coords="370,80,429,105"/>
-</map>

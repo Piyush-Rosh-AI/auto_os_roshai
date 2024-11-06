@@ -1,4 +1,0 @@
-<map id="mppi::critics::CostCritic" name="mppi::critics::CostCritic">
-<area shape="rect" id="node1" title="Critic objective function for avoiding obstacles using costmap&#39;s inflated cost." alt="" coords="18,79,191,104"/>
-<area shape="rect" id="node2" href="$classmppi_1_1critics_1_1CriticFunction.html" title="Abstract critic objective function to score trajectories." alt="" coords="5,5,204,31"/>
-</map>

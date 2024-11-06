@@ -1,4 +1,0 @@
-<map id="nav2_behavior_tree::IsStuckCondition" name="nav2_behavior_tree::IsStuckCondition">
-<area shape="rect" id="node1" title="A BT::ConditionNode that tracks robot odometry and returns SUCCESS if robot is stuck somewhere and FA..." alt="" coords="5,79,156,119"/>
-<area shape="rect" id="node2" title=" " alt="" coords="9,5,152,31"/>
-</map>

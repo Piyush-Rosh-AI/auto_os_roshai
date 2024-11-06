@@ -1,8 +1,0 @@
-<map id="nav2_smac_planner::AnalyticExpansion&lt; NodeT &gt;" name="nav2_smac_planner::AnalyticExpansion&lt; NodeT &gt;">
-<area shape="rect" id="node1" title=" " alt="" coords="70,313,285,353"/>
-<area shape="rect" id="node2" href="$structnav2__smac__planner_1_1SearchInfo.html" title="Search properties and penalties." alt="" coords="5,211,165,251"/>
-<area shape="rect" id="node3" title=" " alt="" coords="56,108,115,133"/>
-<area shape="rect" id="node4" href="$classnav2__smac__planner_1_1GridCollisionChecker.html" title="A costmap grid collision checker." alt="" coords="189,211,349,251"/>
-<area shape="rect" id="node5" href="$classnav2__costmap__2d_1_1FootprintCollisionChecker.html" title=" " alt="" coords="160,93,379,148"/>
-<area shape="rect" id="node6" href="$classnav2__costmap__2d_1_1Costmap2D.html" title="A 2D costmap provides a mapping between points in the world and their associated &quot;costs&quot;." alt="" coords="157,5,381,31"/>
-</map>

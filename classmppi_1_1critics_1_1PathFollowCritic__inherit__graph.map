@@ -1,4 +1,0 @@
-<map id="mppi::critics::PathFollowCritic" name="mppi::critics::PathFollowCritic">
-<area shape="rect" id="node1" title=" " alt="" coords="15,79,195,119"/>
-<area shape="rect" id="node2" href="$classmppi_1_1critics_1_1CriticFunction.html" title="Abstract critic objective function to score trajectories." alt="" coords="5,5,204,31"/>
-</map>

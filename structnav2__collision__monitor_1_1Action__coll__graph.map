@@ -1,5 +1,0 @@
-<map id="nav2_collision_monitor::Action" name="nav2_collision_monitor::Action">
-<area shape="rect" id="node1" title="Action for robot." alt="" coords="75,108,248,148"/>
-<area shape="rect" id="node2" href="$structnav2__collision__monitor_1_1Velocity.html" title="Velocity for 2D model of motion." alt="" coords="5,5,179,45"/>
-<area shape="rect" id="node3" title=" " alt="" coords="203,13,261,38"/>
-</map>
