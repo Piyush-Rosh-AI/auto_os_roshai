@@ -10,3 +10,10 @@ use the gdb debugger with prefix set in launch file as server(while running serv
 
 For more details check:https://gist.github.com/JADC362/a4425c2d05cdaadaaa71b697b674425f#file-ros2debugvscode-md
 More on extension details:https://github.com/ms-iot/vscode-ros?tab=readme-ov-file
+
+
+
+---Doxygen
+Doxygen are linked with the github pages.
+offline we can run doxygen Doxyfile to generate the html in the 'docs/' folder(it is git ignore to save space)
+online-workflows are designed to automatically create the doxygen html ,however is on HOLD because we didn't create any doc folder.(Check doxygen-gh-pages.yaml)
