@@ -132,7 +132,7 @@
         <geometry>
           <mesh>
             <scale>0.01 0.01 0.01</scale>
-            <uri>/home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/meshes/hybrid_body.obj</uri>
+            <uri>/home/roshai/sim_ws/src/roshai_pkgs/roshai_gazebo/meshes/hybrid_body.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -264,7 +264,7 @@
         <geometry>
           <mesh>
             <scale>0.01 0.01 0.01</scale>
-            <uri>/home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/meshes/wheel.obj</uri>
+            <uri>/home/roshai/sim_ws/src/roshai_pkgs/roshai_gazebo/meshes/wheel.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -359,7 +359,7 @@
         <geometry>
           <mesh>
             <scale>0.01 0.01 0.01</scale>
-            <uri>/home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/meshes/wheel.obj</uri>
+            <uri>/home/roshai/sim_ws/src/roshai_pkgs/roshai_gazebo/meshes/wheel.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -421,7 +421,7 @@
         <geometry>
           <mesh>
             <scale>0.01 0.01 0.01</scale>
-            <uri>/home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/meshes/wheel.obj</uri>
+            <uri>/home/roshai/sim_ws/src/roshai_pkgs/roshai_gazebo/meshes/wheel.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -483,7 +483,7 @@
         <geometry>
           <mesh>
             <scale>0.01 0.01 0.01</scale>
-            <uri>/home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/meshes/wheel.obj</uri>
+            <uri>/home/roshai/sim_ws/src/roshai_pkgs/roshai_gazebo/meshes/wheel.obj</uri>
           </mesh>
         </geometry>
       </visual>
@@ -525,7 +525,7 @@
         <geometry>
           <mesh>
             <scale>0.01 0.01 0.01</scale>
-            <uri>/home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/meshes/steering_wheel.obj</uri>
+            <uri>/home/roshai/sim_ws/src/roshai_pkgs/roshai_gazebo/meshes/steering_wheel.obj</uri>
           </mesh>
         </geometry>
       </visual>

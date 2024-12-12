@@ -2,7 +2,7 @@
 Make two terminal:
 T1-for build and check with
 ```bash
-  git clone https://github.com/Piyush-Rosh-AI/auto_os_roshai.git src
+  git clone https://github.com/roshai-Rosh-AI/auto_os_roshai.git src
 ```
 ```bash
  sudo apt-get install libboost-all-dev
@@ -33,7 +33,7 @@ T2:open dependencies folder to clone repo if required
 
 
 ```bash
-  git clone -b ros2 https://github.com/ros/diagnostic
+  git clone -b ros2 https://github.com/ros/diagnostics.git
 ```
 
 
@@ -58,7 +58,7 @@ T2:open dependencies folder to clone repo if required
 
 
 ```bash
-  git clone https://github.com/Piyush-Rosh-AI/auto_os_roshai.git src
+  git clone -b jazzy https://github.com/ros-navigation/nav2_minimal_turtlebot_simulation.git
 ```
 
 
@@ -100,7 +100,8 @@ To launch the gazebo world:
 change the location of the world to the desired location with the new workspace:
 https://vscode.dev/github/Piyush-Rosh-AI/auto_os_roshai/blob/main/roshai_pkgs/roshai_gazebo/worlds/empty_world.world#L38
 
-
+----
+Also change the location of the world file and model file based upon your system configuration-piyush-roshai,chall_ws-your_ws,challenge_ws-sim_ws
 Run the launch file to open for the gazebo as well as rviz world:
 ```bash
   ros2 launch roshai_gazebo emptyworld.launch.py

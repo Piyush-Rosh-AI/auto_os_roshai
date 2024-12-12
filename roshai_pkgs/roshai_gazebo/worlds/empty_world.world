@@ -37,12 +37,12 @@
     <include>
       <!-- make the location setting to something like this : filename="package://roshai_gazebo ... -->
       <uri>
-        /home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/worlds/Model4
+        /home/roshai/sim_ws/src/roshai_pkgs/roshai_gazebo/worlds/Model4
       </uri>
      </include> 
 <!-- <include>
       <uri>
-        /home/piyush/chall_ws/src/roshai_pkgs/roshai_gazebo/worlds/Model3/sonoma.sdf
+        /home/roshai/sim_ws/src/roshai_pkgs/roshai_gazebo/worlds/Model3/sonoma.sdf
       </uri>
      </include> -->
   <!-- <include>
