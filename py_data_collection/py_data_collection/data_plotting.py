@@ -12,7 +12,7 @@ class HDF5ToOdomNode(Node):
         super().__init__('hdf5_to_odom_node')
 
         # Open the HDF5 file for reading
-        self.hdf5_file = h5py.File('/home/roshai/nav_ws/src/py_data_collection/py_data_collection/sensor_data.h5', 'r')
+        self.hdf5_file = h5py.File('/home/roshai/sim_ws/sensor_data.h5', 'r')
         # Initialize the TransformBroadcaster
         self.tf_broadcaster = TransformBroadcaster(self)
         # Initialize ROS 2 publisher for Odometry data

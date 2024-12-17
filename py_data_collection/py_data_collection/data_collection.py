@@ -15,8 +15,10 @@ class LiDARAndIMUToHDF5Node(Node):
         # LiDAR dataset for range data (360 points per scan)
         self.lidar_dataset = self.hdf5_file.create_dataset(
             'ranges', (0, 360), maxshape=(None, 360), chunks=True)
-        self.timestamps_dataset = self.hdf5_file.create_dataset(
-            'ltimestamps', (0,), maxshape=(None,), dtype='float64', chunks=True)
+        self.lidar_sec_timestamps = self.hdf5_file.create_dataset(
+            'lidar_sec_timestamps', (0,), maxshape=(None,), dtype='float64', chunks=True)
+        self.lidar_nanosec_timestamps = self.hdf5_file.create_dataset(
+            'lidar_nanosec_timestamps', (0,), maxshape=(None,), dtype='float64', chunks=True)
 
         # IMU dataset for angular velocity and linear acceleration (each as 3D vectors)
         # Angular velocity (x, y, z) and linear acceleration (x, y, z) per IMU message
@@ -24,6 +26,11 @@ class LiDARAndIMUToHDF5Node(Node):
             'angular_velocity', (0, 3), maxshape=(None, 3), chunks=True)
         self.imu_linear_acceleration_dataset = self.hdf5_file.create_dataset(
             'linear_acceleration', (0, 3), maxshape=(None, 3), chunks=True)
+        self.imu_sec_timestamps = self.hdf5_file.create_dataset(
+            'imu_sec_timestamps', (0,), maxshape=(None,), dtype='float64', chunks=True)
+        self.imu_nanosec_timestamps = self.hdf5_file.create_dataset(
+            'imu_nanosec_timestamps', (0,), maxshape=(None,), dtype='float64', chunks=True)
+        
         # Odometry dataset for position (x, y, z) and orientation (quaternion x, y, z, w)
         self.odom_sec_timestamps = self.hdf5_file.create_dataset(
             'odom_sec_timestamps', (0,), maxshape=(None,), dtype='float64', chunks=True)
@@ -66,10 +73,15 @@ class LiDARAndIMUToHDF5Node(Node):
         self.lidar_dataset.resize((current_size + 1, 360))
         self.lidar_dataset[current_size] = ranges
 
-        current_size_timestamps = self.timestamps_dataset.shape[0]
-        self.timestamps_dataset.resize((current_size_timestamps + 1,))
-        self.timestamps_dataset[current_size_timestamps] = timestamp
 
+
+        current_size_timestamps = self.lidar_sec_timestamps.shape[0]
+        self.lidar_sec_timestamps.resize((current_size_timestamps + 1,))
+        self.lidar_sec_timestamps[current_size_timestamps] = msg.header.stamp.sec
+        
+        current_size_timestamps = self.lidar_nanosec_timestamps.shape[0]
+        self.lidar_nanosec_timestamps.resize((current_size_timestamps + 1,))
+        self.lidar_nanosec_timestamps[current_size_timestamps] = msg.header.stamp.nanosec
         self.get_logger().info(f"Saved LiDAR scan data to HDF5: {ranges[:5]}...")  # Log first 5 range values
 
     def imu_callback(self, msg: Imu):
@@ -87,6 +99,14 @@ class LiDARAndIMUToHDF5Node(Node):
         current_size_linear_acceleration = self.imu_linear_acceleration_dataset.shape[0]
         self.imu_linear_acceleration_dataset.resize((current_size_linear_acceleration + 1, 3))
         self.imu_linear_acceleration_dataset[current_size_linear_acceleration] = linear_acceleration
+
+        current_size_timestamps = self.imu_sec_timestamps.shape[0]
+        self.imu_sec_timestamps.resize((current_size_timestamps + 1,))
+        self.imu_sec_timestamps[current_size_timestamps] = msg.header.stamp.sec
+        
+        current_size_timestamps = self.imu_nanosec_timestamps.shape[0]
+        self.imu_nanosec_timestamps.resize((current_size_timestamps + 1,))
+        self.imu_nanosec_timestamps[current_size_timestamps] = msg.header.stamp.nanosec
 
         self.get_logger().info(f"Saved IMU data to HDF5: Angular Velocity: {angular_velocity}, Linear Acceleration: {linear_acceleration}")
     def odom_callback(self, msg: Odometry):
