@@ -2,7 +2,7 @@
 Make two terminal:
 T1-for build and check with
 ```bash
-  git clone https://github.com/roshai-Rosh-AI/auto_os_roshai.git src
+   git clone --recursive https://github.com/Piyush-Rosh-AI/auto_os_roshai.git src
 ```
 ```bash
  sudo apt-get install libboost-all-dev
@@ -92,6 +92,19 @@ Check for the following commands in case you witness some other dependencies iss
 ```bash
   sudo apt-get install libboost-filesystem-dev
 ```
+
+```bash
+Lio Sam
+  git clone -b ros2 https://github.com/TixiaoShan/LIO-SAM.git
+In dependencies folder add gtsam
+
+   https://github.com/borglab/gtsam.git
+
+follow https://github.com/borglab/gtsam#quickstart
+Change the instance for Eigen to Eigen3,also change the boost to std for the while building the pkg for ros2
+
+```
+    
     
 
 

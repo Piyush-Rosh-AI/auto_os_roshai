@@ -21,7 +21,8 @@ setup(
     entry_points={
         'console_scripts': [
             'data_collection = py_data_collection.data_collection:main',
-            'data_plotting = py_data_collection.data_plotting:main',
+            'data_publishing = py_data_collection.data_publishing:main',
+            'make_map = py_data_collection.make_map:main',
         ],
     },
 )
