@@ -1,16 +1,17 @@
 import rclpy
 from rclpy.node import Node
 from nav_msgs.msg import Odometry
-from sensor_msgs.msg import Imu, LaserScan
+from sensor_msgs.msg import Imu, LaserScan, Image
 from tf2_ros import TransformListener, Buffer
 import h5py
 import numpy as np
+from sensor_msgs_py import point_cloud2  # For image handling (if needed)
 
 class HDF5_Write(Node):
     def __init__(self):
         super().__init__('sensor_data_subscriber')
         
-        # Subscription to the /odom, /imu/data, /scan, and tf topics
+        # Subscription to the /odom, /imu/data, /scan, /camera/image_raw, and tf topics
         self.odom_subscription = self.create_subscription(
             Odometry,
             '/odom',  # Change this to your actual odom topic if needed
@@ -32,6 +33,14 @@ class HDF5_Write(Node):
             10
         )
         
+        # Camera Subscription (Raw image topic)
+        self.camera_subscription = self.create_subscription(
+            Image,
+            '/camera/image_raw',  # Change to your actual camera topic
+            self.camera_callback,
+            10
+        )
+
         # Initialize the TF listener
         self.tf_buffer = Buffer()
         self.tf_listener = TransformListener(self.tf_buffer, self)
@@ -44,14 +53,10 @@ class HDF5_Write(Node):
         self.imu_group = self.h5_file.create_group('imu_data')
         self.lidar_group = self.h5_file.create_group('lidar_data')
         self.tf_group = self.h5_file.create_group('tf_data')  # New group for storing TF data
-        self.message_group = self.h5_file.create_group('message_types')
-        
-        # Store the message type in the 'message_types' group
-        self.message_group.create_dataset('odom_message_type', data='nav_msgs/msg/Odometry')
-        self.message_group.create_dataset('imu_message_type', data='sensor_msgs/msg/Imu')
-        self.message_group.create_dataset('lidar_message_type', data='sensor_msgs/msg/LaserScan')
+        self.camera_group = self.h5_file.create_group('camera_data')  # New group for storing Camera data
 
-        self.create_timer(0.1, self.tf_callback)  # 
+        # Create a timer to call tf_callback every 100ms (0.1 seconds)
+        self.create_timer(0.1, self.tf_callback)  # Call tf_callback every 100ms
 
     def odom_callback(self, msg: Odometry):
         # Extract position, orientation, and timestamp from the Odometry message
@@ -182,6 +187,36 @@ class HDF5_Write(Node):
             self.lidar_group['timestamps'][-1] = timestamp
 
         self.get_logger().info(f"LiDAR scan data received at {timestamp:.2f}")
+
+    def camera_callback(self, msg: Image):
+        # Extract image data and timestamp from the camera image message
+        image_data = np.array(msg.data, dtype=np.uint8)
+        timestamp = msg.header.stamp.sec + msg.header.stamp.nanosec / 1e9
+
+        if 'image' not in self.camera_group:
+            self.camera_group.create_dataset(
+                'image',
+                shape=(1, len(image_data)),
+                data=image_data,
+                maxshape=(None, len(image_data)),
+                chunks=(1, len(image_data)),
+                compression="gzip"
+            )
+            self.camera_group.create_dataset(
+                'timestamps',
+                shape=(1,),
+                data=np.array([timestamp], dtype=np.float64),
+                maxshape=(None,),
+                chunks=(1,),
+                compression="gzip"
+            )
+        else:
+            self.camera_group['image'].resize(self.camera_group['image'].shape[0] + 1, axis=0)
+            self.camera_group['image'][-1] = image_data
+            self.camera_group['timestamps'].resize(self.camera_group['timestamps'].shape[0] + 1, axis=0)
+            self.camera_group['timestamps'][-1] = timestamp
+
+        self.get_logger().info(f"Camera image received at {timestamp:.2f}")
 
     def tf_callback(self):
         try:

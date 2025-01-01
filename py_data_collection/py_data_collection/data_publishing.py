@@ -1,105 +1,115 @@
 import rclpy
 from rclpy.node import Node
 from nav_msgs.msg import Odometry
+from sensor_msgs.msg import Imu
+from std_msgs.msg import Header
 import h5py
-import numpy as np
-from geometry_msgs.msg import TransformStamped
-import tf2_ros
-from tf2_ros import TransformBroadcaster
-from tf2_ros import Buffer, TransformListener
-class HDF5ToOdomNode(Node):
+
+class OdomImuPublisher(Node):
     def __init__(self):
-        super().__init__('hdf5_to_odom_node')
+        super().__init__('odom_imu_hdf5_publisher')
 
-        # Open the HDF5 file for reading
-        self.hdf5_file = h5py.File('/home/roshai/sim_ws/sensor_data.h5', 'r')
-        # Initialize the TransformBroadcaster
-        self.tf_broadcaster = TransformBroadcaster(self)
-        # Initialize ROS 2 publisher for Odometry data
-        self.odom_publisher = self.create_publisher(Odometry, '/odom', 10)
+        # ROS 2 Publishers for Odometry and IMU
+        self.odom_pub = self.create_publisher(Odometry, 'odom_hdf5', 10)
+        self.imu_pub = self.create_publisher(Imu, 'imu_hdf5', 10)
 
-        # Variables to keep track of the current index for the dataset
-        self.odom_index = 0
+        # HDF5 file path
+        self.file_path = '/home/roshai/sim_ws/sensor_data.h5'  # Replace with your HDF5 file path
 
-        self.get_logger().info("HDF5 to Odometry Node started and publishing odometry data.")
+        # Timer to periodically publish data
+        self.timer = self.create_timer(0.1, self.publish_data)  # 10 Hz
 
-        # Set a timer to periodically read data and publish it
-        self.create_timer(0.1, self.timer_callback)  # Publish every 1 second
-
-    def timer_callback(self):
+    def read_hdf5_data(self):
         """
-        This function will be called periodically to read data from the HDF5 file and publish it.
+        Reads odometry and IMU data from an HDF5 file.
+        Returns:
+            tuple: (position, orientation, linear_accel, angular_velocity)
         """
-        # Check if there is more Odometry data to publish
-        if self.odom_index < self.hdf5_file['position'].shape[0]:
-            # Read Odometry data from HDF5
-            odom_data = Odometry()
-            odom_data.header.stamp.sec= int(self.hdf5_file['odom_sec_timestamps'][self.odom_index])
-            odom_data.header.stamp.nanosec= int(self.hdf5_file['odom_nanosec_timestamps'][self.odom_index])
-            odom_data.header.frame_id = 'map'
-            odom_data.child_frame_id = 'odom'
+        with h5py.File(self.file_path, 'r') as f:
+            odom_timestamp = f['odom_data/timestamps'][:]
+            position = f['odom_data/position'][:]
+            orientation = f['odom_data/orientation'][:]
+            linear_accel = f['imu_data/acceleration'][:]
+            angular_velocity = f['imu_data/angular_velocity'][:]
+        return position, orientation, linear_accel, angular_velocity
 
-            # Set position and orientation
-            odom_data.pose.pose.position.x = float(self.hdf5_file['position'][self.odom_index][0])
-            odom_data.pose.pose.position.y = float(self.hdf5_file['position'][self.odom_index][1])
-            odom_data.pose.pose.position.z = float(self.hdf5_file['position'][self.odom_index][2])
+    def create_odometry_msg(self, position, orientation):
+        """
+        Create a ROS 2 Odometry message from position and orientation.
+        """
+        odom_msg = Odometry()
 
-            odom_data.pose.pose.orientation.x = float(self.hdf5_file['orientation'][self.odom_index][0])
-            odom_data.pose.pose.orientation.y = float(self.hdf5_file['orientation'][self.odom_index][1])
-            odom_data.pose.pose.orientation.z = float(self.hdf5_file['orientation'][self.odom_index][2])
-            odom_data.pose.pose.orientation.w = float(self.hdf5_file['orientation'][self.odom_index][3])
+        # Set header
+        odom_msg.header = Header()
+        odom_msg.header.stamp = 1.0
+        odom_msg.header.frame_id = "odom"
 
-            
-            transform = TransformStamped()
+        # Set position
+        odom_msg.pose.pose.position.x = position[0]
+        odom_msg.pose.pose.position.y = position[1]
+        odom_msg.pose.pose.position.z = position[2]
 
-            # Set the timestamp
-            transform.header.stamp.sec=odom_data.header.stamp.sec
-            transform.header.stamp.nanosec=odom_data.header.stamp.nanosec
+        # Set orientation (quaternion)
+        odom_msg.pose.pose.orientation.x = orientation[0]
+        odom_msg.pose.pose.orientation.y = orientation[1]
+        odom_msg.pose.pose.orientation.z = orientation[2]
+        odom_msg.pose.pose.orientation.w = orientation[3]
 
-            # Set the frame IDs
-            transform.header.frame_id = 'map'  # Parent frame (fixed)
-            transform.child_frame_id = 'odom'  # Child frame (moving)
+        return odom_msg
 
-            # Set the translation (x, y, z) in the transform
-            transform.transform.translation.x = odom_data.pose.pose.position.x
-            transform.transform.translation.y = odom_data.pose.pose.position.y
-            transform.transform.translation.z = 0.0  # 2D transform, so z is 0
+    def create_imu_msg(self, linear_accel, angular_velocity):
+        """
+        Create a ROS 2 IMU message from linear acceleration and angular velocity.
+        """
+        imu_msg = Imu()
 
-            # Set the rotation (using quaternion) for the transform
-            transform.transform.rotation.x = float(self.hdf5_file['orientation'][self.odom_index][0])
-            transform.transform.rotation.y = float(self.hdf5_file['orientation'][self.odom_index][1])
-            transform.transform.rotation.z = float(self.hdf5_file['orientation'][self.odom_index][2])
-            transform.transform.rotation.w = float(self.hdf5_file['orientation'][self.odom_index][3])
+        # Set header
+        imu_msg.header = Header()
+        imu_msg.header.stamp = 2.0
+        imu_msg.header.frame_id = "imu_link"
 
-            # Publish the transform
-            self.tf_broadcaster.sendTransform(transform)
-            # Publish Odometry data
-            self.odom_publisher.publish(odom_data)
-            self.odom_index += 1
-            self.get_logger().info(f"Published Odometry data #{self.odom_index}")
+        # Set linear acceleration
+        imu_msg.linear_acceleration.x = linear_accel[0]
+        imu_msg.linear_acceleration.y = linear_accel[1]
+        imu_msg.linear_acceleration.z = linear_accel[2]
 
-        # If all data has been published, log that the process is complete
-        if self.odom_index >= self.hdf5_file['position'].shape[0]:
-            self.get_logger().info("All Odometry data has been published.")
-            rclpy.shutdown()
+        # Set angular velocity
+        imu_msg.angular_velocity.x = angular_velocity[0]
+        imu_msg.angular_velocity.y = angular_velocity[1]
+        imu_msg.angular_velocity.z = angular_velocity[2]
 
-    def __del__(self):
-        # Ensure the HDF5 file is closed when the node is destroyed
-        self.hdf5_file.close()
-        self.get_logger().info('HDF5 file closed.')
+        return imu_msg
+
+    def publish_data(self):
+        """
+        Reads data from HDF5 and publishes it to ROS 2 topics.
+        """
+        # Read data from HDF5 file
+        position, orientation, linear_accel, angular_velocity = self.read_hdf5_data()
+
+        # Create Odometry and IMU messages
+        odom_msg = self.create_odometry_msg(position, orientation)
+        imu_msg = self.create_imu_msg(linear_accel, angular_velocity)
+
+        # Publish the messages
+        self.odom_pub.publish(odom_msg)
+        self.imu_pub.publish(imu_msg)
+
+        self.get_logger().info('Published Odometry and IMU data')
 
 def main(args=None):
     rclpy.init(args=args)
 
-    # Create the node
-    node = HDF5ToOdomNode()
-
-    # Spin the node to keep reading and publishing data
-    rclpy.spin(node)
-
-    # Clean up before shutdown
-    node.destroy_node()
-    rclpy.shutdown()
+    # Create and run the node
+    node = OdomImuPublisher()
+    
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
