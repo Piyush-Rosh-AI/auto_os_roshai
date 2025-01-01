@@ -10,7 +10,7 @@ from sensor_msgs_py import point_cloud2  # For image handling (if needed)
 class HDF5_Write(Node):
     def __init__(self):
         super().__init__('sensor_data_subscriber')
-        
+
         # Subscription to the /odom, /imu/data, /scan, /camera/image_raw, and tf topics
         self.odom_subscription = self.create_subscription(
             Odometry,
@@ -18,7 +18,7 @@ class HDF5_Write(Node):
             self.odom_callback,
             10
         )
-        
+
         self.imu_subscription = self.create_subscription(
             Imu,
             '/imu',  # Change this to your actual imu topic if needed
@@ -32,7 +32,7 @@ class HDF5_Write(Node):
             self.lidar_callback,
             10
         )
-        
+
         # Camera Subscription (Raw image topic)
         self.camera_subscription = self.create_subscription(
             Image,
@@ -47,58 +47,60 @@ class HDF5_Write(Node):
 
         # Create or open an HDF5 file
         self.h5_file = h5py.File('sensor_data.h5', 'w')
-        
+
         # Create groups for storing data
         self.odom_group = self.h5_file.create_group('odom_data')
-        self.imu_group = self.h5_file.create_group('imu_data')
-        self.lidar_group = self.h5_file.create_group('lidar_data')
-        self.tf_group = self.h5_file.create_group('tf_data')  # New group for storing TF data
-        self.camera_group = self.h5_file.create_group('camera_data')  # New group for storing Camera data
+        self.odom_header_group = self.odom_group.create_group('header')
+        self.odom_header_stamp_group = self.odom_header_group.create_group('stamp')
+        self.odom_pose_group = self.odom_group.create_group('pose')
+        self.odom_pose_pose_group = self.odom_pose_group.create_group('pose')
 
+        self.imu_group = self.h5_file.create_group('imu_data')
+        self.imu_header_group = self.imu_group.create_group('header')
+        self.imu_header_stamp_group = self.imu_header_group.create_group('stamp')
+
+
+        self.lidar_group = self.h5_file.create_group('lidar_data')
+        self.lidar_header_group = self.lidar_group.create_group('header')
+        self.lidar_header_stamp_group = self.lidar_header_group.create_group('stamp')
+
+        self.tf_group = self.h5_file.create_group('tf_data')  # New group for storing TF data
+        self.tf_header_group = self.tf_group.create_group('header')
+        self.tf_header_stamp_group = self.tf_header_group.create_group('stamp')
+        
+        self.camera_group = self.h5_file.create_group('camera_data')  # New group for storing Camera data
+        self.camera_header_group = self.camera_group.create_group('header')
+        self.camera_header_stamp_group = self.camera_header_group.create_group('stamp')
+        
         # Create a timer to call tf_callback every 100ms (0.1 seconds)
         self.create_timer(0.1, self.tf_callback)  # Call tf_callback every 100ms
 
     def odom_callback(self, msg: Odometry):
-        # Extract position, orientation, and timestamp from the Odometry message
         position = msg.pose.pose.position
         orientation = msg.pose.pose.orientation
-        timestamp = msg.header.stamp.sec + msg.header.stamp.nanosec / 1e9
-        position_data = np.array([position.x, position.y, position.z], dtype=np.float64)
-        orientation_data = np.array([orientation.x, orientation.y, orientation.z, orientation.w], dtype=np.float64)
 
-        # Check if the datasets exist, and create them if not
-        if 'position' not in self.odom_group:
-            self.odom_group.create_dataset(
-                'position', 
-                shape=(1,3),
-                data=position_data, 
-                maxshape=(None, 3)  
-            )
-            self.odom_group.create_dataset(
-                'orientation', 
-                shape=(1,4),
-                data=orientation_data, 
-                maxshape=(None, 4),  
-                chunks=(1, 4),  
-                compression="gzip"
-            )
-            self.odom_group.create_dataset(
-                'timestamps', 
-                shape=(1,),
-                data=np.array([timestamp], dtype=np.float64), 
-                maxshape=(None,),  
-                chunks=(1,),  
-                compression="gzip"
-            )
+        if 'position' not in self.odom_pose_pose_group:
+            self.odom_header_group.create_dataset('frame_id',shape=(1,1),maxshape=(None, 1),chunks=(1, 1), data=msg.header.frame_id)      
+            self.odom_header_stamp_group.create_dataset('sec',shape=(1,),maxshape=(None, ),chunks=(1, ), data=np.array([msg.header.stamp.sec], dtype=np.float64))
+            self.odom_header_stamp_group.create_dataset('nanosec', shape=(1,),maxshape=(None, ),chunks=(1, ),data=np.array([msg.header.stamp.nanosec / 1e9], dtype=np.float64))
+            self.odom_pose_pose_group.create_dataset('position',shape=(1,3),maxshape=(None, 3),chunks=(1, 3),data=[position.x, position.y, position.z])
+            self.odom_pose_pose_group.create_dataset('orientation', shape=(1,4),maxshape=(None, 4),chunks=(1, 4),  data=[orientation.x, orientation.y, orientation.z, orientation.w])
+          
         else:
-            self.odom_group['position'].resize(self.odom_group['position'].shape[0] + 1, axis=0)
-            self.odom_group['position'][-1] = position_data
-            self.odom_group['orientation'].resize(self.odom_group['orientation'].shape[0] + 1, axis=0)
-            self.odom_group['orientation'][-1] = orientation_data
-            self.odom_group['timestamps'].resize(self.odom_group['timestamps'].shape[0] + 1, axis=0)
-            self.odom_group['timestamps'][-1] = timestamp
+            self.odom_header_group['frame_id'].resize(self.odom_header_group['frame_id'].shape[0] + 1, axis=0)
+            self.odom_header_group['frame_id'][-1] = msg.header.frame_id
+            self.odom_header_stamp_group['sec'].resize(self.odom_header_stamp_group['sec'].shape[0] + 1, axis=0)
+            self.odom_header_stamp_group['sec'][-1] = msg.header.stamp.sec
+            self.odom_header_stamp_group['nanosec'].resize(self.odom_header_stamp_group['nanosec'].shape[0] + 1, axis=0)
+            self.odom_header_stamp_group['nanosec'][-1] = msg.header.stamp.nanosec
+            self.odom_pose_pose_group['position'].resize(self.odom_pose_pose_group['position'].shape[0] + 1, axis=0)
+            self.odom_pose_pose_group['position'][-1] = np.array([position.x, position.y, position.z], dtype=np.float64)
+            self.odom_pose_pose_group['orientation'].resize(self.odom_pose_pose_group['orientation'].shape[0] + 1, axis=0)
+            self.odom_pose_pose_group['orientation'][-1] = np.array([orientation.x, orientation.y, orientation.z,orientation.w], dtype=np.float64)
 
-        self.get_logger().info(f"Odometry data received at {timestamp:.2f}")
+
+        self.get_logger().info(f"Odometry data received at {msg.header.stamp.sec:.2f}")
+
 
     def imu_callback(self, msg: Imu):
         # Extract data from IMU message
@@ -106,14 +108,14 @@ class HDF5_Write(Node):
         angular_velocity = [msg.angular_velocity.x, msg.angular_velocity.y, msg.angular_velocity.z]
         orientation = [msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w]
         timestamp = msg.header.stamp.sec + msg.header.stamp.nanosec / 1e9
-        
+
         acceleration_data = np.array(acceleration, dtype=np.float64)
         angular_velocity_data = np.array(angular_velocity, dtype=np.float64)
         orientation_data = np.array(orientation, dtype=np.float64)
 
-        if 'acceleration' not in self.imu_group:
+        if 'linear_acceleration' not in self.imu_group:
             self.imu_group.create_dataset(
-                'acceleration',
+                'linear_acceleration',
                 shape=(1, 3),
                 data=acceleration_data,
                 maxshape=(None, 3),
@@ -136,31 +138,30 @@ class HDF5_Write(Node):
                 chunks=(1, 4),
                 compression="gzip"
             )
-            self.imu_group.create_dataset(
-                'timestamps',
-                shape=(1,),
-                data=np.array([timestamp], dtype=np.float64),
-                maxshape=(None,),
-                chunks=(1,),
-                compression="gzip"
-            )
+            self.imu_header_group.create_dataset('frame_id',shape=(1,1),maxshape=(None, 1),chunks=(1, 1), data=msg.header.frame_id)      
+            self.imu_header_stamp_group.create_dataset('sec',shape=(1,),maxshape=(None, ),chunks=(1, ), data=np.array([msg.header.stamp.sec], dtype=np.float64))
+            self.imu_header_stamp_group.create_dataset('nanosec', shape=(1,),maxshape=(None, ),chunks=(1, ),data=np.array([msg.header.stamp.nanosec / 1e9], dtype=np.float64))
         else:
-            self.imu_group['acceleration'].resize(self.imu_group['acceleration'].shape[0] + 1, axis=0)
-            self.imu_group['acceleration'][-1] = acceleration_data
+            self.imu_header_group['frame_id'].resize(self.imu_header_group['frame_id'].shape[0] + 1, axis=0)
+            self.imu_header_group['frame_id'][-1] = msg.header.frame_id
+            self.imu_header_stamp_group['sec'].resize(self.imu_header_stamp_group['sec'].shape[0] + 1, axis=0)
+            self.imu_header_stamp_group['sec'][-1] = msg.header.stamp.sec
+            self.imu_header_stamp_group['nanosec'].resize(self.imu_header_stamp_group['nanosec'].shape[0] + 1, axis=0)
+            self.imu_header_stamp_group['nanosec'][-1] = msg.header.stamp.nanosec
+            self.imu_group['linear_acceleration'].resize(self.imu_group['linear_acceleration'].shape[0] + 1, axis=0)
+            self.imu_group['linear_acceleration'][-1] = acceleration_data
             self.imu_group['angular_velocity'].resize(self.imu_group['angular_velocity'].shape[0] + 1, axis=0)
             self.imu_group['angular_velocity'][-1] = angular_velocity_data
             self.imu_group['orientation'].resize(self.imu_group['orientation'].shape[0] + 1, axis=0)
             self.imu_group['orientation'][-1] = orientation_data
-            self.imu_group['timestamps'].resize(self.imu_group['timestamps'].shape[0] + 1, axis=0)
-            self.imu_group['timestamps'][-1] = timestamp
 
         self.get_logger().info(f"IMU data received at {timestamp:.2f}")
 
     def lidar_callback(self, msg: LaserScan):
         # Extract ranges and timestamp from the LaserScan message
         ranges = msg.ranges
-        timestamp = msg.header.stamp.sec + msg.header.stamp.nanosec / 1e9
-        
+ 
+
         ranges_data = np.array(ranges, dtype=np.float64)
 
         if 'ranges' not in self.lidar_group:
@@ -172,26 +173,27 @@ class HDF5_Write(Node):
                 chunks=(1, len(ranges)),
                 compression="gzip"
             )
-            self.lidar_group.create_dataset(
-                'timestamps',
-                shape=(1,),
-                data=np.array([timestamp], dtype=np.float64),
-                maxshape=(None,),
-                chunks=(1,),
-                compression="gzip"
-            )
+            self.lidar_header_group.create_dataset('frame_id',shape=(1,1),maxshape=(None, 1),chunks=(1, 1), data=msg.header.frame_id)      
+            self.lidar_header_stamp_group.create_dataset('sec',shape=(1,),maxshape=(None, ),chunks=(1, ), data=np.array([msg.header.stamp.sec], dtype=np.float64))
+            self.lidar_header_stamp_group.create_dataset('nanosec', shape=(1,),maxshape=(None, ),chunks=(1, ),data=np.array([msg.header.stamp.nanosec / 1e9], dtype=np.float64))
+          
         else:
+            self.lidar_header_group['frame_id'].resize(self.lidar_header_group['frame_id'].shape[0] + 1, axis=0)
+            self.lidar_header_group['frame_id'][-1] = msg.header.frame_id
+            self.lidar_header_stamp_group['sec'].resize(self.lidar_header_stamp_group['sec'].shape[0] + 1, axis=0)
+            self.lidar_header_stamp_group['sec'][-1] = msg.header.stamp.sec
+            self.lidar_header_stamp_group['nanosec'].resize(self.lidar_header_stamp_group['nanosec'].shape[0] + 1, axis=0)
+            self.lidar_header_stamp_group['nanosec'][-1] = msg.header.stamp.nanosec
+           
             self.lidar_group['ranges'].resize(self.lidar_group['ranges'].shape[0] + 1, axis=0)
             self.lidar_group['ranges'][-1] = ranges_data
-            self.lidar_group['timestamps'].resize(self.lidar_group['timestamps'].shape[0] + 1, axis=0)
-            self.lidar_group['timestamps'][-1] = timestamp
 
-        self.get_logger().info(f"LiDAR scan data received at {timestamp:.2f}")
+        self.get_logger().info(f"LiDAR scan data received at {msg.header.stamp.sec:.2f}")
 
     def camera_callback(self, msg: Image):
         # Extract image data and timestamp from the camera image message
         image_data = np.array(msg.data, dtype=np.uint8)
-        timestamp = msg.header.stamp.sec + msg.header.stamp.nanosec / 1e9
+
 
         if 'image' not in self.camera_group:
             self.camera_group.create_dataset(
@@ -202,22 +204,24 @@ class HDF5_Write(Node):
                 chunks=(1, len(image_data)),
                 compression="gzip"
             )
-            self.camera_group.create_dataset(
-                'timestamps',
-                shape=(1,),
-                data=np.array([timestamp], dtype=np.float64),
-                maxshape=(None,),
-                chunks=(1,),
-                compression="gzip"
-            )
+            self.camera_header_group.create_dataset('frame_id',shape=(1,1),maxshape=(None, 1),chunks=(1, 1), data=msg.header.frame_id)      
+            self.camera_header_stamp_group.create_dataset('sec',shape=(1,),maxshape=(None, ),chunks=(1, ), data=np.array([msg.header.stamp.sec], dtype=np.float64))
+            self.camera_header_stamp_group.create_dataset('nanosec', shape=(1,),maxshape=(None, ),chunks=(1, ),data=np.array([msg.header.stamp.nanosec / 1e9], dtype=np.float64))
+ 
         else:
+            self.camera_header_group['frame_id'].resize(self.camera_header_group['frame_id'].shape[0] + 1, axis=0)
+            self.camera_header_group['frame_id'][-1] = msg.header.frame_id
+            self.camera_header_stamp_group['sec'].resize(self.camera_header_stamp_group['sec'].shape[0] + 1, axis=0)
+            self.camera_header_stamp_group['sec'][-1] = msg.header.stamp.sec
+            self.camera_header_stamp_group['nanosec'].resize(self.camera_header_stamp_group['nanosec'].shape[0] + 1, axis=0)
+            self.camera_header_stamp_group['nanosec'][-1] = msg.header.stamp.nanosec
+            
             self.camera_group['image'].resize(self.camera_group['image'].shape[0] + 1, axis=0)
             self.camera_group['image'][-1] = image_data
-            self.camera_group['timestamps'].resize(self.camera_group['timestamps'].shape[0] + 1, axis=0)
-            self.camera_group['timestamps'][-1] = timestamp
 
-        self.get_logger().info(f"Camera image received at {timestamp:.2f}")
 
+        self.get_logger().info(f"Camera image received at {msg.header.stamp.sec:.2f}")
+    
     def tf_callback(self):
         try:
             # Get the latest transform from base_link to map (or any other frames of interest)
@@ -225,7 +229,6 @@ class HDF5_Write(Node):
             # Convert the transform to a numpy array or other suitable format
             position = transform.transform.translation
             orientation = transform.transform.rotation
-            timestamp = transform.header.stamp.sec + transform.header.stamp.nanosec / 1e9
 
             transform_data = np.array([position.x, position.y, position.z, orientation.x, orientation.y, orientation.z, orientation.w], dtype=np.float64)
 
@@ -238,25 +241,25 @@ class HDF5_Write(Node):
                     chunks=(1, 7),
                     compression="gzip"
                 )
-                self.tf_group.create_dataset(
-                    'timestamps',
-                    shape=(1,),
-                    data=np.array([timestamp], dtype=np.float64),
-                    maxshape=(None,),
-                    chunks=(1,),
-                    compression="gzip"
-                )
+                self.tf_header_group.create_dataset('frame_id',shape=(1,1),maxshape=(None, 1),chunks=(1, 1), data=transform.header.frame_id)      
+                self.tf_header_stamp_group.create_dataset('sec',shape=(1,),maxshape=(None, ),chunks=(1, ), data=np.array([transform.header.stamp.sec], dtype=np.float64))
+                self.tf_header_stamp_group.create_dataset('nanosec', shape=(1,),maxshape=(None, ),chunks=(1, ),data=np.array([transform.header.stamp.nanosec / 1e9], dtype=np.float64))
+    
             else:
+                self.tf_header_group['frame_id'].resize(self.tf_header_group['frame_id'].shape[0] + 1, axis=0)
+                self.tf_header_group['frame_id'][-1] = transform.header.frame_id
+                self.tf_header_stamp_group['sec'].resize(self.tf_header_stamp_group['sec'].shape[0] + 1, axis=0)
+                self.tf_header_stamp_group['sec'][-1] = transform.header.stamp.sec
+                self.tf_header_stamp_group['nanosec'].resize(self.tf_header_stamp_group['nanosec'].shape[0] + 1, axis=0)
+                self.tf_header_stamp_group['nanosec'][-1] = transform.header.stamp.nanosec
                 self.tf_group['transform'].resize(self.tf_group['transform'].shape[0] + 1, axis=0)
                 self.tf_group['transform'][-1] = transform_data
-                self.tf_group['timestamps'].resize(self.tf_group['timestamps'].shape[0] + 1, axis=0)
-                self.tf_group['timestamps'][-1] = timestamp
 
-            self.get_logger().info(f"TF data received at {timestamp:.2f}")
+            self.get_logger().info(f"TF data received at {transform.header.stamp.sec:.2f}")
         
         except Exception as e:
             self.get_logger().warn(f"Failed to get transform: {e}")
-
+    
     def __del__(self):
         # Close the HDF5 file when done
         self.h5_file.close()
