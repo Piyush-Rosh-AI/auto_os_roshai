@@ -1,160 +1,245 @@
 import rclpy
 from rclpy.node import Node
-from sensor_msgs.msg import LaserScan, Imu
+from nav_msgs.msg import Odometry
+from sensor_msgs.msg import Imu, LaserScan
+from tf2_ros import TransformListener, Buffer
 import h5py
 import numpy as np
-from nav_msgs.msg import Odometry  # Import Odometry message
-class LiDARAndIMUToHDF5Node(Node):
+
+class HDF5_Write(Node):
     def __init__(self):
-        super().__init__('lidar_imu_to_hdf5_node')
-
-        # Create an HDF5 file where the data will be stored
-        self.hdf5_file = h5py.File('sensor_data.h5', 'w')
-
-        # Create datasets for LiDAR and IMU data
-        # LiDAR dataset for range data (360 points per scan)
-        self.lidar_dataset = self.hdf5_file.create_dataset(
-            'ranges', (0, 360), maxshape=(None, 360), chunks=True)
-        self.lidar_sec_timestamps = self.hdf5_file.create_dataset(
-            'lidar_sec_timestamps', (0,), maxshape=(None,), dtype='float64', chunks=True)
-        self.lidar_nanosec_timestamps = self.hdf5_file.create_dataset(
-            'lidar_nanosec_timestamps', (0,), maxshape=(None,), dtype='float64', chunks=True)
-
-        # IMU dataset for angular velocity and linear acceleration (each as 3D vectors)
-        # Angular velocity (x, y, z) and linear acceleration (x, y, z) per IMU message
-        self.imu_angular_velocity_dataset = self.hdf5_file.create_dataset(
-            'angular_velocity', (0, 3), maxshape=(None, 3), chunks=True)
-        self.imu_linear_acceleration_dataset = self.hdf5_file.create_dataset(
-            'linear_acceleration', (0, 3), maxshape=(None, 3), chunks=True)
-        self.imu_sec_timestamps = self.hdf5_file.create_dataset(
-            'imu_sec_timestamps', (0,), maxshape=(None,), dtype='float64', chunks=True)
-        self.imu_nanosec_timestamps = self.hdf5_file.create_dataset(
-            'imu_nanosec_timestamps', (0,), maxshape=(None,), dtype='float64', chunks=True)
+        super().__init__('sensor_data_subscriber')
         
-        # Odometry dataset for position (x, y, z) and orientation (quaternion x, y, z, w)
-        self.odom_sec_timestamps = self.hdf5_file.create_dataset(
-            'odom_sec_timestamps', (0,), maxshape=(None,), dtype='float64', chunks=True)
-        self.odom_nanosec_timestamps = self.hdf5_file.create_dataset(
-            'odom_nanosec_timestamps', (0,), maxshape=(None,), dtype='float64', chunks=True)
-        self.odometry_position_dataset = self.hdf5_file.create_dataset(
-            'position', (0, 3), maxshape=(None, 3), chunks=True)
-        self.odometry_orientation_dataset = self.hdf5_file.create_dataset(
-            'orientation', (0, 4), maxshape=(None, 4), chunks=True)
-        # Subscribe to the /scan topic for LiDAR data
-        self.lidar_subscription = self.create_subscription(
-            LaserScan,
-            '/scan',  # Topic name for LiDAR
-            self.lidar_callback,
-            10  # QoS (Quality of Service)
-        )
-
-        # Subscribe to the /imu topic for IMU data
-        self.imu_subscription = self.create_subscription(
-            Imu,
-            '/imu',  # Topic name for IMU
-            self.imu_callback,
-            10  # QoS (Quality of Service)
-        )
+        # Subscription to the /odom, /imu/data, /scan, and tf topics
         self.odom_subscription = self.create_subscription(
             Odometry,
-            '/odom',  # Topic name for Odometry
+            '/odom',  # Change this to your actual odom topic if needed
             self.odom_callback,
-            10  # QoS (Quality of Service)
+            10
+        )
+        
+        self.imu_subscription = self.create_subscription(
+            Imu,
+            '/imu',  # Change this to your actual imu topic if needed
+            self.imu_callback,
+            10
         )
 
-    def lidar_callback(self, msg: LaserScan):
-        """
-        Callback function for LiDAR data. Saves the range values to the HDF5 file.
-        """
-        ranges = np.array(msg.ranges)  # Convert LiDAR ranges to NumPy array
-        timestamp = msg.header.stamp.sec + msg.header.stamp.nanosec / 1e9
-        # Resize the LiDAR dataset to accommodate the new data and append it
-        current_size = self.lidar_dataset.shape[0]
-        self.lidar_dataset.resize((current_size + 1, 360))
-        self.lidar_dataset[current_size] = ranges
-
-
-
-        current_size_timestamps = self.lidar_sec_timestamps.shape[0]
-        self.lidar_sec_timestamps.resize((current_size_timestamps + 1,))
-        self.lidar_sec_timestamps[current_size_timestamps] = msg.header.stamp.sec
+        self.lidar_subscription = self.create_subscription(
+            LaserScan,
+            '/scan',  # Change this to your actual scan topic if needed
+            self.lidar_callback,
+            10
+        )
         
-        current_size_timestamps = self.lidar_nanosec_timestamps.shape[0]
-        self.lidar_nanosec_timestamps.resize((current_size_timestamps + 1,))
-        self.lidar_nanosec_timestamps[current_size_timestamps] = msg.header.stamp.nanosec
-        self.get_logger().info(f"Saved LiDAR scan data to HDF5: {ranges[:5]}...")  # Log first 5 range values
+        # Initialize the TF listener
+        self.tf_buffer = Buffer()
+        self.tf_listener = TransformListener(self.tf_buffer, self)
+
+        # Create or open an HDF5 file
+        self.h5_file = h5py.File('sensor_data.h5', 'w')
+        
+        # Create groups for storing data
+        self.odom_group = self.h5_file.create_group('odom_data')
+        self.imu_group = self.h5_file.create_group('imu_data')
+        self.lidar_group = self.h5_file.create_group('lidar_data')
+        self.tf_group = self.h5_file.create_group('tf_data')  # New group for storing TF data
+        self.message_group = self.h5_file.create_group('message_types')
+        
+        # Store the message type in the 'message_types' group
+        self.message_group.create_dataset('odom_message_type', data='nav_msgs/msg/Odometry')
+        self.message_group.create_dataset('imu_message_type', data='sensor_msgs/msg/Imu')
+        self.message_group.create_dataset('lidar_message_type', data='sensor_msgs/msg/LaserScan')
+
+        self.create_timer(0.1, self.tf_callback)  # 
+
+    def odom_callback(self, msg: Odometry):
+        # Extract position, orientation, and timestamp from the Odometry message
+        position = msg.pose.pose.position
+        orientation = msg.pose.pose.orientation
+        timestamp = msg.header.stamp.sec + msg.header.stamp.nanosec / 1e9
+        position_data = np.array([position.x, position.y, position.z], dtype=np.float64)
+        orientation_data = np.array([orientation.x, orientation.y, orientation.z, orientation.w], dtype=np.float64)
+
+        # Check if the datasets exist, and create them if not
+        if 'position' not in self.odom_group:
+            self.odom_group.create_dataset(
+                'position', 
+                shape=(1,3),
+                data=position_data, 
+                maxshape=(None, 3)  
+            )
+            self.odom_group.create_dataset(
+                'orientation', 
+                shape=(1,4),
+                data=orientation_data, 
+                maxshape=(None, 4),  
+                chunks=(1, 4),  
+                compression="gzip"
+            )
+            self.odom_group.create_dataset(
+                'timestamps', 
+                shape=(1,),
+                data=np.array([timestamp], dtype=np.float64), 
+                maxshape=(None,),  
+                chunks=(1,),  
+                compression="gzip"
+            )
+        else:
+            self.odom_group['position'].resize(self.odom_group['position'].shape[0] + 1, axis=0)
+            self.odom_group['position'][-1] = position_data
+            self.odom_group['orientation'].resize(self.odom_group['orientation'].shape[0] + 1, axis=0)
+            self.odom_group['orientation'][-1] = orientation_data
+            self.odom_group['timestamps'].resize(self.odom_group['timestamps'].shape[0] + 1, axis=0)
+            self.odom_group['timestamps'][-1] = timestamp
+
+        self.get_logger().info(f"Odometry data received at {timestamp:.2f}")
 
     def imu_callback(self, msg: Imu):
-        """
-        Callback function for IMU data. Saves the angular velocity and linear acceleration to the HDF5 file.
-        """
-        angular_velocity = np.array([msg.angular_velocity.x, msg.angular_velocity.y, msg.angular_velocity.z])
-        linear_acceleration = np.array([msg.linear_acceleration.x, msg.linear_acceleration.y, msg.linear_acceleration.z])
-
-        # Resize the IMU datasets to accommodate the new data and append it
-        current_size_angular_velocity = self.imu_angular_velocity_dataset.shape[0]
-        self.imu_angular_velocity_dataset.resize((current_size_angular_velocity + 1, 3))
-        self.imu_angular_velocity_dataset[current_size_angular_velocity] = angular_velocity
-
-        current_size_linear_acceleration = self.imu_linear_acceleration_dataset.shape[0]
-        self.imu_linear_acceleration_dataset.resize((current_size_linear_acceleration + 1, 3))
-        self.imu_linear_acceleration_dataset[current_size_linear_acceleration] = linear_acceleration
-
-        current_size_timestamps = self.imu_sec_timestamps.shape[0]
-        self.imu_sec_timestamps.resize((current_size_timestamps + 1,))
-        self.imu_sec_timestamps[current_size_timestamps] = msg.header.stamp.sec
+        # Extract data from IMU message
+        acceleration = [msg.linear_acceleration.x, msg.linear_acceleration.y, msg.linear_acceleration.z]
+        angular_velocity = [msg.angular_velocity.x, msg.angular_velocity.y, msg.angular_velocity.z]
+        orientation = [msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w]
+        timestamp = msg.header.stamp.sec + msg.header.stamp.nanosec / 1e9
         
-        current_size_timestamps = self.imu_nanosec_timestamps.shape[0]
-        self.imu_nanosec_timestamps.resize((current_size_timestamps + 1,))
-        self.imu_nanosec_timestamps[current_size_timestamps] = msg.header.stamp.nanosec
+        acceleration_data = np.array(acceleration, dtype=np.float64)
+        angular_velocity_data = np.array(angular_velocity, dtype=np.float64)
+        orientation_data = np.array(orientation, dtype=np.float64)
 
-        self.get_logger().info(f"Saved IMU data to HDF5: Angular Velocity: {angular_velocity}, Linear Acceleration: {linear_acceleration}")
-    def odom_callback(self, msg: Odometry):
-        """
-        Callback function for Odometry data. Saves the position and orientation to the HDF5 file.
-        """
-        position = np.array([msg.pose.pose.position.x, msg.pose.pose.position.y, msg.pose.pose.position.z])
-        orientation = np.array([msg.pose.pose.orientation.x, msg.pose.pose.orientation.y,
-                                msg.pose.pose.orientation.z, msg.pose.pose.orientation.w])
+        if 'acceleration' not in self.imu_group:
+            self.imu_group.create_dataset(
+                'acceleration',
+                shape=(1, 3),
+                data=acceleration_data,
+                maxshape=(None, 3),
+                chunks=(1, 3),
+                compression="gzip"
+            )
+            self.imu_group.create_dataset(
+                'angular_velocity',
+                shape=(1, 3),
+                data=angular_velocity_data,
+                maxshape=(None, 3),
+                chunks=(1, 3),
+                compression="gzip"
+            )
+            self.imu_group.create_dataset(
+                'orientation',
+                shape=(1, 4),
+                data=orientation_data,
+                maxshape=(None, 4),
+                chunks=(1, 4),
+                compression="gzip"
+            )
+            self.imu_group.create_dataset(
+                'timestamps',
+                shape=(1,),
+                data=np.array([timestamp], dtype=np.float64),
+                maxshape=(None,),
+                chunks=(1,),
+                compression="gzip"
+            )
+        else:
+            self.imu_group['acceleration'].resize(self.imu_group['acceleration'].shape[0] + 1, axis=0)
+            self.imu_group['acceleration'][-1] = acceleration_data
+            self.imu_group['angular_velocity'].resize(self.imu_group['angular_velocity'].shape[0] + 1, axis=0)
+            self.imu_group['angular_velocity'][-1] = angular_velocity_data
+            self.imu_group['orientation'].resize(self.imu_group['orientation'].shape[0] + 1, axis=0)
+            self.imu_group['orientation'][-1] = orientation_data
+            self.imu_group['timestamps'].resize(self.imu_group['timestamps'].shape[0] + 1, axis=0)
+            self.imu_group['timestamps'][-1] = timestamp
 
-        # Resize the Odometry datasets to accommodate the new data and append it
-        current_size_position = self.odometry_position_dataset.shape[0]
-        self.odometry_position_dataset.resize((current_size_position + 1, 3))
-        self.odometry_position_dataset[current_size_position] = position
+        self.get_logger().info(f"IMU data received at {timestamp:.2f}")
 
-        current_size_orientation = self.odometry_orientation_dataset.shape[0]
-        self.odometry_orientation_dataset.resize((current_size_orientation + 1, 4))
-        self.odometry_orientation_dataset[current_size_orientation] = orientation
+    def lidar_callback(self, msg: LaserScan):
+        # Extract ranges and timestamp from the LaserScan message
+        ranges = msg.ranges
+        timestamp = msg.header.stamp.sec + msg.header.stamp.nanosec / 1e9
         
-        # timestamp = msg.header.stamp.sec + msg.header.stamp.nanosec / 1e9
-        current_size_timestamps = self.odom_sec_timestamps.shape[0]
-        self.odom_sec_timestamps.resize((current_size_timestamps + 1,))
-        self.odom_sec_timestamps[current_size_timestamps] = msg.header.stamp.sec
+        ranges_data = np.array(ranges, dtype=np.float64)
+
+        if 'ranges' not in self.lidar_group:
+            self.lidar_group.create_dataset(
+                'ranges',
+                shape=(1, len(ranges)),
+                data=ranges_data,
+                maxshape=(None, len(ranges)),
+                chunks=(1, len(ranges)),
+                compression="gzip"
+            )
+            self.lidar_group.create_dataset(
+                'timestamps',
+                shape=(1,),
+                data=np.array([timestamp], dtype=np.float64),
+                maxshape=(None,),
+                chunks=(1,),
+                compression="gzip"
+            )
+        else:
+            self.lidar_group['ranges'].resize(self.lidar_group['ranges'].shape[0] + 1, axis=0)
+            self.lidar_group['ranges'][-1] = ranges_data
+            self.lidar_group['timestamps'].resize(self.lidar_group['timestamps'].shape[0] + 1, axis=0)
+            self.lidar_group['timestamps'][-1] = timestamp
+
+        self.get_logger().info(f"LiDAR scan data received at {timestamp:.2f}")
+
+    def tf_callback(self):
+        try:
+            # Get the latest transform from base_link to map (or any other frames of interest)
+            transform = self.tf_buffer.lookup_transform('odom', 'base_link', rclpy.time.Time())
+            # Convert the transform to a numpy array or other suitable format
+            position = transform.transform.translation
+            orientation = transform.transform.rotation
+            timestamp = transform.header.stamp.sec + transform.header.stamp.nanosec / 1e9
+
+            transform_data = np.array([position.x, position.y, position.z, orientation.x, orientation.y, orientation.z, orientation.w], dtype=np.float64)
+
+            if 'transform' not in self.tf_group:
+                self.tf_group.create_dataset(
+                    'transform',
+                    shape=(1, 7),  # 7 values (position + orientation)
+                    data=transform_data,
+                    maxshape=(None, 7),
+                    chunks=(1, 7),
+                    compression="gzip"
+                )
+                self.tf_group.create_dataset(
+                    'timestamps',
+                    shape=(1,),
+                    data=np.array([timestamp], dtype=np.float64),
+                    maxshape=(None,),
+                    chunks=(1,),
+                    compression="gzip"
+                )
+            else:
+                self.tf_group['transform'].resize(self.tf_group['transform'].shape[0] + 1, axis=0)
+                self.tf_group['transform'][-1] = transform_data
+                self.tf_group['timestamps'].resize(self.tf_group['timestamps'].shape[0] + 1, axis=0)
+                self.tf_group['timestamps'][-1] = timestamp
+
+            self.get_logger().info(f"TF data received at {timestamp:.2f}")
         
-        current_size_timestamps = self.odom_nanosec_timestamps.shape[0]
-        self.odom_nanosec_timestamps.resize((current_size_timestamps + 1,))
-        self.odom_nanosec_timestamps[current_size_timestamps] = msg.header.stamp.nanosec
-        self.get_logger().info(f"Saved Odometry data to HDF5: Position: {position}, Orientation: {orientation}")
+        except Exception as e:
+            self.get_logger().warn(f"Failed to get transform: {e}")
 
     def __del__(self):
-        """
-        Ensure the HDF5 file is closed when the node is destroyed.
-        """
-        self.hdf5_file.close()
-        self.get_logger().info('HDF5 file closed.')
+        # Close the HDF5 file when done
+        self.h5_file.close()
+
 
 def main(args=None):
     rclpy.init(args=args)
 
-    # Create the node
-    node = LiDARAndIMUToHDF5Node()
+    # Create an instance of the HDF5_Write node
+    sensor_data_subscriber = HDF5_Write()
 
-    # Spin the node to keep listening for messages
-    rclpy.spin(node)
+    # Spin the node so it can keep receiving messages
+    rclpy.spin(sensor_data_subscriber)
 
-    # Clean up before shutdown
-    node.destroy_node()
+    # Cleanly shut down the node
+    sensor_data_subscriber.destroy_node()
     rclpy.shutdown()
+
 
 if __name__ == '__main__':
     main()

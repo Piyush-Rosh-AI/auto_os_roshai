@@ -2,3 +2,6 @@
 	path = LIO-SAM
 	url = https://github.com/TixiaoShan/LIO-SAM.git
 	branch = ros2
+[submodule "pointcloud_to_laserscan"]
+	path = pointcloud_to_laserscan
+	url = https://github.com/ros-perception/pointcloud_to_laserscan.git

@@ -49,8 +49,8 @@ def generate_launch_description():
         executable='sync_slam_toolbox_node',
         name='slam_toolbox',
         output='screen',
-        prefix=["gdbserver localhost:3000"],
-        emulate_tty=True,
+        # prefix=["gdbserver localhost:3000"],
+        # emulate_tty=True,
         namespace=''
     )
 
