@@ -7,6 +7,7 @@ import h5py
 import numpy as np
 
 class HDF5_Read(Node):
+    
     def __init__(self):
         super().__init__('hdf5_data_publisher')
 
@@ -18,24 +19,25 @@ class HDF5_Read(Node):
 
         # Open the HDF5 file
         self.h5_file = h5py.File('sensor_datas.h5', 'r')
-
+        self.index =0
         # Create a timer to call the publish_data every 1 second
-        self.create_timer(0.1, self.publish_data)  # Timer callback every 1 second
+        
+        self.create_timer(1.0, self.publish_data)  # Timer callback every 1 second
 
     def publish_data(self):
         # Publish Odometry Data
         if 'odom_data' in self.h5_file:
             odom_group = self.h5_file['odom_data']
             header = Header()
-            header.stamp.sec = int(odom_group['header/stamp/sec'][0])
-            header.stamp.nanosec = int(odom_group['header/stamp/nanosec'][0]*1e9)
+            header.stamp.sec = int(odom_group['header/stamp/sec'][self.index])
+            header.stamp.nanosec = int(odom_group['header/stamp/nanosec'][self.index]*1e9)
 
             odom_msg = Odometry()
             odom_msg.header = header
-            odom_msg.header.frame_id = str(odom_group['header/frame_id'][0])
+            odom_msg.header.frame_id = str(odom_group['header/frame_id'][self.index])
 
-            position = odom_group['pose/pose/position'][0]
-            orientation = odom_group['pose/pose/orientation'][0]
+            position = odom_group['pose/pose/position'][self.index]
+            orientation = odom_group['pose/pose/orientation'][self.index]
             odom_msg.pose.pose.position.x = position[0]
             odom_msg.pose.pose.position.y = position[1]
             odom_msg.pose.pose.position.z = position[2]
@@ -50,28 +52,28 @@ class HDF5_Read(Node):
         if 'imu_data' in self.h5_file:
             imu_group = self.h5_file['imu_data']
             header = Header()
-            header.stamp.sec = int(imu_group['header/stamp/sec'][0])
-            header.stamp.nanosec = int(imu_group['header/stamp/nanosec'][0]*1e9)
+            header.stamp.sec = int(imu_group['header/stamp/sec'][self.index])
+            header.stamp.nanosec = int(imu_group['header/stamp/nanosec'][self.index]*1e9)
 
             imu_msg = Imu()
             imu_msg.header = header
-            imu_msg.header.frame_id = str(imu_group['header/frame_id'][0])
+            imu_msg.header.frame_id = str(imu_group['header/frame_id'][self.index])
 
             # Acceleration
-            imu_msg.linear_acceleration.x = imu_group['linear_acceleration'][0][0]
-            imu_msg.linear_acceleration.y = imu_group['linear_acceleration'][0][1]
-            imu_msg.linear_acceleration.z = imu_group['linear_acceleration'][0][2]
+            imu_msg.linear_acceleration.x = imu_group['linear_acceleration'][self.index][0]
+            imu_msg.linear_acceleration.y = imu_group['linear_acceleration'][self.index][1]
+            imu_msg.linear_acceleration.z = imu_group['linear_acceleration'][self.index][2]
 
             # Angular Velocity
-            imu_msg.angular_velocity.x = imu_group['angular_velocity'][0][0]
-            imu_msg.angular_velocity.y = imu_group['angular_velocity'][0][1]
-            imu_msg.angular_velocity.z = imu_group['angular_velocity'][0][2]
+            imu_msg.angular_velocity.x = imu_group['angular_velocity'][self.index][0]
+            imu_msg.angular_velocity.y = imu_group['angular_velocity'][self.index][1]
+            imu_msg.angular_velocity.z = imu_group['angular_velocity'][self.index][2]
 
             # Orientation
-            imu_msg.orientation.x = imu_group['orientation'][0][0]
-            imu_msg.orientation.y = imu_group['orientation'][0][1]
-            imu_msg.orientation.z = imu_group['orientation'][0][2]
-            imu_msg.orientation.w = imu_group['orientation'][0][3]
+            imu_msg.orientation.x = imu_group['orientation'][self.index][0]
+            imu_msg.orientation.y = imu_group['orientation'][self.index][1]
+            imu_msg.orientation.z = imu_group['orientation'][self.index][2]
+            imu_msg.orientation.w = imu_group['orientation'][self.index][3]
 
             self.imu_publisher.publish(imu_msg)
 
@@ -79,30 +81,31 @@ class HDF5_Read(Node):
         if 'lidar_data' in self.h5_file:
             lidar_group = self.h5_file['lidar_data']
             header = Header()
-            header.stamp.sec = int(lidar_group['header/stamp/sec'][0])
-            header.stamp.nanosec = int(lidar_group['header/stamp/nanosec'][0]*1e9)
+            header.stamp.sec = int(lidar_group['header/stamp/sec'][self.index])
+            header.stamp.nanosec = int(lidar_group['header/stamp/nanosec'][self.index]*1e9)
 
             lidar_msg = LaserScan()
             lidar_msg.header = header
-            lidar_msg.header.frame_id = str(lidar_group['header/frame_id'][0])
-            lidar_msg.ranges = lidar_group['ranges'][0]
+            lidar_msg.header.frame_id = str(lidar_group['header/frame_id'][self.index])
+            lidar_msg.ranges = lidar_group['ranges'][self.index]
 
             self.lidar_publisher.publish(lidar_msg)
+            
 
         # Publish Camera Image Data
         if 'camera_data' in self.h5_file:
             camera_group = self.h5_file['camera_data']
             header = Header()
-            header.stamp.sec = int(camera_group['header/stamp/sec'][0])
-            header.stamp.nanosec = int(camera_group['header/stamp/nanosec'][0]*1e9)
+            header.stamp.sec = int(camera_group['header/stamp/sec'][self.index])
+            header.stamp.nanosec = int(camera_group['header/stamp/nanosec'][self.index]*1e9)
 
             camera_msg = Image()
             camera_msg.header = header
-            camera_msg.header.frame_id = str(camera_group['header/frame_id'][0])
-            camera_msg.data = camera_group['image'][0].tolist()  # Convert numpy array to list for Image message
+            camera_msg.header.frame_id = str(camera_group['header/frame_id'][self.index])
+            camera_msg.data = camera_group['image'][self.index].tolist()  # Convert numpy array to list for Image message
 
             self.camera_publisher.publish(camera_msg)
-
+        self.index=self.index+1
         self.get_logger().info("Published data to topics.")
 
     def __del__(self):
