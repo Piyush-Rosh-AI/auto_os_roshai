@@ -46,7 +46,7 @@ class HDF5_Write(Node):
         self.tf_listener = TransformListener(self.tf_buffer, self)
 
         # Create or open an HDF5 file
-        self.h5_file = h5py.File('sensor_data.h5', 'w')
+        self.h5_file = h5py.File('sensor_datas.h5', 'w')
 
         # Create groups for storing data
         self.odom_group = self.h5_file.create_group('odom_data')

@@ -1,115 +1,128 @@
 import rclpy
 from rclpy.node import Node
 from nav_msgs.msg import Odometry
-from sensor_msgs.msg import Imu
+from sensor_msgs.msg import Imu, LaserScan, Image
 from std_msgs.msg import Header
 import h5py
+import numpy as np
 
-class OdomImuPublisher(Node):
+class HDF5_Read(Node):
     def __init__(self):
-        super().__init__('odom_imu_hdf5_publisher')
+        super().__init__('hdf5_data_publisher')
 
-        # ROS 2 Publishers for Odometry and IMU
-        self.odom_pub = self.create_publisher(Odometry, 'odom_hdf5', 10)
-        self.imu_pub = self.create_publisher(Imu, 'imu_hdf5', 10)
+        # Create publishers for each topic
+        self.odom_publisher = self.create_publisher(Odometry, '/odom', 10)
+        self.imu_publisher = self.create_publisher(Imu, '/imu', 10)
+        self.lidar_publisher = self.create_publisher(LaserScan, '/scan', 10)
+        self.camera_publisher = self.create_publisher(Image, '/camera/image_raw', 10)
 
-        # HDF5 file path
-        self.file_path = '/home/roshai/sim_ws/sensor_data.h5'  # Replace with your HDF5 file path
+        # Open the HDF5 file
+        self.h5_file = h5py.File('sensor_datas.h5', 'r')
 
-        # Timer to periodically publish data
-        self.timer = self.create_timer(0.1, self.publish_data)  # 10 Hz
-
-    def read_hdf5_data(self):
-        """
-        Reads odometry and IMU data from an HDF5 file.
-        Returns:
-            tuple: (position, orientation, linear_accel, angular_velocity)
-        """
-        with h5py.File(self.file_path, 'r') as f:
-            odom_timestamp = f['odom_data/timestamps'][:]
-            position = f['odom_data/position'][:]
-            orientation = f['odom_data/orientation'][:]
-            linear_accel = f['imu_data/acceleration'][:]
-            angular_velocity = f['imu_data/angular_velocity'][:]
-        return position, orientation, linear_accel, angular_velocity
-
-    def create_odometry_msg(self, position, orientation):
-        """
-        Create a ROS 2 Odometry message from position and orientation.
-        """
-        odom_msg = Odometry()
-
-        # Set header
-        odom_msg.header = Header()
-        odom_msg.header.stamp = 1.0
-        odom_msg.header.frame_id = "odom"
-
-        # Set position
-        odom_msg.pose.pose.position.x = position[0]
-        odom_msg.pose.pose.position.y = position[1]
-        odom_msg.pose.pose.position.z = position[2]
-
-        # Set orientation (quaternion)
-        odom_msg.pose.pose.orientation.x = orientation[0]
-        odom_msg.pose.pose.orientation.y = orientation[1]
-        odom_msg.pose.pose.orientation.z = orientation[2]
-        odom_msg.pose.pose.orientation.w = orientation[3]
-
-        return odom_msg
-
-    def create_imu_msg(self, linear_accel, angular_velocity):
-        """
-        Create a ROS 2 IMU message from linear acceleration and angular velocity.
-        """
-        imu_msg = Imu()
-
-        # Set header
-        imu_msg.header = Header()
-        imu_msg.header.stamp = 2.0
-        imu_msg.header.frame_id = "imu_link"
-
-        # Set linear acceleration
-        imu_msg.linear_acceleration.x = linear_accel[0]
-        imu_msg.linear_acceleration.y = linear_accel[1]
-        imu_msg.linear_acceleration.z = linear_accel[2]
-
-        # Set angular velocity
-        imu_msg.angular_velocity.x = angular_velocity[0]
-        imu_msg.angular_velocity.y = angular_velocity[1]
-        imu_msg.angular_velocity.z = angular_velocity[2]
-
-        return imu_msg
+        # Create a timer to call the publish_data every 1 second
+        self.create_timer(0.1, self.publish_data)  # Timer callback every 1 second
 
     def publish_data(self):
-        """
-        Reads data from HDF5 and publishes it to ROS 2 topics.
-        """
-        # Read data from HDF5 file
-        position, orientation, linear_accel, angular_velocity = self.read_hdf5_data()
+        # Publish Odometry Data
+        if 'odom_data' in self.h5_file:
+            odom_group = self.h5_file['odom_data']
+            header = Header()
+            header.stamp.sec = int(odom_group['header/stamp/sec'][0])
+            header.stamp.nanosec = int(odom_group['header/stamp/nanosec'][0]*1e9)
 
-        # Create Odometry and IMU messages
-        odom_msg = self.create_odometry_msg(position, orientation)
-        imu_msg = self.create_imu_msg(linear_accel, angular_velocity)
+            odom_msg = Odometry()
+            odom_msg.header = header
+            odom_msg.header.frame_id = str(odom_group['header/frame_id'][0])
 
-        # Publish the messages
-        self.odom_pub.publish(odom_msg)
-        self.imu_pub.publish(imu_msg)
+            position = odom_group['pose/pose/position'][0]
+            orientation = odom_group['pose/pose/orientation'][0]
+            odom_msg.pose.pose.position.x = position[0]
+            odom_msg.pose.pose.position.y = position[1]
+            odom_msg.pose.pose.position.z = position[2]
+            odom_msg.pose.pose.orientation.x = orientation[0]
+            odom_msg.pose.pose.orientation.y = orientation[1]
+            odom_msg.pose.pose.orientation.z = orientation[2]
+            odom_msg.pose.pose.orientation.w = orientation[3]
 
-        self.get_logger().info('Published Odometry and IMU data')
+            self.odom_publisher.publish(odom_msg)
+
+        # Publish IMU Data
+        if 'imu_data' in self.h5_file:
+            imu_group = self.h5_file['imu_data']
+            header = Header()
+            header.stamp.sec = int(imu_group['header/stamp/sec'][0])
+            header.stamp.nanosec = int(imu_group['header/stamp/nanosec'][0]*1e9)
+
+            imu_msg = Imu()
+            imu_msg.header = header
+            imu_msg.header.frame_id = str(imu_group['header/frame_id'][0])
+
+            # Acceleration
+            imu_msg.linear_acceleration.x = imu_group['linear_acceleration'][0][0]
+            imu_msg.linear_acceleration.y = imu_group['linear_acceleration'][0][1]
+            imu_msg.linear_acceleration.z = imu_group['linear_acceleration'][0][2]
+
+            # Angular Velocity
+            imu_msg.angular_velocity.x = imu_group['angular_velocity'][0][0]
+            imu_msg.angular_velocity.y = imu_group['angular_velocity'][0][1]
+            imu_msg.angular_velocity.z = imu_group['angular_velocity'][0][2]
+
+            # Orientation
+            imu_msg.orientation.x = imu_group['orientation'][0][0]
+            imu_msg.orientation.y = imu_group['orientation'][0][1]
+            imu_msg.orientation.z = imu_group['orientation'][0][2]
+            imu_msg.orientation.w = imu_group['orientation'][0][3]
+
+            self.imu_publisher.publish(imu_msg)
+
+        # Publish LiDAR Data
+        if 'lidar_data' in self.h5_file:
+            lidar_group = self.h5_file['lidar_data']
+            header = Header()
+            header.stamp.sec = int(lidar_group['header/stamp/sec'][0])
+            header.stamp.nanosec = int(lidar_group['header/stamp/nanosec'][0]*1e9)
+
+            lidar_msg = LaserScan()
+            lidar_msg.header = header
+            lidar_msg.header.frame_id = str(lidar_group['header/frame_id'][0])
+            lidar_msg.ranges = lidar_group['ranges'][0]
+
+            self.lidar_publisher.publish(lidar_msg)
+
+        # Publish Camera Image Data
+        if 'camera_data' in self.h5_file:
+            camera_group = self.h5_file['camera_data']
+            header = Header()
+            header.stamp.sec = int(camera_group['header/stamp/sec'][0])
+            header.stamp.nanosec = int(camera_group['header/stamp/nanosec'][0]*1e9)
+
+            camera_msg = Image()
+            camera_msg.header = header
+            camera_msg.header.frame_id = str(camera_group['header/frame_id'][0])
+            camera_msg.data = camera_group['image'][0].tolist()  # Convert numpy array to list for Image message
+
+            self.camera_publisher.publish(camera_msg)
+
+        self.get_logger().info("Published data to topics.")
+
+    def __del__(self):
+        # Close the HDF5 file when done
+        self.h5_file.close()
+
 
 def main(args=None):
     rclpy.init(args=args)
 
-    # Create and run the node
-    node = OdomImuPublisher()
-    
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt:
-        pass
-    finally:
-        node.destroy_node()
-        rclpy.shutdown()
+    # Create an instance of the HDF5_Read node
+    hdf5_data_publisher = HDF5_Read()
+
+    # Spin the node so it can keep publishing data
+    rclpy.spin(hdf5_data_publisher)
+
+    # Cleanly shut down the node
+    hdf5_data_publisher.destroy_node()
+    rclpy.shutdown()
+
 
 if __name__ == '__main__':
     main()
