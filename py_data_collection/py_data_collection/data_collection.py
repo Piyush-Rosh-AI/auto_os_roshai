@@ -94,7 +94,7 @@ class HDF5_Write(Node):
             self.odom_header_stamp_group['nanosec'].resize(self.odom_header_stamp_group['nanosec'].shape[0] + 1, axis=0)
             self.odom_header_stamp_group['nanosec'][-1] = msg.header.stamp.nanosec
             self.odom_pose_pose_group['position'].resize(self.odom_pose_pose_group['position'].shape[0] + 1, axis=0)
-            self.odom_pose_pose_group['position'][-1] = np.array([position.x, position.y, position.z], dtype=np.float64)
+            self.odom_pose_pose_group['position'][-1] = np.array([position.x, position.y, position.z])
             self.odom_pose_pose_group['orientation'].resize(self.odom_pose_pose_group['orientation'].shape[0] + 1, axis=0)
             self.odom_pose_pose_group['orientation'][-1] = np.array([orientation.x, orientation.y, orientation.z,orientation.w], dtype=np.float64)
 

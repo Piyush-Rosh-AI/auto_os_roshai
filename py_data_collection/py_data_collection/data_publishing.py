@@ -22,89 +22,103 @@ class HDF5_Read(Node):
         self.index =0
         # Create a timer to call the publish_data every 1 second
         
-        self.create_timer(1.0, self.publish_data)  # Timer callback every 1 second
+        self.create_timer(0.1, self.publish_data)  # Timer callback every 1 second
 
     def publish_data(self):
         # Publish Odometry Data
         if 'odom_data' in self.h5_file:
             odom_group = self.h5_file['odom_data']
-            header = Header()
-            header.stamp.sec = int(odom_group['header/stamp/sec'][self.index])
-            header.stamp.nanosec = int(odom_group['header/stamp/nanosec'][self.index]*1e9)
+            if(self.index<len(odom_group['header/stamp/sec'])):
+                header = Header()
+                header.stamp.sec = int(odom_group['header/stamp/sec'][self.index])
+                header.stamp.nanosec = int(odom_group['header/stamp/nanosec'][self.index]*1e9)
 
-            odom_msg = Odometry()
-            odom_msg.header = header
-            odom_msg.header.frame_id = str(odom_group['header/frame_id'][self.index])
+                odom_msg = Odometry()
+                odom_msg.header = header
+                odom_msg.header.frame_id = str(odom_group['header/frame_id'][self.index])
 
-            position = odom_group['pose/pose/position'][self.index]
-            orientation = odom_group['pose/pose/orientation'][self.index]
-            odom_msg.pose.pose.position.x = position[0]
-            odom_msg.pose.pose.position.y = position[1]
-            odom_msg.pose.pose.position.z = position[2]
-            odom_msg.pose.pose.orientation.x = orientation[0]
-            odom_msg.pose.pose.orientation.y = orientation[1]
-            odom_msg.pose.pose.orientation.z = orientation[2]
-            odom_msg.pose.pose.orientation.w = orientation[3]
+                position = odom_group['pose/pose/position'][self.index]
+                orientation = odom_group['pose/pose/orientation'][self.index]
+                odom_msg.pose.pose.position.x = position[0]
+                odom_msg.pose.pose.position.y = position[1]
+                odom_msg.pose.pose.position.z = position[2]
+                odom_msg.pose.pose.orientation.x = orientation[0]
+                odom_msg.pose.pose.orientation.y = orientation[1]
+                odom_msg.pose.pose.orientation.z = orientation[2]
+                odom_msg.pose.pose.orientation.w = orientation[3]
 
-            self.odom_publisher.publish(odom_msg)
+                self.odom_publisher.publish(odom_msg)
+            else:
+                print("The odometry data was out of range")
 
         # Publish IMU Data
         if 'imu_data' in self.h5_file:
             imu_group = self.h5_file['imu_data']
-            header = Header()
-            header.stamp.sec = int(imu_group['header/stamp/sec'][self.index])
-            header.stamp.nanosec = int(imu_group['header/stamp/nanosec'][self.index]*1e9)
+            if(self.index<len(imu_group['header/stamp/sec'])):
+                header = Header()
+                header.stamp.sec = int(imu_group['header/stamp/sec'][self.index])
+                header.stamp.nanosec = int(imu_group['header/stamp/nanosec'][self.index]*1e9)
 
-            imu_msg = Imu()
-            imu_msg.header = header
-            imu_msg.header.frame_id = str(imu_group['header/frame_id'][self.index])
+                imu_msg = Imu()
+                imu_msg.header = header
+                imu_msg.header.frame_id = str(imu_group['header/frame_id'][self.index])
 
-            # Acceleration
-            imu_msg.linear_acceleration.x = imu_group['linear_acceleration'][self.index][0]
-            imu_msg.linear_acceleration.y = imu_group['linear_acceleration'][self.index][1]
-            imu_msg.linear_acceleration.z = imu_group['linear_acceleration'][self.index][2]
+                # Acceleration
+                imu_msg.linear_acceleration.x = imu_group['linear_acceleration'][self.index][0]
+                imu_msg.linear_acceleration.y = imu_group['linear_acceleration'][self.index][1]
+                imu_msg.linear_acceleration.z = imu_group['linear_acceleration'][self.index][2]
 
-            # Angular Velocity
-            imu_msg.angular_velocity.x = imu_group['angular_velocity'][self.index][0]
-            imu_msg.angular_velocity.y = imu_group['angular_velocity'][self.index][1]
-            imu_msg.angular_velocity.z = imu_group['angular_velocity'][self.index][2]
+                # Angular Velocity
+                imu_msg.angular_velocity.x = imu_group['angular_velocity'][self.index][0]
+                imu_msg.angular_velocity.y = imu_group['angular_velocity'][self.index][1]
+                imu_msg.angular_velocity.z = imu_group['angular_velocity'][self.index][2]
 
-            # Orientation
-            imu_msg.orientation.x = imu_group['orientation'][self.index][0]
-            imu_msg.orientation.y = imu_group['orientation'][self.index][1]
-            imu_msg.orientation.z = imu_group['orientation'][self.index][2]
-            imu_msg.orientation.w = imu_group['orientation'][self.index][3]
+                # Orientation
+                imu_msg.orientation.x = imu_group['orientation'][self.index][0]
+                imu_msg.orientation.y = imu_group['orientation'][self.index][1]
+                imu_msg.orientation.z = imu_group['orientation'][self.index][2]
+                imu_msg.orientation.w = imu_group['orientation'][self.index][3]
 
-            self.imu_publisher.publish(imu_msg)
-
+                self.imu_publisher.publish(imu_msg)
+            else:
+                print("The imu_group data was out of range")
         # Publish LiDAR Data
         if 'lidar_data' in self.h5_file:
             lidar_group = self.h5_file['lidar_data']
-            header = Header()
-            header.stamp.sec = int(lidar_group['header/stamp/sec'][self.index])
-            header.stamp.nanosec = int(lidar_group['header/stamp/nanosec'][self.index]*1e9)
+            if(self.index<len(lidar_group['header/stamp/sec'])):
 
-            lidar_msg = LaserScan()
-            lidar_msg.header = header
-            lidar_msg.header.frame_id = str(lidar_group['header/frame_id'][self.index])
-            lidar_msg.ranges = lidar_group['ranges'][self.index]
+                header = Header()
+                header.stamp.sec = int(lidar_group['header/stamp/sec'][self.index])
+                header.stamp.nanosec = int(lidar_group['header/stamp/nanosec'][self.index]*1e9)
 
-            self.lidar_publisher.publish(lidar_msg)
+                lidar_msg = LaserScan()
+                lidar_msg.header = header
+                lidar_msg.header.frame_id = str(lidar_group['header/frame_id'][self.index])
+                lidar_msg.ranges = lidar_group['ranges'][self.index]
+
+                self.lidar_publisher.publish(lidar_msg)
+            else:
+                print("The lidar_group data was out of range")
+
             
 
         # Publish Camera Image Data
         if 'camera_data' in self.h5_file:
             camera_group = self.h5_file['camera_data']
-            header = Header()
-            header.stamp.sec = int(camera_group['header/stamp/sec'][self.index])
-            header.stamp.nanosec = int(camera_group['header/stamp/nanosec'][self.index]*1e9)
+            if(self.index<len(camera_group['header/stamp/sec'])):
+                header = Header()
+                header.stamp.sec = int(camera_group['header/stamp/sec'][self.index])
+                header.stamp.nanosec = int(camera_group['header/stamp/nanosec'][self.index]*1e9)
 
-            camera_msg = Image()
-            camera_msg.header = header
-            camera_msg.header.frame_id = str(camera_group['header/frame_id'][self.index])
-            camera_msg.data = camera_group['image'][self.index].tolist()  # Convert numpy array to list for Image message
+                camera_msg = Image()
+                camera_msg.header = header
+                camera_msg.header.frame_id = str(camera_group['header/frame_id'][self.index])
+                camera_msg.data = camera_group['image'][self.index].tolist()  # Convert numpy array to list for Image message
 
-            self.camera_publisher.publish(camera_msg)
+
+                self.camera_publisher.publish(camera_msg)
+            else:
+                print("The camera_group data was out of range")
         self.index=self.index+1
         self.get_logger().info("Published data to topics.")
 
