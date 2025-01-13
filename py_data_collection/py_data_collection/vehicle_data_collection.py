@@ -12,7 +12,24 @@ import json
 class HDF5_Write(Node):
     def __init__(self):
         super().__init__('sensor_data_subscriber')
-
+        # Subscription to the odometry message types
+        self.gps_filtered_subscription = self.create_subscription(
+            NavSatFix,
+            '/gps/filtered',  # Change this to your actual odom topic if needed
+            self.gps_filtered_callback,
+            10
+        )
+        self.gps_filtered_data=self.h5_file.create_dataset('gps_filtered_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+       
+        # Subscription to the odometry message types
+        self.gps_2_pose_subscription = self.create_subscription(
+            PoseWithCovarianceStamped,
+            '/gps_2/pose',  # Change this to your actual odom topic if needed
+            self.gps_2_pose_callback,
+            10
+        )
+        self.gps_2_pose_data=self.h5_file.create_dataset('gps_2_pose_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+       
         # Subscription to the odometry message types
         self.vectornav_odom_subscription = self.create_subscription(
             Odometry,
@@ -334,7 +351,15 @@ class HDF5_Write(Node):
             'data': list(msg.data)  # Image data is typically in raw byte format, so convert to a list
         }
 
-
+    def gps_filtered_callback(self, msg: Odometry):
+   
+        self.gps_filtered_data.resize(self.gps_filtered_data.shape[0] + 1, axis=0)
+        self.gps_filtered_data[-1] = np.string_(json.dumps(self.navsatfix_JSON(msg)))
+    def gps_2_pose_callback(self, msg: Odometry):
+   
+        self.gps_2_pose_data.resize(self.gps_2_pose_data.shape[0] + 1, axis=0)
+        self.gps_2_pose_data[-1] = np.string_(json.dumps(self.posewithcovariancestamped_JSON(msg)))
+  
 
     
     def vectornav_odom_callback(self, msg: Odometry):
