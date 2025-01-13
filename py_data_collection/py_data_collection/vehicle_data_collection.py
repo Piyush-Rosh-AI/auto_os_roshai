@@ -133,8 +133,8 @@ class HDF5_Write(Node):
         # Create or open an HDF5 file
         self.h5_file = h5py.File('sensor_datas.h5', 'w')
 
-        #/vectornav/Mag        /vectornav/Pres        /vectornav/Temp                
-    def odom_JSON(self,msg:Odometry):       #/vectornav/Odom | 
+                   
+    def odom_JSON(self,msg:Odometry):      
         return  {
                 'header': {
                     'frame_id': msg.header.frame_id,
@@ -170,7 +170,7 @@ class HDF5_Write(Node):
                 }
             }
 
-    def imu_JSON(self,msg:Imu):     #/ouster/imu | /vectornav/IMU 
+    def imu_JSON(self,msg:Imu):     
         return {
                     'header': {
                         'frame_id': msg.header.frame_id,
@@ -197,7 +197,7 @@ class HDF5_Write(Node):
                     }
                 }
 
-    def pointcloud2_JSON(self,msg:PointCloud2): #/ouster/points   
+    def pointcloud2_JSON(self,msg:PointCloud2):    
         return  {
                 'header': {
                     'frame_id': msg.header.frame_id,
@@ -219,7 +219,7 @@ class HDF5_Write(Node):
                 'data': []  # This will store the actual point data
             }
 
-    def navsatfix_JSON(self, msg: NavSatFix):  # /gps/fix | NavSatFix message
+    def navsatfix_JSON(self, msg: NavSatFix):  
         return {
             'header': {
                 'frame_id': msg.header.frame_id,
@@ -243,7 +243,7 @@ class HDF5_Write(Node):
             'position_covariance_type': msg.position_covariance_type
         }
 
-    def posewithcovariancestamped_JSON(self, msg: PoseWithCovarianceStamped):  # /pose_with_covariance_stamped
+    def posewithcovariancestamped_JSON(self, msg: PoseWithCovarianceStamped):  
         return {
             'header': {
                 'frame_id': msg.header.frame_id,
@@ -317,7 +317,7 @@ class HDF5_Write(Node):
             'variance': msg.variance
         }
 
-    def image_JSON(self, msg: Image):  # /camera/image
+    def image_JSON(self, msg: Image):  
         return {
             'header': {
                 'frame_id': msg.header.frame_id,
@@ -383,47 +383,14 @@ class HDF5_Write(Node):
     def vectornav_pres_callback(self,msg:FluidPressure):
         self.vectornav_pres_data.resize(self.vectornav_pres_data.shape[0] + 1, axis=0)
         self.vectornav_pres_data[-1] = np.string_(json.dumps(self.fluid_pressure_JSON(msg)))
+   
     def vectornav_gps_callback(self,msg:NavSatFix):
         self.vectornav_gps_data.resize(self.vectornav_gps_data.shape[0] + 1, axis=0)
         self.vectornav_gps_data[-1] = np.string_(json.dumps(self.navsatfix_JSON(msg)))
 
-    def tf_callback(self):
-        try:
-            # Get the latest transform from base_link to map (or any other frames of interest)
-            transform = self.tf_buffer.lookup_transform('odom', 'base_link', rclpy.time.Time())
-            # Convert the transform to a numpy array or other suitable format
-            position = transform.transform.translation
-            orientation = transform.transform.rotation
 
-            transform_data = np.array([position.x, position.y, position.z, orientation.x, orientation.y, orientation.z, orientation.w], dtype=np.float64)
 
-            if 'transform' not in self.tf_group:
-                self.tf_group.create_dataset(
-                    'transform',
-                    shape=(1, 7),  # 7 values (position + orientation)
-                    data=transform_data,
-                    maxshape=(None, 7),
-                    chunks=(1, 7),
-                    compression="gzip"
-                )
-                self.tf_header_group.create_dataset('frame_id',shape=(1,1),maxshape=(None, 1),chunks=(1, 1), data=transform.header.frame_id,compression="gzip")      
-                self.tf_header_stamp_group.create_dataset('sec',shape=(1,),maxshape=(None, ),chunks=(1, ), data=np.array([transform.header.stamp.sec], dtype=np.float64),compression="gzip")
-                self.tf_header_stamp_group.create_dataset('nanosec', shape=(1,),maxshape=(None, ),chunks=(1, ),data=np.array([transform.header.stamp.nanosec / 1e9], dtype=np.float64),compression="gzip")
-    
-            else:
-                self.tf_header_group['frame_id'].resize(self.tf_header_group['frame_id'].shape[0] + 1, axis=0)
-                self.tf_header_group['frame_id'][-1] = transform.header.frame_id
-                self.tf_header_stamp_group['sec'].resize(self.tf_header_stamp_group['sec'].shape[0] + 1, axis=0)
-                self.tf_header_stamp_group['sec'][-1] = transform.header.stamp.sec
-                self.tf_header_stamp_group['nanosec'].resize(self.tf_header_stamp_group['nanosec'].shape[0] + 1, axis=0)
-                self.tf_header_stamp_group['nanosec'][-1] = transform.header.stamp.nanosec
-                self.tf_group['transform'].resize(self.tf_group['transform'].shape[0] + 1, axis=0)
-                self.tf_group['transform'][-1] = transform_data
 
-            self.get_logger().info(f"TF data received at {transform.header.stamp.sec:.2f}")
-        
-        except Exception as e:
-            self.get_logger().warn(f"Failed to get transform: {e}")
     
     def __del__(self):
         # Close the HDF5 file when done
