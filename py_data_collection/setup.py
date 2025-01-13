@@ -23,6 +23,7 @@ setup(
             'data_collection = py_data_collection.data_collection:main',
             'data_publishing = py_data_collection.data_publishing:main',
             'make_map = py_data_collection.make_map:main',
+            'vehicle_data_collection = py_data_collection.vehicle_data_collection:main',
         ],
     },
 )

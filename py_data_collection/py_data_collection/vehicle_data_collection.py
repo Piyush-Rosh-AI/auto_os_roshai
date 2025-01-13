@@ -8,10 +8,15 @@ import h5py
 import numpy as np
 import time
 import json
+import datetime
+
 
 class HDF5_Write(Node):
     def __init__(self):
         super().__init__('sensor_data_subscriber')
+        current_time = datetime.datetime.now()
+        hdf_name=str(current_time.year)+ '_' +str(current_time.month)+ '_'+ str(current_time.day)  + '_'+ str(current_time.hour)+ '_'  + str(current_time.minute)  + '_file'
+        self.h5_file = h5py.File(hdf_name, 'w')
         # Subscription to the odometry message types
         self.gps_filtered_subscription = self.create_subscription(
             NavSatFix,
@@ -40,7 +45,7 @@ class HDF5_Write(Node):
         self.vectornav_odom_data=self.h5_file.create_dataset('vectornav_odom_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
         self.gps_odom_subscription = self.create_subscription(
             Odometry,
-            '/odometry/gps ',  # Change this to your actual odom topic if needed
+            '/odometry/gps',  # Change this to your actual odom topic if needed
             self.gps_odom_callback,
             10
         )
@@ -48,7 +53,7 @@ class HDF5_Write(Node):
       
         self.navsat_odom_subscription = self.create_subscription(
             Odometry,
-            '/odometry/navsat ',  # Change this to your actual odom topic if needed
+            '/odometry/navsat',  # Change this to your actual odom topic if needed
             self.navsat_odom_callback,
             10
         )
@@ -57,7 +62,7 @@ class HDF5_Write(Node):
         # Subscription to the imu message types
         self.ouster_imu_subscription = self.create_subscription(
             Imu,
-            '/ouster/imu ',  # Change this to your actual imu topic if needed
+            '/ouster/imu',  # Change this to your actual imu topic if needed
             self.ouster_imu_callback,
             10
         )
@@ -65,7 +70,7 @@ class HDF5_Write(Node):
        
         self.vectornav_imu_subscription = self.create_subscription(
             Imu,
-            '/vectornav/IMU ',  # Change this to your actual imu topic if needed
+            '/vectornav/IMU',  # Change this to your actual imu topic if needed
             self.vectornav_imu_callback,
             10
         )
@@ -140,7 +145,7 @@ class HDF5_Write(Node):
      
         self.vectornav_gps_subscription = self.create_subscription(
             NavSatFix,
-            '/vectornav/GPS  ',  # Change to your actual camera topic
+            '/vectornav/GPS',  # Change to your actual camera topic
             self.vectornav_gps_callback,
             10
         )
@@ -148,9 +153,8 @@ class HDF5_Write(Node):
      
 
         # Create or open an HDF5 file
-        self.h5_file = h5py.File('sensor_datas.h5', 'w')
-
-                   
+       
+                 
     def odom_JSON(self,msg:Odometry):      
         return  {
                 'header': {
@@ -360,8 +364,6 @@ class HDF5_Write(Node):
         self.gps_2_pose_data.resize(self.gps_2_pose_data.shape[0] + 1, axis=0)
         self.gps_2_pose_data[-1] = np.string_(json.dumps(self.posewithcovariancestamped_JSON(msg)))
   
-
-    
     def vectornav_odom_callback(self, msg: Odometry):
    
         self.vectornav_odom_data.resize(self.vectornav_odom_data.shape[0] + 1, axis=0)
@@ -413,10 +415,6 @@ class HDF5_Write(Node):
         self.vectornav_gps_data.resize(self.vectornav_gps_data.shape[0] + 1, axis=0)
         self.vectornav_gps_data[-1] = np.string_(json.dumps(self.navsatfix_JSON(msg)))
 
-
-
-
-    
     def __del__(self):
         # Close the HDF5 file when done
         self.h5_file.close()
