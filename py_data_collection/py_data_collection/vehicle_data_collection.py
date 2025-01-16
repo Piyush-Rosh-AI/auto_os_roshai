@@ -9,6 +9,7 @@ import numpy as np
 import time
 import json
 import datetime
+from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy
 
 
 class HDF5_Write(Node):
@@ -17,12 +18,17 @@ class HDF5_Write(Node):
         current_time = datetime.datetime.now()
         hdf_name=str(current_time.year)+ '_' +str(current_time.month)+ '_'+ str(current_time.day)  + '_'+ str(current_time.hour)+ '_'  + str(current_time.minute)  + '_file'
         self.h5_file = h5py.File(hdf_name, 'w')
+        qos_profile = QoSProfile(
+            depth=10,  # Set the queue size for the subscriber (buffer size)
+            reliability=ReliabilityPolicy.BEST_EFFORT,  # Reliable message delivery
+            durability=DurabilityPolicy.VOLATILE,  # Volatile messages (do not persist)
+        )
         # Subscription to the odometry message types
         self.gps_filtered_subscription = self.create_subscription(
             NavSatFix,
             '/gps/filtered',  # Change this to your actual odom topic if needed
             self.gps_filtered_callback,
-            10
+            qos_profile
         )
         self.gps_filtered_data=self.h5_file.create_dataset('gps_filtered_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
        
@@ -31,7 +37,7 @@ class HDF5_Write(Node):
             PoseWithCovarianceStamped,
             '/gps_2/pose',  # Change this to your actual odom topic if needed
             self.gps_2_pose_callback,
-            10
+            qos_profile
         )
         self.gps_2_pose_data=self.h5_file.create_dataset('gps_2_pose_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
        
@@ -40,14 +46,14 @@ class HDF5_Write(Node):
             Odometry,
             '/vectornav/Odom',  # Change this to your actual odom topic if needed
             self.vectornav_odom_callback,
-            10
+            qos_profile
         )
         self.vectornav_odom_data=self.h5_file.create_dataset('vectornav_odom_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
         self.gps_odom_subscription = self.create_subscription(
             Odometry,
             '/odometry/gps',  # Change this to your actual odom topic if needed
             self.gps_odom_callback,
-            10
+            qos_profile
         )
         self.gps_odom_data=self.h5_file.create_dataset('gps_odom_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
       
@@ -55,7 +61,7 @@ class HDF5_Write(Node):
             Odometry,
             '/odometry/navsat',  # Change this to your actual odom topic if needed
             self.navsat_odom_callback,
-            10
+            qos_profile
         )
         self.navsat_odom_data=self.h5_file.create_dataset('navsat_odom_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
       
@@ -64,7 +70,7 @@ class HDF5_Write(Node):
             Imu,
             '/ouster/imu',  # Change this to your actual imu topic if needed
             self.ouster_imu_callback,
-            10
+            qos_profile
         )
         self.ouster_imu_data=self.h5_file.create_dataset('ouster_imu_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
        
@@ -72,7 +78,7 @@ class HDF5_Write(Node):
             Imu,
             '/vectornav/IMU',  # Change this to your actual imu topic if needed
             self.vectornav_imu_callback,
-            10
+            qos_profile
         )
         self.vectornav_imu_data=self.h5_file.create_dataset('vectornav_imu_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
        
@@ -82,7 +88,7 @@ class HDF5_Write(Node):
             PointCloud2,
             '/ouster/points',  # Change this to your actual scan topic if needed
             self.ousterpoints_lidar_callback,
-            10
+            qos_profile
         )
         self.ousterpoints_lidar_data=self.h5_file.create_dataset('ousterpoints_lidar_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
   
@@ -91,7 +97,7 @@ class HDF5_Write(Node):
             Image,
             '/ouster/nearir_image',  # Change to your actual camera topic
             self.ouster_nearir_image_camera_callback,
-            10
+            qos_profile
         )
         self.ouster_nearir_image_data=self.h5_file.create_dataset('ouster_nearir_image_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
   
@@ -99,7 +105,7 @@ class HDF5_Write(Node):
             Image,
             '/ouster/range_image',  # Change to your actual camera topic
             self.ouster_range_image_camera_callback,
-            10
+            qos_profile
         )
         self.ouster_range_image_data=self.h5_file.create_dataset('ouster_range_image_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
   
@@ -107,7 +113,7 @@ class HDF5_Write(Node):
             Image,
             '/ouster/reflec_image',  # Change to your actual camera topic
             self.ouster_reflec_image_camera_callback,
-            10
+            qos_profile
         )
         self.ouster_reflec_image_data=self.h5_file.create_dataset('ouster_reflec_image_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
   
@@ -115,7 +121,7 @@ class HDF5_Write(Node):
             Image,
             '/ouster/signal_image',  # Change to your actual camera topic
             self.ouster_signal_image_camera_callback,
-            10
+            qos_profile
         )
         self.ouster_signal_image_data=self.h5_file.create_dataset('ouster_signal_image_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
         
@@ -123,7 +129,7 @@ class HDF5_Write(Node):
             MagneticField,
             '/vectornav/MAG',  # Change to your actual camera topic
             self.vectornav_mag_callback,
-            10
+            qos_profile
         )
         self.vectornav_mag_data=self.h5_file.create_dataset('vectornav_mag_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
    
@@ -131,7 +137,7 @@ class HDF5_Write(Node):
             Temperature,
             '/vectornav/Temp',  # Change to your actual camera topic
             self.vectornav_temp_callback,
-            10
+            qos_profile
         )
         self.vectornav_temp_data=self.h5_file.create_dataset('vectornav_temp_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
         
@@ -139,7 +145,7 @@ class HDF5_Write(Node):
             FluidPressure,
             '/vectornav/Pres',  # Change to your actual camera topic
             self.vectornav_pres_callback,
-            10
+            qos_profile
         )
         self.vectornav_pres_data=self.h5_file.create_dataset('vectornav_pres_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
      
@@ -147,7 +153,7 @@ class HDF5_Write(Node):
             NavSatFix,
             '/vectornav/GPS',  # Change to your actual camera topic
             self.vectornav_gps_callback,
-            10
+            qos_profile
         )
         self.vectornav_gps_data=self.h5_file.create_dataset('vectornav_gps_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
      
@@ -356,7 +362,7 @@ class HDF5_Write(Node):
         }
 
     def gps_filtered_callback(self, msg: Odometry):
-   
+        print("getting the data for gps filtered data")
         self.gps_filtered_data.resize(self.gps_filtered_data.shape[0] + 1, axis=0)
         self.gps_filtered_data[-1] = np.string_(json.dumps(self.navsatfix_JSON(msg)))
     def gps_2_pose_callback(self, msg: Odometry):
