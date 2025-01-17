@@ -12,13 +12,15 @@ class HDF5_Read(Node):
 
         # Create publishers for each topic
         self.odom_publisher = self.create_publisher(Odometry, '/odom', 10)
-        self.imu_publisher = self.create_publisher(Imu, '/imu', 10)
-        self.lidar_publisher = self.create_publisher(LaserScan, '/scan', 10)
-        self.camera_publisher = self.create_publisher(Image, '/camera/image_raw', 10)
 
-        # Open the HDF5 file
-        self.h5_file = h5py.File('Jan_sensor_data.h5', 'r')
-        self.odom_index = 0
+        try:
+            # Open the HDF5 file
+            self.h5_file = h5py.File('/home/roshai/sim_ws/2025_1_17_13_7_file', 'r')
+        except Exception as e:
+            self.get_logger().error(f"Error opening HDF5 file: {e}")
+            self.h5_file = None  # Set to None if the file can't be opened
+
+        self.odom_index = 1
 
         # Create a timer to call the publish_data every 1 second
         self.create_timer(0.1, self.publish_odom)  # Timer callback every 0.1 seconds (10Hz)
@@ -52,7 +54,7 @@ class HDF5_Read(Node):
         
         odom_msg.twist.twist.angular.x = odom_dict['twist']['angular']['x']
         odom_msg.twist.twist.angular.y = odom_dict['twist']['angular']['y']
-        odom_msg.twist.twist.angular.z = odom_dict['twist']['Fangular']['z']
+        odom_msg.twist.twist.angular.z = odom_dict['twist']['angular']['z']
         
         # Publish the odometry message
         self.odom_publisher.publish(odom_msg)
@@ -75,7 +77,9 @@ class HDF5_Read(Node):
                         odometry_entry = odometry_entry.rstrip(b'\x00')  # Remove null bytes
                         try:
                             # Decode the byte string to UTF-8 and deserialize it
+                            print("now decoding")
                             odom_dict = json.loads(odometry_entry.decode('utf-8'))
+                           
                             self.publish_odom_from_dict(odom_dict)
                             self.odom_index += 1
                             self.get_logger().info(f"Published odometry data at index {self.odom_index}.")

@@ -44,7 +44,7 @@ class HDF5_Write(Node):
         # Subscription to the odometry message types
         self.vectornav_odom_subscription = self.create_subscription(
             Odometry,
-            '/vectornav/Odom',  # Change this to your actual odom topic if needed
+            '/odom',  # Change this to your actual odom topic if needed
             self.vectornav_odom_callback,
             qos_profile
         )
