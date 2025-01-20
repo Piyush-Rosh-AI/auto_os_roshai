@@ -10,19 +10,36 @@ import time
 import json
 import datetime
 from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy
+import os
+#@todo @piyush-
+# -header in alphabetical format
+# -check for the variables names
+# -make the file into chunks if memory increases at certain extend
 
 
 class HDF5_Write(Node):
     def __init__(self):
         super().__init__('sensor_data_subscriber')
+        #frequency
+        self.messageCounter=0
+        self.startTime=0
+        
+        
+        
+        #Get current date and time for the file name
         current_time = datetime.datetime.now()
-        hdf_name=str(current_time.year)+ '_' +str(current_time.month)+ '_'+ str(current_time.day)  + '_'+ str(current_time.hour)+ '_'  + str(current_time.minute)  + '_file'
-        self.h5_file = h5py.File(hdf_name, 'w')
+        strdate = datetime.datetime(current_time.year, current_time.month, current_time.day)
+        formatted_date = strdate.strftime("%B %d, %Y")
+        self.hdf_name=str(current_time.hour)+ '_'  + str(current_time.minute)+"|"+formatted_date+ '_file.h5'
+        
+        self.h5_file = h5py.File(self.hdf_name, 'w')
+        
         qos_profile = QoSProfile(
             depth=10,  # Set the queue size for the subscriber (buffer size)
             reliability=ReliabilityPolicy.BEST_EFFORT,  # Reliable message delivery
             durability=DurabilityPolicy.VOLATILE,  # Volatile messages (do not persist)
         )
+        
         # Subscription to the odometry message types
         self.gps_filtered_subscription = self.create_subscription(
             NavSatFix,
@@ -44,7 +61,7 @@ class HDF5_Write(Node):
         # Subscription to the odometry message types
         self.vectornav_odom_subscription = self.create_subscription(
             Odometry,
-            '/odom',  # Change this to your actual odom topic if needed
+            '/vectornav_odom_data',  # Change this to your actual odom topic if needed
             self.vectornav_odom_callback,
             qos_profile
         )
@@ -158,11 +175,11 @@ class HDF5_Write(Node):
         self.vectornav_gps_data=self.h5_file.create_dataset('vectornav_gps_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
      
 
-        # Create or open an HDF5 file
+
        
                  
-    def odom_JSON(self,msg:Odometry):      
-        return  {
+    def odom_JSON(self,msg:Odometry,avgTime):      
+        return  {'avgTime':avgTime,
                 'header': {
                     'frame_id': msg.header.frame_id,
                     'stamp': {
@@ -371,9 +388,21 @@ class HDF5_Write(Node):
         self.gps_2_pose_data[-1] = np.string_(json.dumps(self.posewithcovariancestamped_JSON(msg)))
   
     def vectornav_odom_callback(self, msg: Odometry):
-   
+        avgTime=0
+        if(self.messageCounter>0):
+            lastRecordedTime=time.time()
+            elapsedTime=lastRecordedTime-self.startTime
+            avgTime=elapsedTime/self.messageCounter
+            print(avgTime)
+        else:
+            self.startTime=time.time()
+            
         self.vectornav_odom_data.resize(self.vectornav_odom_data.shape[0] + 1, axis=0)
-        self.vectornav_odom_data[-1] = np.string_(json.dumps(self.odom_JSON(msg)))
+        self.vectornav_odom_data[-1] = np.string_(json.dumps(self.odom_JSON(msg,avgTime)))
+        self.messageCounter=self.messageCounter+1
+        
+        
+        
     def gps_odom_callback(self, msg: Odometry):
         self.gps_odom_data.resize(self.gps_odom_data.shape[0] + 1, axis=0)
         self.gps_odom_data[-1] = np.string_(json.dumps(self.odom_JSON(msg)))
@@ -423,6 +452,11 @@ class HDF5_Write(Node):
 
     def __del__(self):
         # Close the HDF5 file when done
+        file_size = os.path.getsize(self.hdf_name)
+        file_size_kb = file_size / 1024
+        file_size_mb = file_size_kb / 1024
+
+        print(f"Size of the file: {file_size_mb:.2f} MB")
         self.h5_file.close()
 
 
