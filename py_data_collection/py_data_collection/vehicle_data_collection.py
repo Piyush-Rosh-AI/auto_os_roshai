@@ -174,7 +174,61 @@ class HDF5_Write(Node):
         )
         self.vectornav_gps_data=self.h5_file.create_dataset('vectornav_GPS_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
        
-                 
+    def navsatfix_JSON(self, msg: NavSatFix):  
+        return {
+            'header': {
+                'frame_id': msg.header.frame_id,
+                'stamp': {
+                    'sec': msg.header.stamp.sec,
+                    'nanosec': msg.header.stamp.nanosec
+                }
+            },
+            'status': {
+                'status': msg.status.status,
+                'service': msg.status.service
+            },
+            'latitude': msg.latitude,
+            'longitude': msg.longitude,
+            'altitude': msg.altitude,
+            'position_covariance': [
+                msg.position_covariance[0], msg.position_covariance[1], msg.position_covariance[2],
+                msg.position_covariance[3], msg.position_covariance[4], msg.position_covariance[5],
+                msg.position_covariance[6], msg.position_covariance[7], msg.position_covariance[8]
+            ],
+            'position_covariance_type': msg.position_covariance_type
+        }
+    def posewithcovariancestamped_JSON(self, msg: PoseWithCovarianceStamped):  
+        return {
+            'header': {
+                'frame_id': msg.header.frame_id,
+                'stamp': {
+                    'sec': msg.header.stamp.sec,
+                    'nanosec': msg.header.stamp.nanosec
+                }
+            },
+            'pose': {
+                'pose': {
+                    'position': {
+                        'x': msg.pose.pose.position.x,
+                        'y': msg.pose.pose.position.y,
+                        'z': msg.pose.pose.position.z
+                    },
+                    'orientation': {
+                        'x': msg.pose.pose.orientation.x,
+                        'y': msg.pose.pose.orientation.y,
+                        'z': msg.pose.pose.orientation.z,
+                        'w': msg.pose.pose.orientation.w
+                    }
+                },
+                'covariance': [
+                    msg.pose.covariance[0], msg.pose.covariance[1], msg.pose.covariance[2], msg.pose.covariance[3], msg.pose.covariance[4], msg.pose.covariance[5],
+                    msg.pose.covariance[6], msg.pose.covariance[7], msg.pose.covariance[8], msg.pose.covariance[9], msg.pose.covariance[10], msg.pose.covariance[11],
+                    msg.pose.covariance[12], msg.pose.covariance[13], msg.pose.covariance[14], msg.pose.covariance[15], msg.pose.covariance[16], msg.pose.covariance[17],
+                    msg.pose.covariance[18], msg.pose.covariance[19], msg.pose.covariance[20], msg.pose.covariance[21], msg.pose.covariance[22], msg.pose.covariance[23],
+                    msg.pose.covariance[24], msg.pose.covariance[25]
+                ]
+            }
+        }                        
     def odom_JSON(self,msg:Odometry,avgTime):      
         return  {'avgTime':avgTime,
                 'header': {
@@ -257,7 +311,7 @@ class HDF5_Write(Node):
                 'is_dense': msg.is_dense,
                 'data': []  # This will store the actual point data
             }
-    def navsatfix_JSON(self, msg: NavSatFix):  
+    def image_JSON(self, msg: Image):  
         return {
             'header': {
                 'frame_id': msg.header.frame_id,
@@ -266,51 +320,12 @@ class HDF5_Write(Node):
                     'nanosec': msg.header.stamp.nanosec
                 }
             },
-            'status': {
-                'status': msg.status.status,
-                'service': msg.status.service
-            },
-            'latitude': msg.latitude,
-            'longitude': msg.longitude,
-            'altitude': msg.altitude,
-            'position_covariance': [
-                msg.position_covariance[0], msg.position_covariance[1], msg.position_covariance[2],
-                msg.position_covariance[3], msg.position_covariance[4], msg.position_covariance[5],
-                msg.position_covariance[6], msg.position_covariance[7], msg.position_covariance[8]
-            ],
-            'position_covariance_type': msg.position_covariance_type
-        }
-    def posewithcovariancestamped_JSON(self, msg: PoseWithCovarianceStamped):  
-        return {
-            'header': {
-                'frame_id': msg.header.frame_id,
-                'stamp': {
-                    'sec': msg.header.stamp.sec,
-                    'nanosec': msg.header.stamp.nanosec
-                }
-            },
-            'pose': {
-                'pose': {
-                    'position': {
-                        'x': msg.pose.pose.position.x,
-                        'y': msg.pose.pose.position.y,
-                        'z': msg.pose.pose.position.z
-                    },
-                    'orientation': {
-                        'x': msg.pose.pose.orientation.x,
-                        'y': msg.pose.pose.orientation.y,
-                        'z': msg.pose.pose.orientation.z,
-                        'w': msg.pose.pose.orientation.w
-                    }
-                },
-                'covariance': [
-                    msg.pose.covariance[0], msg.pose.covariance[1], msg.pose.covariance[2], msg.pose.covariance[3], msg.pose.covariance[4], msg.pose.covariance[5],
-                    msg.pose.covariance[6], msg.pose.covariance[7], msg.pose.covariance[8], msg.pose.covariance[9], msg.pose.covariance[10], msg.pose.covariance[11],
-                    msg.pose.covariance[12], msg.pose.covariance[13], msg.pose.covariance[14], msg.pose.covariance[15], msg.pose.covariance[16], msg.pose.covariance[17],
-                    msg.pose.covariance[18], msg.pose.covariance[19], msg.pose.covariance[20], msg.pose.covariance[21], msg.pose.covariance[22], msg.pose.covariance[23],
-                    msg.pose.covariance[24], msg.pose.covariance[25]
-                ]
-            }
+            'height': msg.height,
+            'width': msg.width,
+            'encoding': msg.encoding,
+            'is_bigendian': msg.is_bigendian,
+            'step': msg.step,
+            'data': list(msg.data)  # Image data is typically in raw byte format, so convert to a list
         }
     def magneticfield_JSON(self, msg: MagneticField):
         return {
@@ -350,23 +365,7 @@ class HDF5_Write(Node):
             'fluid_pressure': msg.fluid_pressure,
             'variance': msg.variance
         }
-    def image_JSON(self, msg: Image):  
-        return {
-            'header': {
-                'frame_id': msg.header.frame_id,
-                'stamp': {
-                    'sec': msg.header.stamp.sec,
-                    'nanosec': msg.header.stamp.nanosec
-                }
-            },
-            'height': msg.height,
-            'width': msg.width,
-            'encoding': msg.encoding,
-            'is_bigendian': msg.is_bigendian,
-            'step': msg.step,
-            'data': list(msg.data)  # Image data is typically in raw byte format, so convert to a list
-        }
-
+    
     def gps_filtered_callback(self, msg: Odometry):
         print("getting the data for gps filtered data")
         self.gps_filtered_data.resize(self.gps_filtered_data.shape[0] + 1, axis=0)
@@ -375,7 +374,7 @@ class HDF5_Write(Node):
    
         self.gps_2_pose_data.resize(self.gps_2_pose_data.shape[0] + 1, axis=0)
         self.gps_2_pose_data[-1] = np.string_(json.dumps(self.posewithcovariancestamped_JSON(msg)))
-  
+
     def vectornav_odom_callback(self, msg: Odometry):
         avgTime=0
         if(self.messageCounter>0):
@@ -423,10 +422,10 @@ class HDF5_Write(Node):
     def vectornav_mag_callback(self,msg:MagneticField):
         self.vectornav_MAG_data.resize(self.vectornav_MAG_data.shape[0] + 1, axis=0)
         self.vectornav_MAG_data[-1] = np.string_(json.dumps(self.magneticfield_JSON(msg)))
-
+    
     def vectornav_temp_callback(self,msg:Temperature):
         self.vectornav_Temp_data.resize(self.vectornav_Temp_data.shape[0] + 1, axis=0)
-        self.vectornav_Temp_data[-1] = np.string_(json.dumps(self.temperature_JSON(msg)))
+        self.vectornav_Temp_data[-1] = np.string_(json.dumps(self.temperature_JSON(msg))) 
     
     def vectornav_pres_callback(self,msg:FluidPressure):
         self.vectornav_Pres_data.resize(self.vectornav_Pres_data.shape[0] + 1, axis=0)
