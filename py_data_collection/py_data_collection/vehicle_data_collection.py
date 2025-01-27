@@ -11,6 +11,7 @@ import json
 import datetime
 from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy
 import os
+import tf2_ros
 #@todo @piyush-
 # -header in alphabetical format
 # -check for the variables names
@@ -48,8 +49,7 @@ class HDF5_Write(Node):
         )
         self.gps_filtered_messageCounter=0
         self.gps_filtered_startTime=0
-        self.gps_filtered_data=self.h5_file.create_dataset('gps_filtered_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
-       
+
         # Subscription to the odometry message types
         self.gps_2_pose_subscription = self.create_subscription(
             PoseWithCovarianceStamped,
@@ -59,18 +59,17 @@ class HDF5_Write(Node):
         )
         self.gps_2_pose_messageCounter=0
         self.gps_2_pose_startTime=0
-        self.gps_2_pose_data=self.h5_file.create_dataset('gps_2_pose_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
-       
+
         # Subscription to the odometry message types
         self.vectornav_odom_subscription = self.create_subscription(
             Odometry,
-            '/vectornav_odom_data',  # Change this to your actual odom topic if needed
+            '/vectornav/odom',  # Change this to your actual odom topic if needed
             self.vectornav_odom_callback,
             qos_profile
         )
         self.vectornav_odom_messageCounter=0
         self.vectornav_odom_startTime=0
-        self.vectornav_odom_data=self.h5_file.create_dataset('vectornav_odom_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        
         self.gps_odom_subscription = self.create_subscription(
             Odometry,
             '/odometry/gps',  # Change this to your actual odom topic if needed
@@ -79,7 +78,7 @@ class HDF5_Write(Node):
         )
         self.gps_odom_messageCounter=0
         self.gps_odom_startTime=0
-        self.odometry_gps_data=self.h5_file.create_dataset('odometry_gps_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        
       
         self.odometry_navsat_subscription = self.create_subscription(
             Odometry,
@@ -89,7 +88,7 @@ class HDF5_Write(Node):
         )
         self.odometry_navsat_messageCounter=0
         self.odometry_navsat_startTime=0
-        self.odometry_navsat_data=self.h5_file.create_dataset('odometry_navsat_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        
       
         # Subscription to the imu message types
         self.ouster_imu_subscription = self.create_subscription(
@@ -100,17 +99,17 @@ class HDF5_Write(Node):
         )
         self.ouster_imu_messageCounter=0
         self.ouster_imu_startTime=0
-        self.ouster_imu_data=self.h5_file.create_dataset('ouster_imu_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        
        
-        self.vectornav_IMU_subscription = self.create_subscription(
+        self.vectornav_imu_subscription = self.create_subscription(
             Imu,
-            '/vectornav/IMU',  # Change this to your actual imu topic if needed
-            self.vectornav_IMU_callback,
+            '/vectornav/imu',  # Change this to your actual imu topic if needed
+            self.vectornav_imu_callback,
             qos_profile
         )
-        self.vectornav_IMU_messageCounter=0
-        self.vectornav_IMU_startTime=0
-        self.vectornav_IMU_data=self.h5_file.create_dataset('vectornav_IMU_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        self.vectornav_imu_messageCounter=0
+        self.vectornav_imu_startTime=0
+        
        
         # Subscription to the pointclouddata2 message types
 
@@ -122,7 +121,7 @@ class HDF5_Write(Node):
         )
         self.ouster_points_messageCounter=0
         self.ouster_points_startTime=0
-        self.ouster_points_data=self.h5_file.create_dataset('ouster_points_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        
   
         # Subscription to the Image message types
         self.ouster_nearir_image_subscription = self.create_subscription(
@@ -133,7 +132,7 @@ class HDF5_Write(Node):
         )
         self.ouster_nearir_image_messageCounter=0
         self.ouster_nearir_image_startTime=0
-        self.ouster_nearir_image_data=self.h5_file.create_dataset('ouster_nearir_image_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        
   
         self.ouster_range_image_subscription = self.create_subscription(
             Image,
@@ -143,7 +142,7 @@ class HDF5_Write(Node):
         )
         self.ouster_range_image_messageCounter=0
         self.ouster_range_image_startTime=0
-        self.ouster_range_image_data=self.h5_file.create_dataset('ouster_range_image_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        
   
         self.ouster_reflec_image_subscription = self.create_subscription(
             Image,
@@ -153,7 +152,7 @@ class HDF5_Write(Node):
         )
         self.ouster_reflec_image_messageCounter=0
         self.ouster_reflec_image_startTime=0
-        self.ouster_reflec_image_data=self.h5_file.create_dataset('ouster_reflec_image_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        
   
         self.ouster_signal_image_subscription = self.create_subscription(
             Image,
@@ -163,47 +162,58 @@ class HDF5_Write(Node):
         )
         self.ouster_signal_image_messageCounter=0
         self.ouster_signal_image_startTime=0
-        self.ouster_signal_image_data=self.h5_file.create_dataset('ouster_signal_image_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
         
-        self.vectornav_MAG_subscription = self.create_subscription(
+        
+        self.vectornav_magnetic_subscription = self.create_subscription(
             MagneticField,
-            '/vectornav/MAG',  # Change to your actual camera topic
-            self.vectornav_MAG_callback,
+            '/vectornav/magnetic',  # Change to your actual camera topic
+            self.vectornav_magnetic_callback,
             qos_profile
         )
-        self.vectornav_MAG_messageCounter=0
-        self.vectornav_MAG_startTime=0
-        self.vectornav_MAG_data=self.h5_file.create_dataset('vectornav_MAG_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
-   
-        self.vectornav_TEMP_subscription = self.create_subscription(
-            Temperature,
-            '/vectornav/Temp',  # Change to your actual camera topic
-            self.vectornav_TEMP_callback,
-            qos_profile
-        )
-        self.vectornav_TEMP_messageCounter=0
-        self.vectornav_TEMP_startTime=0
-        self.vectornav_TEMP_data=self.h5_file.create_dataset('vectornav_TEMP_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        self.vectornav_magnetic_messageCounter=0
+        self.vectornav_magnetic_startTime=0
         
-        self.vectornav_Pres_subscription = self.create_subscription(
+   
+        self.vectornav_temperature_subscription = self.create_subscription(
+            Temperature,
+            '/vectornav/temperature',  # Change to your actual camera topic
+            self.vectornav_temperature_callback,
+            qos_profile
+        )
+        self.vectornav_temperature_messageCounter=0
+        self.vectornav_temperature_startTime=0
+        
+        
+        self.vectornav_pressure_subscription = self.create_subscription(
             FluidPressure,
-            '/vectornav/Pres',  # Change to your actual camera topic
-            self.vectornav_Pres_callback,
+            '/vectornav/pressure',  # Change to your actual camera topic
+            self.vectornav_pressure_callback,
             qos_profile
         )
-        self.vectornav_Pres_messageCounter=0
-        self.vectornav_Pres_startTime=0
-        self.vectornav_Pres_data=self.h5_file.create_dataset('vectornav_Pres_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        self.vectornav_pressure_messageCounter=0
+        self.vectornav_pressure_startTime=0
+        
      
-        self.vectornav_GPS_subscription = self.create_subscription(
+        self.vectornav_gnss_subscription = self.create_subscription(
             NavSatFix,
-            '/vectornav/GPS',  # Change to your actual camera topic
-            self.vectornav_GPS_callback,
+            '/vectornav/gnss',  # Change to your actual camera topic
+            self.vectornav_gnss_callback,
             qos_profile
         )
-        self.vectornav_GPS_messageCounter=0
-        self.vectornav_GPS_startTime=0
-        self.vectornav_GPS_data=self.h5_file.create_dataset('vectornav_GPS_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        self.vectornav_gnss_messageCounter=0
+        self.vectornav_gnss_startTime=0
+        
+        #tf to periodically(timer) look for transform(between?) and save it.
+        # Set up TF listener
+        self.tf_buffer = tf2_ros.Buffer()
+        self.listener = tf2_ros.TransformListener(self.tf_buffer, self)
+        
+        # Create an HDF5 file to store transformations
+        
+        self.tf_dataset = self.h5_file.create_dataset(
+            'tf_transforms', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+
+        self.timer = self.create_timer(1.0, self.record_transform)
        
     def navsatfix_JSON(self, msg: NavSatFix):  
         return {
@@ -396,7 +406,29 @@ class HDF5_Write(Node):
             'fluid_pressure': msg.fluid_pressure,
             'variance': msg.variance
         }
-    
+    def transform_JSON(self, transform):
+        # Serialize the translation and rotation to JSON format
+        return {
+            'header': {
+                'frame_id': transform.header.frame_id,
+                'stamp': {
+                    'sec': transform.header.stamp.sec,
+                    'nanosec': transform.header.stamp.nanosec
+                }
+            },
+             'child_frame_id': transform.child_frame_id,
+            "translation": {
+                "x": transform.transform.translation.x,
+                "y": transform.transform.translation.y,
+                "z": transform.transform.translation.z
+            },
+            "rotation": {
+                "x": transform.transform.rotation.x,
+                "y": transform.transform.rotation.y,
+                "z": transform.transform.rotation.z,
+                "w": transform.transform.rotation.w
+            }
+        }
     def gps_filtered_callback(self, msg: Odometry):
         avgTime=0
         if(self.gps_filtered_messageCounter>0):
@@ -406,8 +438,11 @@ class HDF5_Write(Node):
             # print(avgTime)
         else:
             self.gps_filtered_startTime=time.time()
+            self.gps_filtered_data=self.h5_file.create_dataset('gps_filtered_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+       
         self.gps_filtered_data.resize(self.gps_filtered_data.shape[0] + 1, axis=0)
         self.gps_filtered_data[-1] = np.string_(json.dumps(self.navsatfix_JSON(msg)))
+        self.gps_filtered_messageCounter=self.gps_filtered_messageCounter+1
     def gps_2_pose_callback(self, msg: Odometry):
         avgTime=0
         if(self.gps_2_pose_messageCounter>0):
@@ -417,6 +452,8 @@ class HDF5_Write(Node):
             # print(avgTime)
         else:
             self.gps_2_pose_startTime=time.time()
+            self.gps_2_pose_data=self.h5_file.create_dataset('gps_2_pose_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+       
         self.gps_2_pose_data.resize(self.gps_2_pose_data.shape[0] + 1, axis=0)
         self.gps_2_pose_data[-1] = np.string_(json.dumps(self.posewithcovariancestamped_JSON(msg)))
 
@@ -429,10 +466,10 @@ class HDF5_Write(Node):
             # print(avgTime)
         else:
             self.vectornav_odom_startTime=time.time()
+            self.vectornav_odom_data=self.h5_file.create_dataset('vectornav_odom_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
             
         self.vectornav_odom_data.resize(self.vectornav_odom_data.shape[0] + 1, axis=0)
-        self.vectornav_odom_data[-1] = np.string_(json.dumps(self.odom_JSON(msg,avgTime)))
-        self.messageCounter=self.messageCounter+1     
+           
     def odometry_gps_callback(self, msg: Odometry):
         avgTime=0
         if(self.gps_odom_messageCounter>0):
@@ -442,7 +479,7 @@ class HDF5_Write(Node):
             # print(avgTime)
         else:
             self.gps_odom_startTime=time.time()
-            
+            self.odometry_gps_data=self.h5_file.create_dataset('odometry_gps_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
         self.odometry_gps_data.resize(self.odometry_gps_data.shape[0] + 1, axis=0)
         self.odometry_gps_data[-1] = np.string_(json.dumps(self.odom_JSON(msg)))
     def odometry_navsat_callback(self, msg: Odometry):
@@ -454,6 +491,7 @@ class HDF5_Write(Node):
             # print(avgTime)
         else:
             self.odometry_navsat_startTime=time.time()
+            self.odometry_navsat_data=self.h5_file.create_dataset('odometry_navsat_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
         self.odometry_navsat_data.resize(self.odometry_navsat_data.shape[0] + 1, axis=0)
         self.odometry_navsat_data[-1] = np.string_(json.dumps(self.odom_JSON(msg)))
 
@@ -466,19 +504,21 @@ class HDF5_Write(Node):
             # print(avgTime)
         else:
             self.ouster_imu_startTime=time.time()
+            self.ouster_imu_data=self.h5_file.create_dataset('ouster_imu_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
         self.ouster_imu_data.resize(self.ouster_imu_data.shape[0] + 1, axis=0)
         self.ouster_imu_data[-1] = np.string_(json.dumps(self.imu_JSON(msg)))
-    def vectornav_IMU_callback(self, msg: Imu):
+    def vectornav_imu_callback(self, msg: Imu):
         avgTime=0
-        if(self.vectornav_IMU_messageCounter>0):
+        if(self.vectornav_imu_messageCounter>0):
             lastRecordedTime=time.time()
-            elapsedTime=lastRecordedTime-self.vectornav_IMU_startTime
-            avgTime=elapsedTime/self.vectornav_IMU_messageCounter
+            elapsedTime=lastRecordedTime-self.vectornav_imu_startTime
+            avgTime=elapsedTime/self.vectornav_imu_messageCounter
             # print(avgTime)
         else:
-            self.vectornav_IMU_startTime=time.time()
-        self.vectornav_IMU_data.resize(self.vectornav_IMU_data.shape[0] + 1, axis=0)
-        self.vectornav_IMU_data[-1] = np.string_(json.dumps(self.imu_JSON(msg)))
+            self.vectornav_imu_startTime=time.time()
+            self.vectornav_imu_data=self.h5_file.create_dataset('vectornav_imu_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        self.vectornav_imu_data.resize(self.vectornav_imu_data.shape[0] + 1, axis=0)
+        self.vectornav_imu_data[-1] = np.string_(json.dumps(self.imu_JSON(msg)))
 
     def ouster_points_callback(self, msg: PointCloud2):
         avgTime=0
@@ -489,6 +529,7 @@ class HDF5_Write(Node):
             # print(avgTime)
         else:
             self.ouster_points_startTime=time.time()
+            self.ouster_points_data=self.h5_file.create_dataset('ouster_points_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
         self.ouster_points_data.resize(self.ouster_points_data.shape[0] + 1, axis=0)
         self.ouster_points_data[-1] = np.string_(json.dumps(self.pointcloud2_JSON(msg)))
 
@@ -501,6 +542,7 @@ class HDF5_Write(Node):
             # print(avgTime)
         else:
             self.ouster_nearir_image_startTime=time.time()
+            self.ouster_nearir_image_data=self.h5_file.create_dataset('ouster_nearir_image_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
         self.ouster_nearir_image_data.resize(self.ouster_nearir_image_data.shape[0] + 1, axis=0)
         self.ouster_nearir_image_data[-1] = np.string_(json.dumps(self.image_JSON(msg)))
     def ouster_range_image_callback(self, msg: Image):
@@ -512,6 +554,7 @@ class HDF5_Write(Node):
             # print(avgTime)
         else:
             self.ouster_range_image_startTime=time.time()
+            self.ouster_range_image_data=self.h5_file.create_dataset('ouster_range_image_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
         self.ouster_range_image_data.resize(self.ouster_range_image_data.shape[0] + 1, axis=0)
         self.ouster_range_image_data[-1] = np.string_(json.dumps(self.image_JSON(msg)))
     def ouster_reflec_image_callback(self, msg: Image):
@@ -523,6 +566,7 @@ class HDF5_Write(Node):
             # print(avgTime)
         else:
             self.ouster_reflec_image_startTime=time.time()
+            self.ouster_reflec_image_data=self.h5_file.create_dataset('ouster_reflec_image_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
         self.ouster_reflec_image_data.resize(self.ouster_reflec_image_data.shape[0] + 1, axis=0)
         self.ouster_reflec_image_data[-1] = np.string_(json.dumps(self.image_JSON(msg)))
     def ouster_signal_image_callback(self, msg: Image):
@@ -534,56 +578,80 @@ class HDF5_Write(Node):
             # print(avgTime)
         else:
             self.ouster_signal_image_startTime=time.time()
+            self.ouster_signal_image_data=self.h5_file.create_dataset('ouster_signal_image_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
         self.ouster_signal_image_data.resize(self.ouster_signal_image_data.shape[0] + 1, axis=0)
         self.ouster_signal_image_data[-1] = np.string_(json.dumps(self.image_JSON(msg)))
     
-    def vectornav_MAG_callback(self,msg:MagneticField):
+    def vectornav_magnetic_callback(self,msg:MagneticField):
         avgTime=0
-        if(self.vectornav_MAG_messageCounter>0):
+        if(self.vectornav_magnetic_messageCounter>0):
             lastRecordedTime=time.time()
-            elapsedTime=lastRecordedTime-self.vectornav_MAG_startTime
-            avgTime=elapsedTime/self.vectornav_MAG_messageCounter
+            elapsedTime=lastRecordedTime-self.vectornav_magnetic_startTime
+            avgTime=elapsedTime/self.vectornav_magnetic_messageCounter
             # print(avgTime)
         else:
-            self.vectornav_MAG_startTime=time.time()
-        self.vectornav_MAG_data.resize(self.vectornav_MAG_data.shape[0] + 1, axis=0)
-        self.vectornav_MAG_data[-1] = np.string_(json.dumps(self.magneticfield_JSON(msg)))
+            self.vectornav_magnetic_startTime=time.time()
+            self.vectornav_magnetic_data=self.h5_file.create_dataset('vectornav_magnetic_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        self.vectornav_magnetic_data.resize(self.vectornav_magnetic_data.shape[0] + 1, axis=0)
+        self.vectornav_magnetic_data[-1] = np.string_(json.dumps(self.magneticfield_JSON(msg)))
     
-    def vectornav_TEMP_callback(self,msg:Temperature):
+    def vectornav_temperature_callback(self,msg:Temperature):
         avgTime=0
-        if(self.vectornav_TEMP_messageCounter>0):
+        if(self.vectornav_temperature_messageCounter>0):
             lastRecordedTime=time.time()
-            elapsedTime=lastRecordedTime-self.vectornav_TEMP_startTime
-            avgTime=elapsedTime/self.vectornav_TEMP_messageCounter
+            elapsedTime=lastRecordedTime-self.vectornav_temperature_startTime
+            avgTime=elapsedTime/self.vectornav_temperature_messageCounter
             # print(avgTime)
         else:
-            self.vectornav_TEMP_startTime=time.time()
-        self.vectornav_TEMP_data.resize(self.vectornav_TEMP_data.shape[0] + 1, axis=0)
-        self.vectornav_TEMP_data[-1] = np.string_(json.dumps(self.temperature_JSON(msg))) 
+            self.vectornav_temperature_startTime=time.time()
+            self.vectornav_temperature_data=self.h5_file.create_dataset('vectornav_temperature_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        self.vectornav_temperature_data.resize(self.vectornav_temperature_data.shape[0] + 1, axis=0)
+        self.vectornav_temperature_data[-1] = np.string_(json.dumps(self.temperature_JSON(msg))) 
     
-    def vectornav_Pres_callback(self,msg:FluidPressure):
+    def vectornav_pressure_callback(self,msg:FluidPressure):
         avgTime=0
-        if(self.vectornav_Pres_messageCounter>0):
+        if(self.vectornav_pressure_messageCounter>0):
             lastRecordedTime=time.time()
-            elapsedTime=lastRecordedTime-self.vectornav_Pres_startTime
-            avgTime=elapsedTime/self.vectornav_Pres_messageCounter
+            elapsedTime=lastRecordedTime-self.vectornav_pressure_startTime
+            avgTime=elapsedTime/self.vectornav_pressure_messageCounter
             # print(avgTime)
         else:
-            self.vectornav_Pres_startTime=time.time()
-        self.vectornav_Pres_data.resize(self.vectornav_Pres_data.shape[0] + 1, axis=0)
-        self.vectornav_Pres_data[-1] = np.string_(json.dumps(self.fluid_pressure_JSON(msg)))
+            self.vectornav_pressure_startTime=time.time()
+            self.vectornav_pressure_data=self.h5_file.create_dataset('vectornav_pressure_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        self.vectornav_pressure_data.resize(self.vectornav_pressure_data.shape[0] + 1, axis=0)
+        self.vectornav_pressure_data[-1] = np.string_(json.dumps(self.fluid_pressure_JSON(msg)))
    
-    def vectornav_GPS_callback(self,msg:NavSatFix):
+    def vectornav_gnss_callback(self,msg:NavSatFix):
         avgTime=0
-        if(self.vectornav_GPS_messageCounter>0):
+        if(self.vectornav_gnss_messageCounter>0):
             lastRecordedTime=time.time()
-            elapsedTime=lastRecordedTime-self.vectornav_GPS_startTime
-            avgTime=elapsedTime/self.vectornav_GPS_messageCounter
+            elapsedTime=lastRecordedTime-self.vectornav_gnss_startTime
+            avgTime=elapsedTime/self.vectornav_gnss_messageCounter
             # print(avgTime)
         else:
-            self.vectornav_GPS_startTime=time.time()
-        self.vectornav_GPS_data.resize(self.vectornav_GPS_data.shape[0] + 1, axis=0)
-        self.vectornav_GPS_data[-1] = np.string_(json.dumps(self.navsatfix_JSON(msg)))
+            self.vectornav_gnss_startTime=time.time()
+            self.vectornav_gnss_data=self.h5_file.create_dataset('vectornav_gnss_data', shape=(1,),maxshape=(None, ),chunks=(1, ),  data='S512',compression="gzip")
+        self.vectornav_gnss_data.resize(self.vectornav_gnss_data.shape[0] + 1, axis=0)
+        self.vectornav_gnss_data[-1] = np.string_(json.dumps(self.navsatfix_JSON(msg)))
+    
+    def record_transform(self):
+        try:
+           
+            
+
+            # Lookup the transform between "base_link" and "rear_left_wheel"
+            transform = self.tf_buffer.lookup_transform('odom', 'base_link', rclpy.time.Time())
+            print("Got transform")
+  
+            
+            self.tf_dataset.resize(self.tf_dataset.shape[0] + 1, axis=0)
+            self.tf_dataset[-1] = np.string_(json.dumps(self.transform_JSON(transform)))
+             
+
+        except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException) as e:
+            self.get_logger().warn(f"Transform not available: {e}")
+    
+
 
     def __del__(self):
         # Close the HDF5 file when done
